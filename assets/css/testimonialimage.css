@@ -1,17 +1,140 @@
-#image-track {
-  display: flex;
-  gap: 4vmin;
-  position: relative;
-  left: 50%;
-  user-select: none; /* -- Prevent image highlighting -- */
-  width: 2000px;
-  justify-content: center; /* -- Center images horizontally -- */
-  align-items: center; /* -- Center images vertically -- */
+@media (min-width: 350px) { 
+  #image-track {
+    display: flex;
+    gap: 4vmin;
+    position: relative;
+    left: 50%;
+    user-select: none; /* -- Prevent image highlighting -- */
+    width: 1000px;
+    justify-content: center; /* -- Center images horizontally -- */
+    align-items: center; /* -- Center images vertically -- */
+  }
+  
+  #image-track > .image {
+    width: 40vmin;
+    height: 56vmin;
+    object-fit: cover;
+    object-position: 100% center;
+  }
+ }
+
+ @media (min-width: 500px) { 
+  #image-track {
+    display: flex;
+    gap: 4vmin;
+    position: relative;
+    left: 50%;
+    user-select: none; /* -- Prevent image highlighting -- */
+    width: 1500px;
+    justify-content: center; /* -- Center images horizontally -- */
+    align-items: center; /* -- Center images vertically -- */
+  }
+  
+  #image-track > .image {
+    width: 40vmin;
+    height: 56vmin;
+    object-fit: cover;
+    object-position: 100% center;
+  }
+ }
+
+@media (min-width: 640px) { 
+  #image-track {
+    display: flex;
+    gap: 4vmin;
+    position: relative;
+    left: 50%;
+    user-select: none; /* -- Prevent image highlighting -- */
+    width: 1800px;
+    justify-content: center; /* -- Center images horizontally -- */
+    align-items: center; /* -- Center images vertically -- */
+  }
+  
+  #image-track > .image {
+    width: 40vmin;
+    height: 56vmin;
+    object-fit: cover;
+    object-position: 100% center;
+  }
+ }
+
+@media (min-width: 768px) { 
+  #image-track {
+    display: flex;
+    gap: 4vmin;
+    position: relative;
+    left: 50%;
+    user-select: none; /* -- Prevent image highlighting -- */
+    width: 2200px;
+    justify-content: center; /* -- Center images horizontally -- */
+    align-items: center; /* -- Center images vertically -- */
+  }
+  
+  #image-track > .image {
+    width: 40vmin;
+    height: 56vmin;
+    object-fit: cover;
+    object-position: 100% center;
+  }
+ }
+
+@media (min-width: 1024px) { 
+  #image-track {
+    display: flex;
+    gap: 4vmin;
+    position: relative;
+    left: 50%;
+    user-select: none; /* -- Prevent image highlighting -- */
+    width: 2200px;
+    justify-content: center; /* -- Center images horizontally -- */
+    align-items: center; /* -- Center images vertically -- */
+  }
+  
+  #image-track > .image {
+    width: 40vmin;
+    height: 56vmin;
+    object-fit: cover;
+    object-position: 100% center;
+  }
 }
 
-#image-track > .image {
-  width: 40vmin;
-  height: 56vmin;
-  object-fit: cover;
-  object-position: 100% center;
+@media (min-width: 1280px) { 
+  #image-track {
+    display: flex;
+    gap: 4vmin;
+    position: relative;
+    left: 50%;
+    user-select: none; /* -- Prevent image highlighting -- */
+    width: 2200px;
+    justify-content: center; /* -- Center images horizontally -- */
+    align-items: center; /* -- Center images vertically -- */
+  }
+  
+  #image-track > .image {
+    width: 40vmin;
+    height: 56vmin;
+    object-fit: cover;
+    object-position: 100% center;
+  }
+ }
+
+@media (min-width: 1536px) { 
+
+  #image-track {
+    display: flex;
+    gap: 4vmin;
+    position: relative;
+    left: 50%;
+    user-select: none; /* -- Prevent image highlighting -- */
+    width: 2200px;
+    justify-content: center; /* -- Center images horizontally -- */
+    align-items: center; /* -- Center images vertically -- */
+  }
+  
+  #image-track > .image {
+    width: 40vmin;
+    height: 56vmin;
+    object-fit: cover;
+    object-position: 100% center;
+  }
 }
