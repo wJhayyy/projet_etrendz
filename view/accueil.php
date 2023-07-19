@@ -493,7 +493,6 @@
     </div>
   </section>
 </div>
-<!-- Container for demo purpose -->
 
 <div class="ntshow">
 <hr class="hrgradient w-4/6 m-auto mt-32 md:w-2/6">
@@ -525,7 +524,7 @@
 	</div>
 </div>
 
-</body>
+<?php include_once('include/footer.php')?>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.6/flowbite.min.js"></script>
 
@@ -583,5 +582,8 @@ hiddenElements.forEach((el) => observer.observe(el));
   })
 
 </script>
+
+
+</body>
 
 </html>
