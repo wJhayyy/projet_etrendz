@@ -1,6 +1,6 @@
-<nav class="fixed top-0 left-0 right-0 z-50 px-4 py-4 flex justify-between items-center bg-color1">
+<nav class="fixed top-0 left-0 right-0 z-50 px-4 py-4 flex justify-between items-center from-color1 to-transparent">
 		<a class="text-3xl font-bold leading-none w-20" href="index.php">
-                <img class="w-full h-full" src="assets/image/Group.svg">
+                <img class="w-full h-full" src="assets/image/logonobg.png">
 		</a>
 		<div class="lg:hidden">
 			<button class="navbar-burger flex items-center text-blue-600 p-3">
@@ -11,33 +11,23 @@
 			</button>
 		</div>
 		<ul class="hidden absolute top-1/2 right-12 transform -translate-y-1/2 -translate-x-1/2 lg:flex lg:mx-auto lg:flex lg:items-center lg:w-auto lg:space-x-6">
-			<li><a class="text-sm text-blue-600 font-bold" href="#">Actualité</a></li>
-			<li class="text-gray-300">
-				<svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" class="w-4 h-4 current-fill" viewBox="0 0 24 24">
-					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
-				</svg>
-			</li>
-			<li><a class="text-sm text-gray-400 hover:text-gray-500" href="#">A propos</a></li>
-			<li class="text-gray-300">
-				<svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" class="w-4 h-4 current-fill" viewBox="0 0 24 24">
-					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
-				</svg>
-			</li>
-			<li><a class="text-sm text-gray-400 hover:text-gray-500" href="#">Twitch</a></li>
-			<li class="text-gray-300">
-				<svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" class="w-4 h-4 current-fill" viewBox="0 0 24 24">
-					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
-				</svg>
-			</li>
-			<li><a class="text-sm text-gray-400 hover:text-gray-500" href="#">Contact</a></li>
+			<li><a class="block text-base font-semibold rounded gradient-button-desktop" href="#">Actualité</a></li>
+			<hr class="vertical-hr">
+			<li><a class="block text-base font-semibold rounded gradient-button-desktop" href="#">Mercato</a></li>
+			<hr class="vertical-hr">
+			<li><a class="block text-base font-semibold rounded gradient-button-desktop" href="#">A propos</a></li>
+			<hr class="vertical-hr">
+			<li><a class="block text-base font-semibold rounded gradient-button-desktop" href="#">Twitch</a></li>
+			<hr class="vertical-hr">
+			<li><a class="block text-base font-semibold rounded gradient-button-desktop" href="#">Contact</a></li>
 		</ul>
 	</nav>
 	<div class="navbar-menu relative z-50 hidden">
 		<div class="navbar-backdrop fixed inset-0 bg-gray-800 opacity-25"></div>
-		<nav class="fixed top-0 left-0 bottom-0 flex flex-col w-5/6 max-w-sm py-6 px-6 bg-color1 border-r overflow-y-auto">
+		<nav class="fixed top-0 left-0 bottom-0 flex flex-col w-5/6 max-w-sm py-4 px-4 bg-gradient-to-r from-color1 via-color1 to-transparent overflow-y-auto">
 			<div class="flex items-center mb-8">
 				<a class="mr-auto text-3xl font-bold leading-none w-20" href="#">
-                    <img class="w-full h-full" src="assets/image/Group.svg">
+                    <img class="w-full h-full" src="assets/image/logonobg.png">
 				</a>
 				<button class="navbar-close">
 					<svg class="h-6 w-6 text-gray-400 cursor-pointer hover:text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -47,21 +37,24 @@
 			</div>
 			<div>
 				<ul>
-					<li class="mb-1">
-						<a class="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded" href="#">Actualités</a>
+					<li class="mb-2">
+						<a class="block p-4 text-base font-semibold rounded gradient-button" href="#">Actualités</a>
 					</li>
-					<li class="mb-1">
-						<a class="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded" href="#">A propos</a>
+					<li class="mb-2">
+						<a class="block p-4 text-base font-semibold rounded gradient-button" href="#">Mercato</a>
 					</li>
-					<li class="mb-1">
-						<a class="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded" href="#">Twitch</a>
+					<li class="mb-2">
+						<a class="block p-4 text-base font-semibold rounded gradient-button" href="#">A propos</a>
 					</li>
-					<li class="mb-1">
-						<a class="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded" href="#">Contact</a>
+					<li class="mb-2">
+						<a class="block p-4 text-base font-semibold rounded gradient-button" href="#">Twitch</a>
+					</li>
+					<li class="mb-2">
+						<a class="block p-4 text-base font-semibold rounded gradient-button" href="#">Contact</a>
 					</li>
 				</ul>
 			</div>
-				<p class="my-4 text-xs text-center text-gray-400">
+				<p class="my-4 text-xs text-gray-400">
 					<span>Copyright © 2021</span>
 				</p>
 			</div>

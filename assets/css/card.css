@@ -1,6 +1,6 @@
 :root {
     --bg-color: rgb(20, 20, 20);
-    --card-color: #050911;
+    --card-color: #0b1220;
   }
 
   .cards {
@@ -109,7 +109,7 @@
   /* -- ↓ ↓ ↓ extra card content styles ↓ ↓ ↓ -- */
   
   h1, h2, h3, h4, span {
-    color: rgb(240, 240, 240);
+    color: #e5e5e5;
     font-family: "Rubik", sans-serif;
     font-weight: 400;
     margin: 0px;
@@ -125,7 +125,8 @@
     height: 280px;
     justify-content: center;
     overflow: hidden;
-  
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
   }
   
   .card-image > i {
@@ -190,7 +191,11 @@
       opacity: 1;
     }
   }
-  
+  @media(max-width: 1200px) {
+  .card{
+    width: 100%;
+    }
+  }
   @media(max-width: 1000px) {
     body {
       align-items: flex-start;  

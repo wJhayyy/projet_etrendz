@@ -1,6 +1,8 @@
 body {
   margin: 0;
   padding: 0;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 header {
@@ -9,9 +11,9 @@ header {
 }
 
 :root {  
-  --purple: #fca311;
-  --violet: rgb(236, 64, 122);
-  --pink: rgb(112, 22, 60);
+  --orange: #fca311;
+  --rose: rgb(236, 64, 122);
+  --violet: rgb(112, 22, 60);
 }
 
 @keyframes background-pan {
@@ -22,7 +24,6 @@ header {
     background-position: 0% 0;
   }
 }
-
 
 .box-position {
   position: relative;
@@ -44,15 +45,10 @@ header {
   transform: translate(-50%, -50%);
   text-align: center;
   width: 100%;
-}
-
-.gradient-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
   height: 100%;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.8) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .text-overlay h1 {
@@ -64,7 +60,6 @@ header {
   height: 1px;
   background-image: linear-gradient(to right, transparent, white, transparent);
 }
-
 
 
 h2 {
@@ -83,13 +78,62 @@ h2 > .magic > .magic-text {
   animation: background-pan 3s linear infinite;
   background: linear-gradient(
     to right,
-    var(--purple),
+    var(--orange),
+    var(--rose),
     var(--violet),
-    var(--pink),
-    var(--purple)
+    var(--orange)
   );
   background-size: 200%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   white-space: nowrap;
+}
+
+.testimonial-text {
+  max-height: 220px; /* Ajustez cette valeur selon vos besoins */
+  overflow: hidden;
+}
+
+/* Définir les couleurs du gradient */
+.gradient-button {
+  background-image: linear-gradient(to right,rgb(90, 17, 47), #fca311);
+  transition: width 0.3s ease; /* Ajouter une transition pour l'animation en douceur */
+  width: 50%;
+  color: #e5e5e5;
+  font-size: 40px
+}
+
+/* Lorsque la souris survole le bouton */
+.gradient-button:hover {
+  width: 70%; /* Définir la largeur à 100% lors du survol */
+}
+
+/* Middle Out */
+.gradient-button-desktop {
+	display: inline-block;
+	position: relative;
+  color: #e5e5e5;
+}
+
+.gradient-button-desktop:after {
+	content: '';
+	display: block;
+	margin: auto;
+	height: 2px;
+	width: 0px;
+	background: linear-gradient(to right,rgb(90, 17, 47), #fca311); /* Utilisation d'un dégradé linéaire */
+	transition: width .5s ease, background .5s ease; /* Modification de 'background-color' en 'background' */
+}
+
+.gradient-button-desktop:hover:after {
+	width: 100%;
+	background: linear-gradient(to right, rgb(90, 17, 47), #fca311); /* Dégradé linéaire également sur le hover */
+}
+
+.vertical-hr {
+  border: none;
+  border-left: 1px solid #e5e5e5; /* Vous pouvez changer la couleur ici (par exemple, "green") */
+  height: 20px; /* Vous pouvez ajuster la hauteur ici selon vos besoins */
+  margin: 0; /* Assurez-vous qu'il n'y a pas d'espacement supplémentaire */
+  padding: 0; /* Assurez-vous qu'il n'y a pas d'espacement supplémentaire */
 }
