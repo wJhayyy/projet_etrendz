@@ -218,7 +218,19 @@
       width: 100%;
       margin:0px;
     }
-  }
+
+    /* Réinitialisez les sélecteurs pour les largeurs d'écran inférieures à 1000px */
+      .card:nth-child(1),
+      .card:nth-child(3),
+      .card:nth-child(5) {
+        transition-delay: 200ms !important;
+      }
+      .card:nth-child(2),
+      .card:nth-child(4),
+      .card:nth-child(6) {
+        transition-delay: 400ms !important;
+      }
+    }
   
   @media(max-width: 500px) {
     .card {
@@ -248,24 +260,8 @@
     .card-info-title > h4 {
       font-size: 0.8em;
       margin-top: 4px;
-      visibility: hidden;
+      display: none;
     }
-  }
-  
-  .card:nth-child(3){
-    transition-delay: 200ms;
-  }
-  
-  .card:nth-child(4){
-    transition-delay: 200ms;
-  }  
-  
-  .card:nth-child(5){
-    transition-delay: 400ms;
-  }
-  
-  .card:nth-child(6){
-    transition-delay: 400ms;
   }
   
   @media(max-width: 320px) {

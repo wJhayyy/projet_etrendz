@@ -95,7 +95,7 @@ h2 > .magic > .magic-text {
 
 /* Définir les couleurs du gradient */
 .gradient-button {
-  background-image: linear-gradient(to right,rgb(90, 17, 47), #fca311);
+  background-image: linear-gradient(to right,#0f0f0f,#724907, #fca311);
   transition: width 0.3s ease; /* Ajouter une transition pour l'animation en douceur */
   width: 50%;
   color: #e5e5e5;

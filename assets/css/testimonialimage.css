@@ -25,7 +25,7 @@
     position: relative;
     left: 50%;
     user-select: none; /* -- Prevent image highlighting -- */
-    width: 1500px;
+    width: 1000px;
     justify-content: center; /* -- Center images horizontally -- */
     align-items: center; /* -- Center images vertically -- */
   }
@@ -45,7 +45,7 @@
     position: relative;
     left: 50%;
     user-select: none; /* -- Prevent image highlighting -- */
-    width: 1800px;
+    width: 1900px;
     justify-content: center; /* -- Center images horizontally -- */
     align-items: center; /* -- Center images vertically -- */
   }

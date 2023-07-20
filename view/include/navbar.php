@@ -15,9 +15,9 @@
 			<hr class="vertical-hr">
 			<li><a class="block text-base font-semibold rounded gradient-button-desktop" href="#">Mercato</a></li>
 			<hr class="vertical-hr">
-			<li><a class="block text-base font-semibold rounded gradient-button-desktop" href="#">A propos</a></li>
+			<li><a class="block text-base font-semibold rounded gradient-button-desktop" href="#">Galerie</a></li>
 			<hr class="vertical-hr">
-			<li><a class="block text-base font-semibold rounded gradient-button-desktop" href="#">Twitch</a></li>
+			<li><a class="block text-base font-semibold rounded gradient-button-desktop" href="#">A propos</a></li>
 			<hr class="vertical-hr">
 			<li><a class="block text-base font-semibold rounded gradient-button-desktop" href="#">Contact</a></li>
 		</ul>
@@ -44,10 +44,10 @@
 						<a class="block p-4 text-base font-semibold rounded gradient-button" href="#">Mercato</a>
 					</li>
 					<li class="mb-2">
-						<a class="block p-4 text-base font-semibold rounded gradient-button" href="#">A propos</a>
+						<a class="block p-4 text-base font-semibold rounded gradient-button" href="#">Galerie</a>
 					</li>
 					<li class="mb-2">
-						<a class="block p-4 text-base font-semibold rounded gradient-button" href="#">Twitch</a>
+						<a class="block p-4 text-base font-semibold rounded gradient-button" href="#">A propos</a>
 					</li>
 					<li class="mb-2">
 						<a class="block p-4 text-base font-semibold rounded gradient-button" href="#">Contact</a>
