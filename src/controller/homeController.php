@@ -5,12 +5,12 @@ function homepage()
     require_once('view/accueil.php');
 }
 
-function vuePresentation(){
-    require_once('view/presentation.php');
+function vueContact(){
+    require_once('view/contact.php');
 }
 
-function vueArticles(){
-    require_once('view/articles.php');
+function vueApropos(){
+    require_once('view/aboutus.php');
 }
 
 function vueArticle(){

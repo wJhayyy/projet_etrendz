@@ -4,11 +4,11 @@ require_once('src/controller/homeController.php');
 
 if (isset($_GET['action']) && $_GET['action'] !== '') {
     switch ($_GET['action']) {
-        case 'presentation':
-            vuePresentation();
+        case 'contact':
+            vueContact();
             break;
-        case 'articles':
-            vueArticles();
+        case 'apropos':
+            vueApropos();
             break;
         case 'article':
             vueArticle();

@@ -1,5 +1,5 @@
 <nav class="fixed top-0 left-0 right-0 z-50 px-4 py-4 flex justify-between items-center bg-gradient-to-b from-color1 to-transparent">
-		<a class="text-3xl font-bold leading-none w-20" href="index.php">
+		<a class="text-3xl font-bold leading-none w-20" href="index.php?action=">
                 <img class="w-full h-full" src="assets/image/logonobg.png">
 		</a>
 		<div class="lg:hidden">
@@ -17,9 +17,9 @@
 			<hr class="vertical-hr">
 			<li><a class="block text-base font-semibold rounded gradient-button-desktop" href="#">Galerie</a></li>
 			<hr class="vertical-hr">
-			<li><a class="block text-base font-semibold rounded gradient-button-desktop" href="#">A propos</a></li>
+			<li><a class="block text-base font-semibold rounded gradient-button-desktop" href="index.php?action=apropos">A propos</a></li>
 			<hr class="vertical-hr">
-			<li><a class="block text-base font-semibold rounded gradient-button-desktop" href="#">Contact</a></li>
+			<li><a class="block text-base font-semibold rounded gradient-button-desktop" href="index.php?action=contact">Contact</a></li>
 		</ul>
 	</nav>
 	<div class="navbar-menu relative z-50 hidden">
@@ -47,10 +47,10 @@
 						<a class="block p-4 text-base font-semibold rounded gradient-button" href="#">Galerie</a>
 					</li>
 					<li class="mb-2">
-						<a class="block p-4 text-base font-semibold rounded gradient-button" href="#">A propos</a>
+						<a class="block p-4 text-base font-semibold rounded gradient-button" href="index.php?action=apropos">A propos</a>
 					</li>
 					<li class="mb-2">
-						<a class="block p-4 text-base font-semibold rounded gradient-button" href="#">Contact</a>
+						<a class="block p-4 text-base font-semibold rounded gradient-button" href="index.php?action=contact">Contact</a>
 					</li>
 				</ul>
 			</div>

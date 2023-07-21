@@ -1,0 +1,43 @@
+/* Définir les couleurs du gradient */
+.gradient-button {
+    background-image: linear-gradient(to right,#0f0f0f,#724907, #fca311);
+    transition: width 0.3s ease; /* Ajouter une transition pour l'animation en douceur */
+    width: 50%;
+    color: #e5e5e5;
+    font-size: 40px
+  }
+  
+  /* Lorsque la souris survole le bouton */
+  .gradient-button:hover {
+    width: 70%; /* Définir la largeur à 100% lors du survol */
+  }
+  
+  /* Middle Out */
+  .gradient-button-desktop {
+      display: inline-block;
+      position: relative;
+    color: #e5e5e5;
+  }
+  
+  .gradient-button-desktop:after {
+      content: '';
+      display: block;
+      margin: auto;
+      height: 2px;
+      width: 0px;
+      background: linear-gradient(to right,rgb(90, 17, 47), #fca311); /* Utilisation d'un dégradé linéaire */
+      transition: width .5s ease, background .5s ease; /* Modification de 'background-color' en 'background' */
+  }
+  
+  .gradient-button-desktop:hover:after {
+      width: 100%;
+      background: linear-gradient(to right, rgb(90, 17, 47), #fca311); /* Dégradé linéaire également sur le hover */
+  }
+  
+  .vertical-hr {
+    border: none;
+    border-left: 1px solid #e5e5e5; /* Vous pouvez changer la couleur ici (par exemple, "green") */
+    height: 20px; /* Vous pouvez ajuster la hauteur ici selon vos besoins */
+    margin: 0; /* Assurez-vous qu'il n'y a pas d'espacement supplémentaire */
+    padding: 0; /* Assurez-vous qu'il n'y a pas d'espacement supplémentaire */
+  }

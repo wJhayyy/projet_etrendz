@@ -25,6 +25,7 @@ $all_mercato = $stmt_mercato->fetchAll(PDO::FETCH_ASSOC);
   <link rel="stylesheet" href="assets/css/commentcard.css">
   <link rel="stylesheet" href="assets/css/card.css">
   <link rel="stylesheet" href="assets/css/button-twitch.css">
+  <link rel="stylesheet" href="assets/css/button-navbar.css">
   <?php include_once('include/link.php')?>
 </head>
 
