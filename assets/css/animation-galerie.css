@@ -1,0 +1,41 @@
+/* Définir l'animation */
+@keyframes slideInFromLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-100%);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+}
+
+.anim-galerie {
+    opacity: 0; /* Commencer avec une opacité de 0 */
+    transition: opacity 1s; /* Transition d'opacité sur 1 seconde */
+}
+
+.anim-galerie.fade-in:nth-child(3n + 1) {
+    animation: slideInFromLeft 1s forwards; /* Animation fadeIn pour les éléments avec la classe fade-in */
+}
+
+.anim-galerie.fade-in:nth-child(3n + 2) {
+    animation: slideInFromLeft 1.5s forwards; /* Animation fadeIn pour les éléments avec la classe fade-in */
+}
+
+.anim-galerie.fade-in:nth-child(3n + 3) {
+    animation: slideInFromLeft 2s forwards; /* Animation fadeIn pour les éléments avec la classe fade-in */
+}
+
+@media(max-width: 1024px) {
+    .anim-galerie.fade-in:nth-child(2n + 1) {
+        animation: slideInFromLeft 1s forwards; /* Animation fadeIn pour les éléments avec la classe fade-in */
+    }
+
+    .anim-galerie.fade-in:nth-child(2n + 2) {
+        animation: slideInFromLeft 1.5s forwards; /* Animation fadeIn pour les éléments avec la classe fade-in */
+    }
+    }
+
+
+

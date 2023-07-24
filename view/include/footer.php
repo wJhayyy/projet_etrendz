@@ -9,16 +9,16 @@
       <p class="text-sm leading-none text-color4 mt-4 dark:text-white">Tout droit réservé.</p>
       <div class="flex items-center m-auto gap-x-4 mt-12">
         <button aria-label="instagram" class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 w-8 h-8 flex-shrink-0 bg-gray-800 cursor-pointer hover:bg-gray-700 rounded-full flex items-center justify-center">
-            <i class="fa-brands fa-instagram"></i>
+            <i class="fa-brands fa-instagram text-color4"></i>
         </button>
         <button aria-label="twitch" class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 w-8 h-8 flex-shrink-0 bg-gray-800 cursor-pointer hover:bg-gray-700 rounded-full flex items-center justify-center">
-            <i class="fa-brands fa-twitch"></i>
+            <i class="fa-brands fa-twitch text-color4"></i>
         </button>
         <button aria-label="twitter" class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 w-8 h-8 flex-shrink-0 bg-gray-800 cursor-pointer hover:bg-gray-700 rounded-full flex items-center justify-center">
-        <i class="fa-brands fa-twitter"></i>
+        <i class="fa-brands fa-twitter text-color4"></i>
         </button>
         <button aria-label="youtube" class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 w-8 h-8 flex-shrink-0 bg-gray-800 cursor-pointer hover:bg-gray-700 rounded-full flex items-center justify-center">
-            <i class="fa-brands fa-youtube"></i>
+            <i class="fa-brands fa-youtube text-color4"></i>
         </button>
       </div>
     </div>
@@ -26,7 +26,7 @@
       <h2 class="text-base font-bold leading-4 text-color4 dark:text-white">Lien Interne</h2>
       <a href="javascript:void(0)" class="w-fit mx-auto focus:outline-none focus:underline hover:text-gray-500 text-base leading-4 mt-6 text-color4 dark:text-white cursor-pointer">Mercato</a>
       <a href="javascript:void(0)" class="w-fit mx-auto focus:outline-none focus:underline hover:text-gray-500 text-base leading-4 mt-6 text-color4 dark:text-white cursor-pointer">Actualité</a>
-      <a href="javascript:void(0)" class="w-fit mx-auto focus:outline-none focus:underline hover:text-gray-500 text-base leading-4 mt-6 text-color4 dark:text-white cursor-pointer">Contact</a>
+      <a href="index.php?action=contact" class="w-fit mx-auto focus:outline-none focus:underline hover:text-gray-500 text-base leading-4 mt-6 text-color4 dark:text-white cursor-pointer">Contact</a>
     </div>
     <div class="flex flex-col text-center">
       <h2 class="text-base font-bold leading-4 text-color4 dark:text-white">Aide aux utilisateurs</h2>

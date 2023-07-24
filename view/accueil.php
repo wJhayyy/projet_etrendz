@@ -9,6 +9,15 @@ $stmt_mercato = $connect->prepare("SELECT id_mercato, titre, image_entete, descr
 $stmt_mercato->execute();
 $all_mercato = $stmt_mercato->fetchAll(PDO::FETCH_ASSOC);
 
+$stmt_galerie = $connect->prepare("SELECT id_galerieimg, img_photo
+                                  FROM galerie
+                                  ORDER BY id_galerieimg DESC
+                                  LIMIT 8
+                                  ");
+$stmt_galerie->execute();
+$all_galerie = $stmt_galerie->fetchAll(PDO::FETCH_ASSOC);
+
+
 ?>
 
 <!doctype html>
@@ -92,7 +101,7 @@ $all_mercato = $stmt_mercato->fetchAll(PDO::FETCH_ASSOC);
         <div class="card ntshow">
             <div class="card-content">
                 <div class="card-image">
-                <img src="assets/image/<?php echo ($mercato['image_entete']); ?>" />
+                <img src="assets/image/<?php echo $mercato['image_entete']; ?>" />
                 </div>
                 <div class="card-info-wrapper">
                     <div class="card-info">
@@ -509,20 +518,15 @@ $all_mercato = $stmt_mercato->fetchAll(PDO::FETCH_ASSOC);
 <hr class="hrgradient w-4/6 m-auto mb-16 md:w-2/6">
 </div>
 
-<a href="#" class="w-fit m-auto flex justify-center button-twitch bg-transparent text-color5 font-semibold hover:text-white py-2 px-4 border border-rose hover:border-transparent rounded mb-12">
+<a href="index.php?action=galerie" class="w-fit m-auto flex justify-center button-twitch bg-transparent text-color5 font-semibold hover:text-white py-2 px-4 border border-rose hover:border-transparent rounded mb-12">
 	<p class="z-10">En savoir plus</p>
 </a>
 
 <div class="ntshow">
 	<div id="image-track" data-mouse-down-at="0" data-prev-percentage="0">
-		<img class="image" src="assets/image/card1.jpg" draggable="false" />
-		<img class="image" src="assets/image/card2.jpg" draggable="false" />
-		<img class="image" src="assets/image/card3.jpg" draggable="false" />
-		<img class="image" src="assets/image/card4.jpg" draggable="false" />
-		<img class="image" src="assets/image/card5.jpg" draggable="false" />
-		<img class="image" src="assets/image/card6.jpg" draggable="false" />
-		<img class="image" src="assets/image/testimonial2.jpg" draggable="false" />
-		<img class="image" src="assets/image/testimonial4.jpeg" draggable="false" />
+    <?php foreach ($all_galerie as $galerie): ?>
+		<img class="image" src="assets/image/<?php echo $galerie['img_photo']?>" draggable="false" />
+    <?php endforeach;?>
 	</div>
 </div>
 
