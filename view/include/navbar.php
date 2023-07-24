@@ -15,7 +15,7 @@
 			<hr class="vertical-hr">
 			<li><a class="block text-base font-semibold rounded gradient-button-desktop" href="#">Mercato</a></li>
 			<hr class="vertical-hr">
-			<li><a class="block text-base font-semibold rounded gradient-button-desktop" href="#">Galerie</a></li>
+			<li><a class="block text-base font-semibold rounded gradient-button-desktop" href="index.php?action=galerie">Galerie</a></li>
 			<hr class="vertical-hr">
 			<li><a class="block text-base font-semibold rounded gradient-button-desktop" href="index.php?action=apropos">A propos</a></li>
 			<hr class="vertical-hr">
@@ -44,7 +44,7 @@
 						<a class="block p-4 text-base font-semibold rounded gradient-button" href="#">Mercato</a>
 					</li>
 					<li class="mb-2">
-						<a class="block p-4 text-base font-semibold rounded gradient-button" href="#">Galerie</a>
+						<a class="block p-4 text-base font-semibold rounded gradient-button" href="index.php?action=galerie">Galerie</a>
 					</li>
 					<li class="mb-2">
 						<a class="block p-4 text-base font-semibold rounded gradient-button" href="index.php?action=apropos">A propos</a>

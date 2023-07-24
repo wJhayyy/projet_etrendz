@@ -92,7 +92,7 @@ $all_mercato = $stmt_mercato->fetchAll(PDO::FETCH_ASSOC);
         <div class="card ntshow">
             <div class="card-content">
                 <div class="card-image">
-                <img src="data:image/jpeg;base64,<?php echo base64_encode($mercato['image_entete']); ?>" />
+                <img src="assets/image/<?php echo ($mercato['image_entete']); ?>" />
                 </div>
                 <div class="card-info-wrapper">
                     <div class="card-info">

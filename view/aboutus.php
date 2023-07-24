@@ -5,7 +5,6 @@
 <head>
   <meta charset="utf-8">
   <title>Titre de la page</title>
-  <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="assets/css/button-navbar.css">
   <?php include_once('include/link.php')?>
 </head>
@@ -14,122 +13,114 @@
 
 <?php include_once('include/navbar.php')?>
 
-<section class="flex items-center py-20 font-poppins dark:bg-gray-800 ">
+<section class="flex items-center py-12 font-poppins dark:bg-gray-800 ">
         <div class="justify-center flex-1 max-w-6xl px-4 py-4 mx-auto lg:py-6 md:px-6">
             <div class="flex flex-wrap items-center">
                 <div class="w-full px-4 mb-10 xl:w-1/2 lg:mb-8">
                     <div class="flex flex-wrap">
                         <div class="w-full px-4 md:w-1/2">
-                            <img src="https://i.postimg.cc/YCJW7jv8/pexels-fauxels-3184357.jpg" alt=""
+                            <img src="assets/image/aboutme1.jpg" alt=""
                                 class="object-cover w-full mb-6 rounded-lg h-80">
-                            <img src="https://i.postimg.cc/j5L5bX2d/pexels-andrea-piacquadio-3757946.jpg" alt=""
+                            <img src="assets/image/aboutme3.jpg" alt=""
                                 class="object-cover w-full rounded-lg h-80">
                         </div>
-                        <div class="w-full px-4 md:w-1/2 xl:mt-11">
-                            <img src="https://i.postimg.cc/sXJQ5cw0/pexels-pixabay-256455-1.jpg" alt=""
+                        <div class="w-full px-4 my-6 md:w-1/2 xl:mt-11">
+                            <img src="assets/image/aboutme2.jpg" alt=""
                                 class="object-cover w-full mb-6 rounded-lg h-80">
-                            <img src="https://i.postimg.cc/vHTg6593/aqq.jpg" alt=""
+                            <img src="assets/image/aboutme4.jpg" alt=""
                                 class="object-cover w-full rounded-lg h-80">
                         </div>
                     </div>
                 </div>
                 <div class="w-full px-4 mb-10 xl:w-1/2 lg:mb-8">
-                    <span class="text-sm font-semibold text-color3 dark:text-blue-400">Notre histoire </span>
-                    <h2 class="mt-2 mb-4 text-2xl font-bold text-white">
+                    <span class="text-sm font-semibold text-color3">Notre histoire </span>
+                    <h2 class="mt-2 mb-4 text-2xl font-bold text-color4">
                         Le centre de l'esport Français
                     </h2>
                     <p class="mb-4 text-base leading-7 text-gray-500 dark:text-gray-400">
-                        Créée en Avril 2019, Gamerush commente les plus grands événements eSport mondiaux 
-                        et publie toutes l'actualités que les fans ont besoins.
-                        Regroupant la plus grande base de fan eSport, n'hésitez pas à nous retrouver 
-                        sur notre chaine <a class="text-color3" href="#">Twitch</a> pour suivre en direct les commentarie de nos caster
+                        Créée en avril 2019, Gamerush commente les plus grands événements eSport mondiaux 
+                        et publie toutes les actualités dont les fans ont besoin. 
+                        Regroupant la plus grande base de fans d'eSport, n'hésitez pas à nous retrouver 
+                        sur notre chaîne <a class="text-color3" href="#">Twitch</a> pour suivre en direct les commentaires de nos casters.
                     </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="flex items-center xl:h-screen font-poppins dark:bg-gray-800 ">
-        <div class="justify-center flex-1 max-w-6xl py-4 mx-auto lg:py-6 md:px-6">
-            <div class="flex flex-wrap items-center ">
-                <div class="w-full px-4 mb-10 lg:w-1/2 lg:mb-0">
-                    <div class="lg:max-w-md">
-                        <span class="text-xl font-semibold text-blue-600 uppercase dark:text-blue-500">
-                            About Us</span>
-                        <h2 class="mt-4 mb-6 text-2xl font-bold dark:text-gray-300">
-                            We are the large business expert in Europe and Asia</h2>
-                        <p class="mb-10 text-gray-600 dark:text-gray-400 ">
-                            Lorem ipsum dor amet Lorem ipsum dor amet is a dummy text .Lorem ipsum dor amet isopinus
-                            ipaino amet Lorem ipsum dor amet is a dummy text</p>
-                    </div>
-                </div>
-                <div class="w-full px-4 mb-10 lg:w-1/2 lg:mb-0">
-                    <div class="flex mb-4">
-                        <span
-                            class="flex items-center justify-center flex-shrink-0 w-12 h-12 mr-6 bg-blue-500 rounded dark:bg-blue-500 dark:text-gray-100 text-gray-50">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="w-5 h-5 bi bi-file-earmark-code" viewBox="0 0 16 16">
-                                <path
-                                    d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z" />
-                                <path
-                                    d="M8.646 6.646a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L10.293 9 8.646 7.354a.5.5 0 0 1 0-.708zm-1.292 0a.5.5 0 0 0-.708 0l-2 2a.5.5 0 0 0 0 .708l2 2a.5.5 0 0 0 .708-.708L5.707 9l1.647-1.646a.5.5 0 0 0 0-.708z" />
-                            </svg>
-                        </span>
-                        <div>
-                            <h2 class="mb-4 text-xl font-bold leading-tight dark:text-gray-300 md:text-2xl">
-                                Design
-                            </h2>
-                            <p class="text-base leading-loose text-gray-500 dark:text-gray-400">
-                                Lorem ipsum dor amet Lorem ipsum dor amet is a dummy text .Lorem ipsum dor amet isopinus
-                                ipaino
-                            </p>
-                        </div>
-                    </div>
-                    <div class="flex mb-4">
-                        <span
-                            class="flex items-center justify-center flex-shrink-0 w-12 h-12 mr-6 bg-blue-500 rounded dark:bg-blue-500 dark:text-gray-100 text-gray-50">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="w-5 h-5 bi bi-file-text" viewBox="0 0 16 16">
-                                <path
-                                    d="M5 4a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1H5zm-.5 2.5A.5.5 0 0 1 5 6h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5zM5 8a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1H5zm0 2a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1H5z" />
-                                <path
-                                    d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1z" />
-                            </svg>
-                        </span>
-                        <div>
-                            <h2 class="mb-4 text-xl font-bold leading-tight dark:text-gray-300 md:text-2xl">
-                                Strategy
-                            </h2>
-                            <p class="text-base leading-loose text-gray-500 dark:text-gray-400">
-                                Lorem ipsum dor amet Lorem ipsum dor amet is a dummy text .Lorem ipsum dor amet isopinus
-                                ipaino
-                            </p>
-                        </div>
-                    </div>
-                    <div class="flex mb-4">
-                        <span
-                            class="flex items-center justify-center flex-shrink-0 w-12 h-12 mr-6 bg-blue-500 rounded dark:bg-blue-500 dark:text-gray-100 text-gray-50">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="w-5 h-5 bi bi-bank2" viewBox="0 0 16 16">
-                                <path
-                                    d="M8.277.084a.5.5 0 0 0-.554 0l-7.5 5A.5.5 0 0 0 .5 6h1.875v7H1.5a.5.5 0 0 0 0 1h13a.5.5 0 1 0 0-1h-.875V6H15.5a.5.5 0 0 0 .277-.916l-7.5-5zM12.375 6v7h-1.25V6h1.25zm-2.5 0v7h-1.25V6h1.25zm-2.5 0v7h-1.25V6h1.25zm-2.5 0v7h-1.25V6h1.25zM8 4a1 1 0 1 1 0-2 1 1 0 0 1 0 2zM.5 15a.5.5 0 0 0 0 1h15a.5.5 0 1 0 0-1H.5z">
-                                </path>
-                            </svg>
-                        </span>
-                        <div>
-                            <h2 class="mb-4 text-xl font-bold leading-tight dark:text-gray-300 md:text-2xl">
-                                Develop
-                            </h2>
-                            <p class="text-base leading-loose text-gray-500 dark:text-gray-400">
-                                Lorem ipsum dor amet Lorem ipsum dor amet is a dummy text .Lorem ipsum dor amet isopinus
-                                ipaino
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- Container for demo purpose -->
+<div class="container my-24 mx-auto md:px-6">
+  <!-- Section: Design Block -->
+  <section class="text-center">
+    <h2 class="mb-12 text-3xl font-bold text-color4">
+     Découvrez notre <u class="text-color3">équipe</u>
+    </h2>
+
+    <div class="lg:gap-xl-12 grid gap-x-6 md:grid-cols-3 xl:grid-cols-4">
+      <div class="mb-12">
+        <img src="https://picsum.photos/300/300"
+          class="mx-auto mb-4 rounded-full shadow-lg dark:shadow-black/20" alt="" style="max-width: 100px" />
+
+        <p class="mb-2 font-bold text-color4">John Doe</p>
+        <p class="text-neutral-500 dark:text-neutral-300">Co-founder</p>
+      </div>
+
+      <div class="mb-12">
+        <img src="https://picsum.photos/300/300"
+          class="mx-auto mb-4 rounded-full shadow-lg dark:shadow-black/20" alt="" style="max-width: 100px" />
+
+        <p class="mb-2 font-bold text-color4">Lisa Ferrol</p>
+        <p class="text-neutral-500 dark:text-neutral-300">Web designer</p>
+      </div>
+
+      <div class="mb-12">
+        <img src="https://picsum.photos/300/300"
+          class="mx-auto mb-4 rounded-full shadow-lg dark:shadow-black/20" alt="" style="max-width: 100px" />
+        <p class="mb-2 font-bold text-color4">Maria Smith</p>
+        <p class="text-neutral-500 dark:text-neutral-300">
+          Senior consultant
+        </p>
+      </div>
+      <div class="mb-12">
+        <img src="https://picsum.photos/300/300"
+          class="mx-auto mb-4 rounded-full shadow-lg dark:shadow-black/20" alt="" style="max-width: 100px" />
+        <p class="mb-2 font-bold text-color4">Agatha Bevos</p>
+        <p class="text-neutral-500 dark:text-neutral-300">Co-founder</p>
+      </div>
+
+      <div class="mb-12">
+        <img src="https://picsum.photos/300/300"
+          class="mx-auto mb-4 rounded-full shadow-lg dark:shadow-black/20" alt="" style="max-width: 100px" />
+        <p class="mb-2 font-bold text-color4">Darren Randolph</p>
+        <p class="text-neutral-500 dark:text-neutral-300">
+          Marketing expert
+        </p>
+      </div>
+
+      <div class="mb-12">
+        <img src="https://picsum.photos/300/300"
+          class="mx-auto mb-4 rounded-full shadow-lg dark:shadow-black/20" alt="" style="max-width: 100px" />
+        <p class="mb-2 font-bold text-color4">Soraya Letto</p>
+        <p class="text-neutral-500 dark:text-neutral-300">SEO expert</p>
+      </div>
+
+      <div class="mb-12">
+        <img src="https://picsum.photos/300/300"
+          class="mx-auto mb-4 rounded-full shadow-lg dark:shadow-black/20" alt="" style="max-width: 100px" />
+        <p class="mb-2 font-bold text-color4">Maliha Welch</p>
+        <p class="text-neutral-500 dark:text-neutral-300">Web designer</p>
+      </div>
+
+      <div class="mb-12">
+        <img src="https://picsum.photos/300/300"
+          class="mx-auto mb-4 rounded-full shadow-lg dark:shadow-black/20" alt="" style="max-width: 100px" />
+        <p class="mb-2 font-bold text-color4">Zeynep Dudley</p>
+        <p class="text-neutral-500 dark:text-neutral-300">Web developer</p>
+      </div>
+    </div>
+  </section>
+  <!-- Section: Design Block -->
+</div>
 
 <?php include_once('include/footer.php')?>
 

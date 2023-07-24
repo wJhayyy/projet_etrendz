@@ -38,7 +38,7 @@ class Connect {
 define("DBHOST", "localhost");
 define("DBUSER", "jerem");
 define("DBPASS", "jerem");
-define("DBNAME", "gamerushtest");
+define("DBNAME", "gamerush");
 
 // Instanciation de la classe Connect pour établir la connexion à la base de données
 $connect = new Connect();

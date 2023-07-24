@@ -5,7 +5,6 @@
 <head>
   <meta charset="utf-8">
   <title>Titre de la page</title>
-  <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="assets/css/button-navbar.css">
   <?php include_once('include/link.php')?>
 </head>
@@ -24,7 +23,7 @@
         class="block rounded-lg bg-[hsla(0,0%,100%,0.1)] px-6 py-12 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] md:py-16 md:px-12 -mt-[100px] backdrop-blur-[12px]">
         <div class="flex flex-wrap">
           <div class="mb-12 w-full shrink-0 grow-0 basis-auto md:px-3 lg:mb-0 lg:w-5/12 lg:px-6">
-            <form action="view/admin/form-contact.php" method="POST">
+            <form action="src/model/form-contact.php" method="POST">
               <div class="relative mb-6" data-te-input-wrapper-init>
                 <input type="text"
                   class="text-white peer block min-h-[auto] w-full rounded border-0 bg-transparent py-[0.32rem] px-3 leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"

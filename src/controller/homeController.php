@@ -13,8 +13,8 @@ function vueApropos(){
     require_once('view/aboutus.php');
 }
 
-function vueArticle(){
-    require_once('view/article.php');
+function vueGalerie(){
+    require_once('view/galerie.php');
 }
 
 function vueRealisations(){
