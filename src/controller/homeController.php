@@ -17,6 +17,10 @@ function vueGalerie(){
     require_once('view/galerie.php');
 }
 
-function vueRealisations(){
-    require_once('view/realisations.php');
+function vueMercato(){
+    require_once('view/mercato.php');
+}
+
+function vueActualité(){
+    require_once('view/actualite.php');
 }

@@ -3,13 +3,13 @@
 include_once('src/model/connectBdd.php');
 
 // Pagination
-$page = isset($_GET['page']) ? intval($_GET['page']) : 1; // Récupérer le numéro de la page à partir des paramètres d'URL
-$limit = 9; // Nombre d'éléments à afficher par page
+$page = isset($_GET['page']) ? intval($_GET['page']) : 1;
+$limit = 9;
 
-$offset = ($page - 1) * $limit; // Calculer l'offset pour la clause LIMIT
+$offset = ($page - 1) * $limit;
 
 // Requête pour afficher les éléments sans recherche avec pagination
-$stmt_galerie = $connect->prepare("SELECT id_galerieimg, img_photo, nom_photo, description_photo
+$stmt_galerie = $connect->prepare("SELECT id_galerieimg, img_photo, nom_photo, mot_clé
                                   FROM galerie
                                   LIMIT :limit OFFSET :offset
                                   ");
@@ -17,6 +17,8 @@ $stmt_galerie->bindValue(':limit', $limit, PDO::PARAM_INT);
 $stmt_galerie->bindValue(':offset', $offset, PDO::PARAM_INT);
 $stmt_galerie->execute();
 $all_galerie = $stmt_galerie->fetchAll(PDO::FETCH_ASSOC);
+
+$chemin = 'assets/image/'; // Removed htmlspecialchars for this variable
 
 // Initialiser la variable $show_error
 $show_error = false;
@@ -28,28 +30,35 @@ $show_pagination = true;
 $search_no_results = false;
 
 // Traitement de la recherche
-if (isset($_POST['s']) && !empty($_POST['s'])) {
-    $recherche = htmlspecialchars($_POST['s']);
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (!empty($_POST['csrf_token']) && hash_equals($_POST['csrf_token'], $_SESSION['csrf_token'])) {
+        $recherche = trim($_POST['s']);
+        // Vérifier si la recherche contient au moins 4 caractères
+        if (strlen($recherche) >= 4) {
+            // Use prepared statement with named placeholders
+            $stmt_recherche = $connect->prepare('SELECT * FROM galerie WHERE nom_photo LIKE :search_term OR mot_clé LIKE :search_term ORDER BY id_galerieimg DESC');
+            $search_term = '%' . $recherche . '%';
+            $stmt_recherche->bindValue(':search_term', $search_term, PDO::PARAM_STR);
+            $stmt_recherche->execute();
+            $search_results = $stmt_recherche->fetchAll(PDO::FETCH_ASSOC);
 
-    // Vérifier si la recherche contient au moins 4 caractères
-    if (strlen($recherche) >= 4) {
-        $stmt_recherche = $connect->prepare('SELECT * FROM galerie WHERE nom_photo LIKE ? OR description_photo LIKE ? ORDER BY id_galerieimg DESC');
-        $search_term = '%' . $recherche . '%';
-        $stmt_recherche->execute([$search_term, $search_term]);
-        $search_results = $stmt_recherche->fetchAll(PDO::FETCH_ASSOC);
+            // Masquer la pagination lorsque des résultats de recherche sont trouvés
+            $show_pagination = false;
 
-        // Masquer la pagination lorsque des résultats de recherche sont trouvés
-        $show_pagination = false;
-
-        // Vérifier si aucun résultat n'a été trouvé
-        if (count($search_results) === 0) {
-            $search_no_results = true;
+            // Vérifier si aucun résultat n'a été trouvé
+            if (count($search_results) === 0) {
+                $search_no_results = true;
+            }
+        } else {
+            // Afficher l'erreur dans la pop-up
+            $show_error = true;
         }
     } else {
-        // Afficher l'erreur dans la pop-up
-        $show_error = true;
+        // CSRF token mismatch or missing, handle the error (e.g., redirect to an error page or log it)
+        exit('Invalid CSRF token');
     }
 }
+
 ?>
 
 
@@ -70,6 +79,11 @@ if (isset($_POST['s']) && !empty($_POST['s'])) {
     <div class="flex items-center justify-center my-28">
         <div class="relative">
             <form action="" method="POST">
+            <?php
+            $csrf_token = bin2hex(random_bytes(32));
+            $_SESSION['csrf_token'] = $csrf_token;
+            ?>
+            <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
                 <input type="search" name="s" class="py-2 pl-10 pr-4 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Rechercher...">
                 <span class="absolute inset-y-0 left-3 flex items-center">
                     <button type="submit" class="cursor-pointer">
@@ -95,29 +109,35 @@ if (isset($_POST['s']) && !empty($_POST['s'])) {
         <?php if (isset($search_results) && !empty($search_results)) : ?>
             <?php foreach ($search_results as $index => $result) : ?>
                 <div class="anim-galerie items flex flex-col items-center slide-in">
-                    <img class="w-11/12 lg:w-5/6 hover:cursor-pointer mb-4 rounded" src="assets/image/<?php echo $result['img_photo']; ?>" onclick="openImage('assets/image/<?php echo $result['img_photo']; ?>')" />
-                    <a href="assets/image/<?php echo $result['img_photo']; ?>" download="<?php echo $result['nom_photo']; ?>.jpg" class="w-5/6 lg:w-2/3 px-4 py-3 bg-green-600 hover:bg-green-800 transition duration-300 rounded-md text-white outline-none focus:ring-4 shadow-lg mx-5 flex">
+                    <img class="w-11/12 lg:w-5/6 hover:cursor-pointer mb-4 rounded" src="<?php echo htmlspecialchars($chemin)?><?php echo htmlspecialchars($result['img_photo']); ?>" onclick="openImage('assets/image/<?php echo htmlspecialchars($result['img_photo']); ?>')" />
+                    <a href="<?php echo htmlspecialchars($chemin)?><?php echo htmlspecialchars($result['img_photo']); ?>" download="<?php echo htmlspecialchars($result['nom_photo']); ?>.jpg" class="w-5/6 lg:w-2/3 px-4 py-3 bg-blue-600 hover:bg-blue-800 transition duration-300 rounded-md text-white outline-none focus:ring-4 shadow-lg mx-5 flex">
                         <span class="m-auto">Télécharger</span>
                         <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                         </svg>
                     </a>
-                    <h3 class="text-color4"><?php echo $result['nom_photo']; ?></h3>
+                    <h3 class="text-color4"><?php echo htmlspecialchars($result['nom_photo']); ?></h3>
                 </div>
             <?php endforeach; ?>
         <?php elseif ($search_no_results) : ?>
-            <p class="text-color4">Aucun résultat trouvé pour votre recherche.</p>
+            <div id="notFoundPopup" class="hidden fixed top-0 left-0 w-full h-full bg-gray-900 bg-opacity-50 flex justify-center items-center z-50">
+                <div class="bg-white p-8 rounded-lg">
+                    <p>Aucun résultat trouvé pour votre recherche.</p>
+                    <button id="closeBtnNotFound" class="mt-4 px-4 py-2 bg-gray-700 text-white rounded-lg">Fermer</button>
+                </div>
+            </div>
+
         <?php else : ?>
             <?php foreach ($all_galerie as $galerie) : ?>
                 <div class="anim-galerie items flex flex-col items-center slide-in">
-                    <img class="w-11/12 lg:w-5/6 hover:cursor-pointer mb-4 rounded" src="assets/image/<?php echo $galerie['img_photo']; ?>" onclick="openImage('assets/image/<?php echo $galerie['img_photo']; ?>')" />
-                    <a href="assets/image/<?php echo $galerie['img_photo']; ?>" download="<?php echo $galerie['nom_photo']; ?>.jpg" class="w-5/6 lg:w-2/3 px-4 py-3 bg-blue-600 hover:bg-blue-800 transition duration-300 rounded-md text-white outline-none focus:ring-4 shadow-lg mx-5 flex">
+                    <img class="w-11/12 lg:w-5/6 hover:cursor-pointer mb-4 rounded" src="<?php echo htmlspecialchars($chemin)?><?php echo htmlspecialchars($galerie['img_photo']); ?>" onclick="openImage('assets/image/<?php echo htmlspecialchars($galerie['img_photo']); ?>')" />
+                    <a href="<?php echo htmlspecialchars($chemin)?><?php echo htmlspecialchars($galerie['img_photo']); ?>" download="<?php echo htmlspecialchars($galerie['nom_photo']); ?>.jpg" class="w-5/6 lg:w-2/3 px-4 py-3 bg-blue-600 hover:bg-blue-800 transition duration-300 rounded-md text-white outline-none focus:ring-4 shadow-lg mx-5 flex">
                         <span class="m-auto">Télécharger</span>
                         <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                         </svg>
                     </a>
-                    <h3 class="text-color4"><?php echo $galerie['nom_photo']; ?></h3>
+                    <h3 class="text-color4"><?php echo htmlspecialchars($galerie['nom_photo']); ?></h3>
                 </div>
             <?php endforeach; ?>
         <?php endif; ?>
@@ -152,6 +172,18 @@ if (isset($_POST['s']) && !empty($_POST['s'])) {
     // Cacher la pop-up lorsque le bouton "Fermer" est cliqué
     document.getElementById('closeBtn').addEventListener('click', function() {
         document.getElementById('errorPopup').classList.add('hidden');
+    });
+</script>
+
+<script>
+    // Afficher la pop-up si l'erreur doit être montrée
+    <?php if ($search_no_results) : ?>
+        document.getElementById('notFoundPopup').classList.remove('hidden');
+    <?php endif; ?>
+
+    // Cacher la pop-up lorsque le bouton "Fermer" est cliqué
+    document.getElementById('closeBtnNotFound').addEventListener('click', function() {
+        document.getElementById('notFoundPopup').classList.add('hidden');
     });
 </script>
 

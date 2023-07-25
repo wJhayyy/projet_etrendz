@@ -11,9 +11,9 @@
 			</button>
 		</div>
 		<ul class="hidden absolute top-1/2 right-12 transform -translate-y-1/2 -translate-x-1/2 lg:flex lg:mx-auto lg:flex lg:items-center lg:w-auto lg:space-x-6">
-			<li><a class="block text-base font-semibold rounded gradient-button-desktop" href="#">Actualité</a></li>
+			<li><a class="block text-base font-semibold rounded gradient-button-desktop" href="index.php?action=actualité">Actualité</a></li>
 			<hr class="vertical-hr">
-			<li><a class="block text-base font-semibold rounded gradient-button-desktop" href="#">Mercato</a></li>
+			<li><a class="block text-base font-semibold rounded gradient-button-desktop" href="index.php?action=mercato">Mercato</a></li>
 			<hr class="vertical-hr">
 			<li><a class="block text-base font-semibold rounded gradient-button-desktop" href="index.php?action=galerie">Galerie</a></li>
 			<hr class="vertical-hr">
@@ -38,10 +38,10 @@
 			<div>
 				<ul>
 					<li class="mb-2">
-						<a class="block p-4 text-base font-semibold rounded gradient-button" href="#">Actualités</a>
+						<a class="block p-4 text-base font-semibold rounded gradient-button" href="index.php?action=actualité">Actualités</a>
 					</li>
 					<li class="mb-2">
-						<a class="block p-4 text-base font-semibold rounded gradient-button" href="#">Mercato</a>
+						<a class="block p-4 text-base font-semibold rounded gradient-button" href="index.php?action=mercato">Mercato</a>
 					</li>
 					<li class="mb-2">
 						<a class="block p-4 text-base font-semibold rounded gradient-button" href="index.php?action=galerie">Galerie</a>

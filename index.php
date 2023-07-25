@@ -14,8 +14,11 @@ if (isset($_GET['action']) && $_GET['action'] !== '') {
         case 'galerie':
             vueGalerie();
             break;
-        case 'realisations':
-            vueRealisations();
+        case 'mercato':
+            vueMercato();
+            break;
+        case 'actualité':
+            vueActualité();
             break; 
         case 'accueil':
             homepage();
