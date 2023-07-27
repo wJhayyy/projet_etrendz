@@ -93,8 +93,8 @@ function limitText($text, $limit) {
 <body class="bg-color1">
 <?php include_once('include/navbar.php') ?>
 
-<div class="flex my-28 justify-evenly">
-    <div class="flex items-center justify-center">
+<div class="flex my-28 flex-col lg:flex-row justify-evenly">
+    <div class="flex items-center mb-8 lg:mb-0 justify-center">
         <div class="relative">
             <form action="" method="POST">
             <?php
@@ -133,16 +133,16 @@ function limitText($text, $limit) {
 
     <!-- Votre formulaire de recherche ici -->
 
-<div id="searchResults" class="contain grid grid-cols-2 gap-8 justify-items-center">
+<div id="searchResults" class="contain grid grid-cols-2 gap-2 sm:gap-8 justify-items-center">
     <?php if (isset($search_results) && !empty($search_results)) : ?>
     <?php foreach ($search_results as $index => $result) : ?>
-        <div class="w-5/6 lg:flex">
+        <div class="w-11/12 lg:w-5/6 lg:flex">
                     <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" style="background-image: url('assets/image/<?php echo htmlspecialchars($result['image_entete']); ?>')" title="<?php echo htmlspecialchars($result['titre']);?>">
                     </div>
-                    <div class="max-w-full w-96 border-r border-b border-l border-grey-light lg:border-l-0 lg:border-t lg:border-grey-light bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
+                    <div class="max-w-full w-full border-r border-b border-l border-grey-light lg:border-l-0 lg:border-t lg:border-grey-light bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
                         <div class="mb-8">
                         <div class="text-black font-bold text-xl mb-2"><a href="<?php echo htmlspecialchars('index.php?action=mercato?id=' . $result['id_mercato']); ?>"><?php echo limitText(htmlspecialchars($result['titre']), 60); ?></a></div>
-                            <?php echo limitText(htmlspecialchars($result['description']), 80); ?></p>
+                            <p class="text-grey-darker text-base hidden lg:block"><?php echo limitText(htmlspecialchars($result['description']), 80); ?></p>
                         </div>
                         <div class="text-sm">
                             <p class="text-color1"><?php echo htmlspecialchars($result['date_mercato']); ?></p>
@@ -160,13 +160,13 @@ function limitText($text, $limit) {
 
         <?php else : ?>
             <?php foreach ($all_mercato as $mercato) : ?>
-                <div class="w-5/6 lg:flex">
+                <div class="w-11/12 lg:w-5/6 lg:flex">
                     <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" style="background-image: url('assets/image/<?php echo htmlspecialchars($mercato['image_entete']); ?>')" title="<?php echo htmlspecialchars($mercato['titre']); ?>">
                     </div>
-                    <div class="max-w-full w-96 border-r border-b border-l border-grey-light lg:border-l-0 lg:border-t lg:border-grey-light bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
+                    <div class="max-w-full w-full border-r border-b border-l border-grey-light lg:border-l-0 lg:border-t lg:border-grey-light bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
                         <div class="mb-8">
                         <div class="text-black font-bold text-xl mb-2"><a href="<?php echo htmlspecialchars('index.php?action=mercato&id_mercato=' . $mercato['id_mercato']); ?>"><?php echo limitText(htmlspecialchars($mercato['titre']), 60); ?></a></div>
-                        <p class="text-grey-darker text-base">
+                        <p class="text-grey-darker text-base hidden lg:block">
                         <?php echo limitText(htmlspecialchars($mercato['description']), 80); ?></p>
                         </div>
                         <div class="text-sm">
@@ -224,7 +224,7 @@ function limitText($text, $limit) {
 
             // Si l'option par défaut est sélectionnée, effectuer la redirection vers mercato.php
             if (value === "") {
-                window.location.href = "index.php?action=mercato";
+                window.location.href = "index.php?action=mercatos";
             } else {
                 // Sinon, faire la requête AJAX pour rafraîchir la liste des résultats en fonction de la catégorie sélectionnée
                 $.ajax({
@@ -265,7 +265,7 @@ function limitText($text, $limit) {
             $("#fetchval").val("");
 
             // Rediriger l'utilisateur vers la page mercato.php
-            window.location.href = "index.php?action=mercato";
+            window.location.href = "index.php?action=mercatos";
         });
     });
 </script>
