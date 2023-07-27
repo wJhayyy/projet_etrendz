@@ -23,13 +23,13 @@
       </div>
     </div>
     <div class="sm:ml-0 lg:ml-8 flex flex-col text-center">
-      <h2 class="text-base font-bold leading-4 text-color4 dark:text-white">Lien Interne</h2>
+      <h2 class="text-lg font-bold leading-4 text-color4 dark:text-white">Lien Interne</h2>
       <a href="javascript:void(0)" class="w-fit mx-auto focus:outline-none focus:underline hover:text-gray-500 text-base leading-4 mt-6 text-color4 dark:text-white cursor-pointer">Mercato</a>
       <a href="javascript:void(0)" class="w-fit mx-auto focus:outline-none focus:underline hover:text-gray-500 text-base leading-4 mt-6 text-color4 dark:text-white cursor-pointer">Actualité</a>
       <a href="index.php?action=contact" class="w-fit mx-auto focus:outline-none focus:underline hover:text-gray-500 text-base leading-4 mt-6 text-color4 dark:text-white cursor-pointer">Contact</a>
     </div>
     <div class="flex flex-col text-center">
-      <h2 class="text-base font-bold leading-4 text-color4 dark:text-white">Aide aux utilisateurs</h2>
+      <h2 class="text-lg font-bold leading-4 text-color4 dark:text-white">Aide aux utilisateurs</h2>
       <a href="javascript:void(0)" class="w-fit mx-auto focus:outline-none focus:underline hover:text-gray-500 text-base leading-4 mt-6 text-color4 dark:text-white cursor-pointer">Mentions légales</a>
       <a href="javascript:void(0)" class="w-fit mx-auto focus:outline-none focus:underline hover:text-gray-500 text-base leading-4 mt-6 text-color4 dark:text-white cursor-pointer">Support</a>
       </div>

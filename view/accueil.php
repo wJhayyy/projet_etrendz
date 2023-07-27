@@ -3,11 +3,21 @@
 include_once('src/model/connectBdd.php');
 
 $stmt_mercato = $connect->prepare("SELECT id_mercato, titre, image_entete, description
-                                      FROM mercato
-                                      LIMIT 6
-                                      ");
+                                  FROM mercato
+                                  ORDER BY id_mercato DESC
+                                  LIMIT 6
+                                  ");
 $stmt_mercato->execute();
 $all_mercato = $stmt_mercato->fetchAll(PDO::FETCH_ASSOC);
+
+$stmt_actualite = $connect->prepare("SELECT id_actualite, titre_actualite, image_entete, description
+                                  FROM actualite
+                                  ORDER BY id_actualite DESC
+                                  LIMIT 6
+                                  ");
+$stmt_actualite->execute();
+$all_actualite = $stmt_actualite->fetchAll(PDO::FETCH_ASSOC);
+
 
 $stmt_galerie = $connect->prepare("SELECT id_galerieimg, img_photo
                                   FROM galerie
@@ -17,6 +27,15 @@ $stmt_galerie = $connect->prepare("SELECT id_galerieimg, img_photo
 $stmt_galerie->execute();
 $all_galerie = $stmt_galerie->fetchAll(PDO::FETCH_ASSOC);
 
+function limitText($text, $limit) {
+  if (mb_strlen($text) <= $limit) {
+      return htmlspecialchars(mb_substr($text, 0, $limit));
+  } else {
+      $shortenedText = mb_substr($text, 0, $limit);
+      $lastSpace = mb_strrpos($shortenedText, ' ');
+      return rtrim(mb_substr($shortenedText, 0, $lastSpace)) . '...';
+  }
+}
 
 ?>
 
@@ -51,7 +70,7 @@ $all_galerie = $stmt_galerie->fetchAll(PDO::FETCH_ASSOC);
     </div>
     <div class="text-overlay background-entete mt-40 h-full">
         <div class="content-container">
-            <h1 class="text-3xl font-bold">GameRush, le site d'actualité esport numéro 1 !</h1>
+            <h1 class="text-3xl font-bold uppercase">GameRush, le site d'actualité esport numéro 1 !</h1>
             <div class="grid grid-cols-2 lg:grid-cols-4 lg:gap-8 xl:gap-24 justify-center justify-evenly pt-16 lg:pt-24 w-11/12 lg:w-11/12 xl:w-10/12 m-auto">
                 <div>
                     <i class="fa-solid fa-dollar-sign text-5xl" style="color: #fca311;"></i>
@@ -82,17 +101,17 @@ $all_galerie = $stmt_galerie->fetchAll(PDO::FETCH_ASSOC);
 <div class="ntshow">
 <hr class="hrgradient w-4/6 m-auto mt-32 md:w-2/6">
 
-<h2 class="text-3xl text-blanc text-center">
+<h3 class="text-3xl text-blanc text-center">
   Les revues 
   <span class="magic">
     <span class="magic-text">mercato</span>
   </span>
-</h2>
+</h3>
 
 <hr class="hrgradient w-4/6 m-auto mb-16 md:w-2/6">
 </div>
 
-	<a href="#" class="w-fit m-auto flex justify-center button-twitch bg-transparent text-color5 font-semibold hover:text-white py-2 px-4 border border-rose hover:border-transparent rounded mt-8 mb-12">
+	<a href="index.php?action=mercatos" class="w-fit m-auto flex justify-center button-twitch bg-transparent text-color5 font-semibold hover:text-white py-2 px-4 border border-rose hover:border-transparent rounded mt-8 mb-12">
 		<p class="z-10">En savoir plus</p>
 	</a>
 
@@ -100,16 +119,20 @@ $all_galerie = $stmt_galerie->fetchAll(PDO::FETCH_ASSOC);
     <?php foreach ($all_mercato as $mercato): ?>
         <div class="card ntshow">
             <div class="card-content">
-                <div class="card-image">
-                <img src="assets/image/<?php echo $mercato['image_entete']; ?>" />
+                <div class="card-image" title="<?php echo htmlspecialchars($mercato['titre']); ?>">
+                <a href="">
+                <img src="assets/image/<?php echo $mercato['image_entete']; ?>"/>
                 </div>
+                </a>
                 <div class="card-info-wrapper">
+                <a href="">
                     <div class="card-info">
                         <div class="card-info-title">
-                            <h3><?php echo $mercato['titre']; ?></h3>
-                            <h4 class="sm:block"><?php echo $mercato['description']; ?></h4>
+                            <h3><?php echo limitText(htmlspecialchars($mercato['titre']),60); ?></h3>
+                            <h4 class="sm:block"><?php echo limitText(htmlspecialchars($mercato['description']),80); ?></h4>
                         </div>
                     </div>
+                </a>
                 </div>
             </div>
         </div>
@@ -119,332 +142,52 @@ $all_galerie = $stmt_galerie->fetchAll(PDO::FETCH_ASSOC);
 		   <div class="ntshow">
 <hr class="hrgradient w-4/6 m-auto mt-32 md:w-2/6">
 
-<h2 class="text-3xl text-blanc text-center">
+<h3 class="text-3xl text-blanc text-center">
   L'actualités 
   <span class="magic">
     <span class="magic-text">e-sport</span>
   </span>
-</h2>
+</h3>
 
 <hr class="hrgradient w-4/6 m-auto mb-16 md:w-2/6">
 </div>
 
-	<a href="#" class="w-fit m-auto flex justify-center button-twitch bg-transparent text-color5 font-semibold hover:text-white py-2 px-4 border border-rose hover:border-transparent rounded mt-8 mb-12">
+	<a href="index.php?action=actualités" class="w-fit m-auto flex justify-center button-twitch bg-transparent text-color5 font-semibold hover:text-white py-2 px-4 border border-rose hover:border-transparent rounded mt-8 mb-12">
 		<p class="z-10">En savoir plus</p>
 	</a>
 
-		<div class="cards mt-2">
-			<div class="card ntshow">
-			<div class="card-content">
-				  <div class="card-image">
-				  <a href="">
-				  <img src="assets/image/card1.jpg">
+<div class="cards mt-2">
+  <?php foreach ($all_actualite as $actualite): ?>
+	<div class="card ntshow">
+	<div class="card-content">
+          <div class="card-image" title="<?php echo htmlspecialchars($actualite['titre_actualite']); ?>">
+				    <a href="">
+				    <img src="assets/image/<?php echo $actualite['image_entete']; ?>">
 				  </div>
 				  </a>
 				<div class="card-info-wrapper">
-				<div class="card-info">
-					<div class="card-info-title">
-					<h3>Apartments</h3>  
-					<h4>Places to be apart. Wait, what?</h4>
-					</div>    
-				</div>
-				</div>
-			</div>
-			</div>
-
-			<div class="card ntshow">
-			<div class="card-content">
-				<div class="card-image">
-				<img src="assets/image/card2.jpg">
-				</div>
-				<div class="card-info-wrapper">
-				<div class="card-info">
-					<div class="card-info-title">
-					<h3>Unicorns</h3>  
-					<h4>A single corn. Er, I mean horn.</h4>
-					</div>    
-				</div>  
-				</div>
-			</div>
-			</div>
-
-			<div class="card ntshow">
-			<div class="card-content">
-				<div class="card-image">
-				<img src="assets/image/card3.jpg">
-				</div>
-				<div class="card-info-wrapper">
-				<div class="card-info">
-					<div class="card-info-title">
-					<h3>Blender Phones</h3>  
-					<h4>These absolutely deserve to exist.</h4>
-					</div>    
-				</div>
-				</div>
-			</div>
-			</div>
-
-			<div class="card ntshow">
-			<div class="card-content">
-				<div class="card-image">
-				<img src="assets/image/card4.jpg">
-				</div>
-				<div class="card-info-wrapper">
-				<div class="card-info">
-					<div class="card-info-title">
-					<h3>Adios</h3>  
-					<h4>See you....</h4>
-					</div>    
-				</div>
-				</div>
-			</div>
-			</div>
-
-			<div class="card ntshow">
-			<div class="card-content">
-				<div class="card-image">
-				<img src="assets/image/card5.jpg">
-				</div>
-				<div class="card-info-wrapper">
-				<div class="card-info">
-					<div class="card-info-title">
-					<h3>I mean hello</h3>  
-					<h4>...over here.</h4>
-					</div>    
-				</div>
-				</div>
-			</div>
-			</div>
-
-			<div class="card ntshow">
-			<div class="card-content">
-				<div class="card-image">
-				<img src="assets/image/card6.jpg">
-				</div>
-				<div class="card-info-wrapper">
-				<div class="card-info">
-					<div class="card-info-title">
-					<h3>Otters</h3>  
-					<h4>Look at me, imma cute lil fella.</h4>
-					</div>    
-				</div>
-				</div>
-			</div>
-			</div>
-   		</div>
-
-<!-- <div class="my-24 mx-auto md:px-6">
-  <section class="mb-32 text-center">
-    
-      <div class="ntshow">
-        <hr class="hrgradient w-4/6 m-auto mt-32 md:w-2/6">
-
-        <h2 class="text-3xl text-blanc text-center">
-          Nos
-          <span class="magic">
-            <span class="magic-text">commentaires</span>
-          </span>
-        </h2>
-
-        <hr class="hrgradient w-4/6 m-auto mb-16 md:w-2/6">
-      </div>
-
-    <div class="grid gap-x-6 md:grid-cols-3 xl:gap-x-12">
-      <div class="w-5/6 m-auto ntshow md:w-full mb-6 lg:mb-0">
-        <div
-          class="block rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)]">
-          <div class="relative overflow-hidden bg-cover bg-no-repeat">
-            <img src="assets/image/testimonial1.jpg" class="w-full rounded-t-lg" />
-            <a href="#!">
-              <div class="absolute top-0 right-0 bottom-0 left-0 h-full w-full overflow-hidden bg-fixed"></div>
-            </a>
-            <svg class="absolute left-0 bottom-0 text-white" xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 1440 320">
-              <path fill="currentColor"
-                d="M0,288L48,272C96,256,192,224,288,197.3C384,171,480,149,576,165.3C672,181,768,235,864,250.7C960,267,1056,245,1152,250.7C1248,256,1344,288,1392,304L1440,320L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z">
-              </path>
-            </svg>
+        <a href="">
+          <div class="card-info">
+            <div class="card-info-title">
+              <h3><?php echo limitText(htmlspecialchars($actualite['titre_actualite']),60); ?></h3>  
+              <h4><?php echo limitText(htmlspecialchars($actualite['description']),80); ?></h4>
+            </div>    
           </div>
-          <div class="p-6 pb-8 lg:max-h-64">
-            <h5 class="mb-2 text-lg font-bold">Victor "Ferra" Francal</h5>
-            <h6 class="mb-4 font-medium text-primary">
-              Coach "Team Vitality"
-            </h6>
-            <ul class="mb-6 flex justify-center">
-              <li>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 96 960 960" class="w-5 text-warning">
-                  <path fill="currentColor"
-                    d="m233 976 65-281L80 506l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Z" />
-                </svg>
-              </li>
-              <li>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 96 960 960" class="w-5 text-warning">
-                  <path fill="currentColor"
-                    d="m233 976 65-281L80 506l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Z" />
-                </svg>
-              </li>
-              <li>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 96 960 960" class="w-5 text-warning">
-                  <path fill="currentColor"
-                    d="m233 976 65-281L80 506l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Z" />
-                </svg>
-              </li>
-              <li>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 96 960 960" class="w-5 text-warning">
-                  <path fill="currentColor"
-                    d="m233 976 65-281L80 506l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Z" />
-                </svg>
-              </li>
-              <li>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 96 960 960" class="w-5 text-warning">
-                  <path fill="currentColor"
-                    d="m480 757 157 95-42-178 138-120-182-16-71-168v387ZM233 976l65-281L80 506l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Z" />
-                </svg>
-              </li>
-            </ul>
-            <p>
-              En étant coach de la team Vitality,
-			  GameRush nous aide à rester dans l'actualité
-			  sur d'autre jeux que nous ne pouvons pas suivre.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div class="w-5/6 m-auto ntshow md:w-full mb-6 lg:mb-0">
-        <div
-          class="block rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] ">
-          <div class="relative overflow-hidden bg-cover bg-no-repeat">
-            <img src="assets/image/testimonial4.jpeg" class="w-full rounded-t-lg" />
-            <a href="#!">
-              <div class="absolute top-0 right-0 bottom-0 left-0 h-full w-full overflow-hidden bg-fixed"></div>
-            </a>
-            <svg class="absolute left-0 bottom-0 text-white" xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 1440 320">
-              <path fill="currentColor"
-                d="M0,96L48,128C96,160,192,224,288,240C384,256,480,224,576,213.3C672,203,768,213,864,202.7C960,192,1056,160,1152,128C1248,96,1344,64,1392,48L1440,32L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z">
-              </path>
-            </svg>
-          </div>
-          <div class="p-6 pb-8 lg:max-h-64">
-            <h5 class="mb-2 text-lg font-bold">Benjamin "Eversax" Wagner</h5>
-            <h6 class="mb-4 font-medium text-primary">
-			      Coach "Karmine Corp"
-            </h6>
-            <ul class="mb-6 flex justify-center">
-              <li>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 96 960 960" class="w-5 text-warning">
-                  <path fill="currentColor"
-                    d="m233 976 65-281L80 506l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Z" />
-                </svg>
-              </li>
-              <li>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 96 960 960" class="w-5 text-warning">
-                  <path fill="currentColor"
-                    d="m233 976 65-281L80 506l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Z" />
-                </svg>
-              </li>
-              <li>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 96 960 960" class="w-5 text-warning">
-                  <path fill="currentColor"
-                    d="m233 976 65-281L80 506l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Z" />
-                </svg>
-              </li>
-              <li>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 96 960 960" class="w-5 text-warning">
-                  <path fill="currentColor"
-                    d="m233 976 65-281L80 506l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Z" />
-                </svg>
-              </li>
-              <li>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 96 960 960" class="w-5 text-warning">
-                  <path fill="currentColor"
-                    d="m233 976 65-281L80 506l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Z" />
-                </svg>
-              </li>
-            </ul>
-            <p>
-              GameRush regroupe une grosse communauté francophone et 
-			  n'hésite pas à faire le voyage pour venir
-			  encourager les francophones.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div class="w-5/6 m-auto ntshow md:w-auto mb-6 lg:mb-0">
-        <div
-          class="block rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)]">
-          <div class="relative overflow-hidden bg-cover bg-no-repeat">
-            <img src="assets/image/testimonial6.jpeg" class="w-full rounded-t-lg" />
-            <a href="#!">
-              <div class="absolute top-0 right-0 bottom-0 left-0 h-full w-full overflow-hidden bg-fixed"></div>
-            </a>
-            <svg class="absolute left-0 bottom-0 text-white" xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 1440 320">
-              <path fill="currentColor"
-                d="M0,288L48,256C96,224,192,160,288,160C384,160,480,224,576,213.3C672,203,768,117,864,85.3C960,53,1056,75,1152,69.3C1248,64,1344,32,1392,16L1440,0L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z">
-              </path>
-            </svg>
-          </div>
-          <div class="p-6 pb-8 lg:max-h-64">
-            <h5 class="mb-2 text-lg font-bold">Brice "ExoTiiK" Bigeard</h5>
-            <h6 class="mb-4 font-medium text-primary">
-              Joueur "Karmine Corp"
-            </h6>
-            <ul class="mb-6 flex justify-center">
-              <li>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 96 960 960" class="w-5 text-warning">
-                  <path fill="currentColor"
-                    d="m233 976 65-281L80 506l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Z" />
-                </svg>
-              </li>
-              <li>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 96 960 960" class="w-5 text-warning">
-                  <path fill="currentColor"
-                    d="m233 976 65-281L80 506l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Z" />
-                </svg>
-              </li>
-              <li>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 96 960 960" class="w-5 text-warning">
-                  <path fill="currentColor"
-                    d="m233 976 65-281L80 506l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Z" />
-                </svg>
-              </li>
-              <li>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 96 960 960" class="w-5 text-warning">
-                  <path fill="currentColor"
-                    d="m233 976 65-281L80 506l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Z" />
-                </svg>
-              </li>
-              <li>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 96 960 960" class="w-5 text-warning">
-                  <path fill="currentColor"
-                    d="m233 976 65-281L80 506l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Z" />
-                </svg>
-              </li>
-            </ul>
-            <p>
-			On est fier d'avoir une plateforme
-			comme ça qui nous donnent de la force sur 
-			la scène et qui montre la ferveur de la communauté
-			française.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-</div> -->
+        </a>
+				</div>
+	</div>
+	</div>
+  <?php endforeach;?>
+</div>
 
 <div class="ntshow">
   <hr class="hrgradient w-4/6 m-auto mt-32 md:w-2/6">
-    <h2 class="text-3xl text-blanc text-center">
+    <h3 class="text-3xl text-blanc text-center">
       Nos
       <span class="magic">
           <span class="magic-text">commentaires</span>
         </span>
-    </h2>
+    </h3>
   <hr class="hrgradient w-4/6 m-auto mb-16 md:w-2/6">
 </div>
 
@@ -508,12 +251,12 @@ $all_galerie = $stmt_galerie->fetchAll(PDO::FETCH_ASSOC);
 <div class="ntshow">
 <hr class="hrgradient w-4/6 m-auto mt-32 md:w-2/6">
 
-<h2 class="text-3xl text-blanc text-center">
+<h3 class="text-3xl text-blanc text-center">
   Notre galerie
   <span class="magic">
     <span class="magic-text">photo</span>
   </span>
-</h2>
+</h3>
 
 <hr class="hrgradient w-4/6 m-auto mb-16 md:w-2/6">
 </div>

@@ -69,6 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="utf-8">
     <title>Titre de la page</title>
     <link rel="stylesheet" href="assets/css/button-navbar.css">
+    <link rel="stylesheet" href="assets/css/button-twitch.css">
     <link rel="stylesheet" href="assets/css/animation-galerie.css">
     <?php include_once('include/link.php') ?>
 </head>
@@ -84,7 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['csrf_token'] = $csrf_token;
             ?>
             <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
-                <input type="search" name="s" class="py-2 pl-10 pr-4 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Rechercher...">
+                <input type="search" name="s" class="pl-10 w-fit m-auto flex justify-center bg-transparent text-color5 font-semibold hover:text-white py-2 px-4 border border-color3 focus:border-color5 hover:border-orange-600 transition ease-in-out duration-300 ring-yellow-500 rounded" placeholder="Rechercher...">
                 <span class="absolute inset-y-0 left-3 flex items-center">
                     <button type="submit" class="cursor-pointer">
                         <i class="fas fa-search text-gray-500"></i>
@@ -154,8 +155,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // Afficher les boutons de pagination
             for ($i = 1; $i <= $total_pages; $i++) {
-                $active_class = ($i === $page) ? "bg-blue-500 text-white" : "bg-white text-blue-500";
-                echo '<a href="index.php?action=galerie&page=' . $i . '" class="px-4 py-2 mx-1 rounded-lg cursor-pointer ' . $active_class . '">' . $i . '</a>';
+                $active_class = ($i === $page) ? "" : "";
+                echo '<a href="index.php?action=mercatos&page=' . $i . '" class="w-fit flex justify-center button-twitch bg-transparent text-color5 font-semibold hover:text-color4 mx-4 py-2 px-4 border border-rose hover:border-transparent rounded mt-8 mb-12 ' . $active_class . '">' . '<p class="z-10">' .$i .'</p>'.'</a>';
             }
             ?>
         </div>

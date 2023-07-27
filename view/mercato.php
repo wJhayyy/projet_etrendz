@@ -2,218 +2,140 @@
 
 include_once('src/model/connectBdd.php');
 
-// Pagination
-$page = isset($_GET['page']) ? intval($_GET['page']) : 1;
-$limit = 10;
+// Vérifier si l'id_mercato est présent dans les paramètres GET
+if (isset($_GET['id_mercato']) && !empty($_GET['id_mercato'])) {
+    // Récupérer l'id_mercato depuis les paramètres GET
+    $id_mercato = $_GET['id_mercato'];
 
-$offset = ($page - 1) * $limit;
+    // Requête SQL avec une jointure entre les tables "mercato" et "category"
+    $sql = 'SELECT m.*, c.name_category 
+            FROM mercato AS m 
+            INNER JOIN category AS c ON m.id_category = c.id_category
+            WHERE m.id_mercato = :id';
 
-// Requête pour afficher les éléments sans recherche avec pagination
-$stmt_mercato = $connect->prepare("SELECT id_mercato, image_entete, titre, description, date_mercato
-                                  FROM mercato
-                                  LIMIT :limit OFFSET :offset
-                                  ");
-$stmt_mercato->bindValue(':limit', $limit, PDO::PARAM_INT);
-$stmt_mercato->bindValue(':offset', $offset, PDO::PARAM_INT);
-$stmt_mercato->execute();
-$all_mercato = $stmt_mercato->fetchAll(PDO::FETCH_ASSOC);
+    $stmt_postmercato = $connect->prepare($sql);
+    $stmt_postmercato->bindParam(':id', $id_mercato, PDO::PARAM_INT);
+    $stmt_postmercato->execute();
+    $mercato = $stmt_postmercato->fetch(PDO::FETCH_ASSOC);
+  
 
-$chemin = 'assets/image/'; // The path to the images directory
-
-// Initialiser la variable $show_error
-$show_error = false;
-
-// Variable pour déterminer si la pagination doit être affichée
-$show_pagination = true;
-
-// Initialiser la variable $search_no_results
-$search_no_results = false;
-
-// Traitement de la recherche
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (!empty($_POST['csrf_token']) && hash_equals($_POST['csrf_token'], $_SESSION['csrf_token'])) {
-        $recherche = trim($_POST['s']);
-        // Vérifier si la recherche contient au moins 4 caractères
-        if (strlen($recherche) >= 4) {
-            // Use prepared statement with named placeholders
-            $stmt_recherche = $connect->prepare('SELECT * FROM mercato WHERE titre LIKE :search_term OR description LIKE :search_term ORDER BY id_mercato DESC');
-            $search_term = '%' . $recherche . '%';
-            $stmt_recherche->bindValue(':search_term', $search_term, PDO::PARAM_STR);
-            $stmt_recherche->execute();
-            $search_results = $stmt_recherche->fetchAll(PDO::FETCH_ASSOC);
-
-            // Masquer la pagination lorsque des résultats de recherche sont trouvés
-            $show_pagination = false;
-
-            // Vérifier si aucun résultat n'a été trouvé
-            if (count($search_results) === 0) {
-                $search_no_results = true;
-            }
-        } else {
-            // Afficher l'erreur dans la pop-up
-            $show_error = true;
-        }
-    } else {
-        // CSRF token mismatch or missing, handle the error (e.g., redirect to an error page or log it)
-        exit('Invalid CSRF token');
-    }
+    if (isset($mercato) && empty($mercato)) {
+        header('Location: index.php?action=mercatos');
+        exit;
+    }    
 }
 
-try{
-    $stmt = $connect->prepare("SELECT id_category, name_category FROM category");
-    $stmt->execute();
-    $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
+// Requête pour afficher les éléments sans recherche avec pagination
+// Sélectionner le nombre total d'enregistrements dans la table "mercato"
+$stmt_count = $connect->prepare("SELECT COUNT(*) FROM mercato");
+$stmt_count->execute();
+$total_rows = $stmt_count->fetchColumn();
 
-} catch (PDOException $e) {
-    die("Erreur de connexion : " . $e->getMessage());
+// Vérifier si nous avons au moins 3 enregistrements dans la table
+if ($total_rows >= 3) {
+    // Tant que nous n'avons pas 3 enregistrements uniques, on continue de générer une nouvelle requête
+    do {
+        // Générer trois IDs aléatoires
+        $random_ids = array_rand(range(1, $total_rows), 3);
+
+        // Convertir les IDs en une chaîne pour la clause IN de la requête
+        $random_ids_str = implode(',', $random_ids);
+
+        // Sélectionner les enregistrements avec les IDs aléatoires, en limitant à 3 résultats
+        $stmt_mercato = $connect->prepare("SELECT id_mercato, image_entete, titre, description, date_mercato
+                                          FROM mercato
+                                          WHERE id_mercato IN ($random_ids_str)
+                                          LIMIT 3");
+        $stmt_mercato->execute();
+        $all_mercato = $stmt_mercato->fetchAll(PDO::FETCH_ASSOC);
+        
+        // Répéter la boucle si on n'obtient pas trois enregistrements uniques
+    } while (count(array_unique(array_column($all_mercato, 'id_mercato'))) < 3);
+} else {
+    // Traiter le cas où il y a moins de 3 enregistrements dans la table "mercato"
+    // Vous pouvez ajuster cette partie selon vos besoins
+    $stmt_mercato = $connect->prepare("SELECT id_mercato, image_entete, titre, description, date_mercato
+                                      FROM mercato
+                                      LIMIT 3");
+    $stmt_mercato->execute();
+    $all_mercato = $stmt_mercato->fetchAll(PDO::FETCH_ASSOC);
+}
+
+
+function limitText($text, $limit) {
+    if (mb_strlen($text) <= $limit) {
+        return $text;
+    } else {
+        $shortenedText = mb_substr($text, 0, $limit);
+        $lastSpace = mb_strrpos($shortenedText, ' ');
+        return rtrim(mb_substr($shortenedText, 0, $lastSpace)) . '...';
+    }
 }
 
 ?>
 
 <!doctype html>
-
 <html lang="fr">
 
 <head>
     <meta charset="utf-8">
-    <title>Titre de la page</title>
+    <title>Gamerush - <?php echo isset($mercato['titre']) ? $mercato['titre'] : 'Titre de la page'; ?></title>
     <link rel="stylesheet" href="assets/css/button-navbar.css">
+    <link rel="stylesheet" href="assets/css/gradient-hr.css">
     <?php include_once('include/link.php') ?>
 </head>
 
 <body class="bg-color1">
-<?php include_once('include/navbar.php') ?>
-
-<div class="flex items-center justify-center my-28">
-    <div class="relative">
-        <form action="" method="POST">
-        <?php
-        $csrf_token = bin2hex(random_bytes(32));
-        $_SESSION['csrf_token'] = $csrf_token;
-        ?>
-        <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
-            <input type="search" name="s" class="py-2 pl-10 pr-4 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Rechercher...">
-            <span class="absolute inset-y-0 left-3 flex items-center">
-                <button type="submit" class="cursor-pointer">
-                     <i class="fas fa-search text-gray-500"></i>
-                 </button>
-             </span>
-        </form>
-    </div>
-</div>
-
-<!-- <form action="src/model/mercato-filter.php" method="">
-    <label for="category">Filtrer par catégorie:</label>
-    <select name="category" id="category">
-        <option value="">Toutes les catégories</option>
-        <?php
-        foreach ($categories as $category) {
-            echo "<option value='{$category['id_category']}'>{$category['name_category']}</option>";
-        }
-        ?>
-    </select>
-    <button type="submit">Filtrer</button>
-</form> -->
-
-    <!-- Afficher la pop-up d'erreur -->
-    <div id="errorPopup" class="hidden fixed top-0 left-0 w-full h-full bg-gray-900 bg-opacity-50 flex justify-center items-center z-50">
-        <div class="bg-white p-8 rounded-lg">
-            <p>La recherche doit contenir au moins 4 caractères.</p>
-            <button id="closeBtn" class="mt-4 px-4 py-2 bg-gray-700 text-white rounded-lg">Fermer</button>
+    <?php include_once('include/navbar.php') ?>
+    <div class="w-full">
+    <hr class="hrgradient w-4/6 m-auto mt-24 md:w-3/6">
+        <h2 class="text-color5 text-2xl lg:text-3xl text-center py-8"><?php echo htmlspecialchars($mercato['titre'])?></h2>
+    <hr class="hrgradient w-4/6 m-auto mb-16 md:w-3/6">
+        <img class="rounded m-auto" src="assets/image/<?php echo htmlspecialchars($mercato['image_entete'])?>">
+        <hr class="hrgradient w-4/6 m-auto mt-16 md:w-3/6">
+            <h3 class="text-color5 text-center mt-8 lg:mt-12 text-lg lg:text-xl mb-8 lg:mb-12"><?php echo htmlspecialchars($mercato['titre1'])?></h3>
+        <hr class="hrgradient w-4/6 m-auto mb-16 md:w-3/6">
+        <p class="text-color5 text-center m-auto mb-10 w-10/12 lg:w-8/12 lg:text-lg"><?php echo htmlspecialchars($mercato['text1'])?></p>
+        <div class="flex justify-center">
+            <?php echo ($mercato['tweet1'])?>
         </div>
+        <p class="text-color5 text-center m-auto mt-10 mb-10 w-10/12 lg:w-8/12 lg:text-lg"><?php echo htmlspecialchars($mercato['text2'])?></p>
+        <div class="flex justify-center">
+            <?php echo ($mercato['tweet2'])?>
+        </div>
+        <p class="text-color5 text-center m-auto mt-10 mb-10 w-10/12 lg:w-8/12 lg:text-lg"><?php echo htmlspecialchars($mercato['text3'])?></p>
+        <hr class="hrgradient w-4/6 m-auto mt-16 md:w-3/6">
+            <h3 class="text-color5 text-center mt-8 lg:mt-12 text-lg lg:text-xl mb-8 lg:mb-12"><?php echo htmlspecialchars($mercato['titre2'])?></h3>
+        <hr class="hrgradient w-4/6 m-auto mb-16 md:w-3/6">
+        <p class="text-color5 text-center m-auto mt-10 mb-10 w-10/12 lg:w-8/12 lg:text-lg"><?php echo htmlspecialchars($mercato['text4'])?></p>
+        <div class="flex justify-center">
+            <?php echo ($mercato['tweet3'])?>
+        </div>
+        <p class="text-color5 text-center m-auto mt-10 mb-10 w-10/12 lg:w-8/12 lg:text-lg"><?php echo htmlspecialchars($mercato['conclusion'])?></p>
+        
+        <p class="text-color5 text-center">Catégorie : <?php echo htmlspecialchars(str_replace('- Mercato', '', $mercato['name_category']))?></p>
     </div>
-
-
-    <!-- Votre formulaire de recherche ici -->
-
-<div id="searchResults" class="grid grid-cols-2 gap-8 justify-items-center">
-    <?php if (isset($search_results) && !empty($search_results)) : ?>
-    <?php foreach ($search_results as $index => $result) : ?>
-        <div class="w-2/3 lg:flex">
-                    <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" style="background-image: url('assets/image/<?php echo htmlspecialchars($result['image_entete']); ?>')" title="<?php echo htmlspecialchars($result['titre']);?>">
-                    </div>
-                    <div class="max-w-full w-96 border-r border-b border-l border-grey-light lg:border-l-0 lg:border-t lg:border-grey-light bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
-                        <div class="mb-8">
-                        <div class="text-black font-bold text-xl mb-2"><a href="<?php echo htmlspecialchars('index.php?mercato.php?id=' . $result['id_mercato']); ?>"><?php echo htmlspecialchars($result['titre']); ?></a></div>
-                            <p class="text-grey-darker text-base"><?php echo htmlspecialchars($result['description']); ?></p>
-                        </div>
-                        <div class="text-sm">
-                            <p class="text-color1"><?php echo htmlspecialchars($result['date_mercato']); ?></p>
-                        </div>
-                    </div>
-                    </div>
-            <?php endforeach; ?>
-        <?php elseif ($search_no_results) : ?>
-            <div id="notFoundPopup" class="hidden fixed top-0 left-0 w-full h-full bg-gray-900 bg-opacity-50 flex justify-center items-center z-50">
-                <div class="bg-white p-8 rounded-lg">
-                    <p>Aucun résultat trouvé pour votre recherche.</p>
-                    <button id="closeBtnNotFound" class="mt-4 px-4 py-2 bg-gray-700 text-white rounded-lg">Fermer</button>
+    <h4 class="text-color5 text-center text-xl mt-12 mb-12">Voici d'autres actualités : </h4>
+<div class="contain grid grid-cols-2 gap-8 justify-items-center">
+    <?php foreach ($all_mercato as $mercato) : ?>
+        <div class="w-5/6 lg:flex">
+            <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" style="background-image: url('assets/image/<?php echo htmlspecialchars($mercato['image_entete']); ?>')" title="<?php echo htmlspecialchars($mercato['titre']); ?>">
+            </div>
+            <div class="max-w-full w-96 border-r border-b border-l border-grey-light lg:border-l-0 lg:border-t lg:border-grey-light bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
+                <div class="mb-8">
+                <div class="text-black font-bold text-xl mb-2"><a href="<?php echo htmlspecialchars('index.php?action=mercato&id_mercato=' . $mercato['id_mercato']); ?>"><?php echo limitText(htmlspecialchars($mercato['titre']), 60); ?></a></div>
+                <p class="text-grey-darker text-base">
+                <?php echo limitText(htmlspecialchars($mercato['description']), 80); ?></p>
+                </div>
+                 <div class="text-sm">
+                    <p class="text-color1"><?php echo htmlspecialchars($mercato['date_mercato']); ?></p>
                 </div>
             </div>
-
-        <?php else : ?>
-            <?php foreach ($all_mercato as $mercato) : ?>
-                <div class="w-5/6 lg:flex">
-                    <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" style="background-image: url('assets/image/<?php echo htmlspecialchars($mercato['image_entete']); ?>')" title="<?php echo htmlspecialchars($mercato['titre']); ?>">
-                    </div>
-                    <div class="max-w-full w-96 border-r border-b border-l border-grey-light lg:border-l-0 lg:border-t lg:border-grey-light bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
-                        <div class="mb-8">
-                        <div class="text-black font-bold text-xl mb-2"><a href="<?php echo htmlspecialchars('index.php?mercato.php?id=' . $mercato['id_mercato']); ?>"><?php echo htmlspecialchars($mercato['titre']); ?></a></div>
-                            <p class="text-grey-darker text-base"><?php echo htmlspecialchars($mercato['description']); ?></p>
-                        </div>
-                        <div class="text-sm">
-                            <p class="text-color1"><?php echo htmlspecialchars($mercato['date_mercato']); ?></p>
-                        </div>
-                    </div>
-                    </div>
-            <?php endforeach; ?>
-        <?php endif; ?>
+            </div>
+    <?php endforeach; ?>
 </div>
-
-    <?php if ($show_pagination) : ?>
-        <div class="flex justify-center mt-8">
-            <?php
-            // Calculer le nombre total de pages
-            $stmt_count = $connect->prepare("SELECT COUNT(*) FROM mercato");
-            $stmt_count->execute();
-            $total_rows = $stmt_count->fetchColumn();
-            $total_pages = ceil($total_rows / $limit);
-
-            // Afficher les boutons de pagination
-            for ($i = 1; $i <= $total_pages; $i++) {
-                $active_class = ($i === $page) ? "bg-blue-500 text-white" : "bg-white text-blue-500";
-                echo '<a href="index.php?action=mercato&page=' . $i . '" class="px-4 py-2 mx-1 rounded-lg cursor-pointer ' . $active_class . '">' . $i . '</a>';
-            }
-            ?>
-        </div>
-    <?php endif; ?>
-
-<?php include_once('include/footer.php') ?>
-
-<script>
-    // Afficher la pop-up si l'erreur doit être montrée
-    <?php if ($show_error) : ?>
-        document.getElementById('errorPopup').classList.remove('hidden');
-    <?php endif; ?>
-
-    // Cacher la pop-up lorsque le bouton "Fermer" est cliqué
-    document.getElementById('closeBtn').addEventListener('click', function() {
-        document.getElementById('errorPopup').classList.add('hidden');
-    });
-</script>
-
-<script>
-    // Afficher la pop-up si l'erreur doit être montrée
-    <?php if ($search_no_results) : ?>
-        document.getElementById('notFoundPopup').classList.remove('hidden');
-    <?php endif; ?>
-
-    // Cacher la pop-up lorsque le bouton "Fermer" est cliqué
-    document.getElementById('closeBtnNotFound').addEventListener('click', function() {
-        document.getElementById('notFoundPopup').classList.add('hidden');
-    });
-</script>
-
+    <?php include_once('include/footer.php') ?>
 </body>
 
 </html>
+

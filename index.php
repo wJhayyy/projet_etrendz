@@ -14,11 +14,17 @@ if (isset($_GET['action']) && $_GET['action'] !== '') {
         case 'galerie':
             vueGalerie();
             break;
+        case 'mercatos':
+            vueMercatos();
+            break;
         case 'mercato':
             vueMercato();
             break;
         case 'actualité':
             vueActualité();
+            break; 
+        case 'actualités':
+            vueActualités();
             break; 
         case 'accueil':
             homepage();
@@ -58,4 +64,3 @@ if (isset($_GET['action']) && $_GET['action'] !== '') {
 // } else {
 //     homepage();
 // }
-?>
