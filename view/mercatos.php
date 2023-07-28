@@ -4,8 +4,12 @@ include_once('src/model/connectBdd.php');
 
 // Pagination
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
-$limit = 10;
+if ($page < 1) {
+    header("Location: index.php?action=mercatos");
+    exit();
+}
 
+$limit = 10;
 $offset = ($page - 1) * $limit;
 
 // Requête pour afficher les éléments sans recherche avec pagination
@@ -17,6 +21,18 @@ $stmt_mercato->bindValue(':limit', $limit, PDO::PARAM_INT);
 $stmt_mercato->bindValue(':offset', $offset, PDO::PARAM_INT);
 $stmt_mercato->execute();
 $all_mercato = $stmt_mercato->fetchAll(PDO::FETCH_ASSOC);
+
+
+$stmt_count = $connect->prepare("SELECT COUNT(*) FROM mercato");
+$stmt_count->execute();
+$total_rows = $stmt_count->fetchColumn();
+$total_pages = ceil($total_rows / $limit);
+
+// Ensure page number is not greater than the total number of pages
+if ($page > $total_pages && $total_pages > 0) {
+    header("Location: index.php?action=mercatos&page=" . $total_pages);
+    exit();
+}
 
 
 // Initialiser la variable $show_error
@@ -137,45 +153,52 @@ function limitText($text, $limit) {
     <?php if (isset($search_results) && !empty($search_results)) : ?>
     <?php foreach ($search_results as $index => $result) : ?>
         <div class="w-11/12 lg:w-5/6 lg:flex">
-                    <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" style="background-image: url('assets/image/<?php echo htmlspecialchars($result['image_entete']); ?>')" title="<?php echo htmlspecialchars($result['titre']);?>">
-                    </div>
-                    <div class="max-w-full w-full border-r border-b border-l border-grey-light lg:border-l-0 lg:border-t lg:border-grey-light bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
-                        <div class="mb-8">
-                        <div class="text-black font-bold text-xl mb-2"><a href="<?php echo htmlspecialchars('index.php?action=mercato?id=' . $result['id_mercato']); ?>"><?php echo limitText(htmlspecialchars($result['titre']), 60); ?></a></div>
-                            <p class="text-grey-darker text-base hidden lg:block"><?php echo limitText(htmlspecialchars($result['description']), 80); ?></p>
-                        </div>
-                        <div class="text-sm">
-                            <p class="text-color1"><?php echo htmlspecialchars($result['date_mercato']); ?></p>
-                        </div>
-                    </div>
-                    </div>
-            <?php endforeach; ?>
-        <?php elseif ($search_no_results) : ?>
-            <div id="notFoundPopup" class="hidden fixed top-0 left-0 w-full h-full bg-gray-900 bg-opacity-50 flex justify-center items-center z-50">
-                <div class="bg-white p-8 rounded-lg">
-                    <p>Aucun résultat trouvé pour votre recherche.</p>
-                    <button id="closeBtnNotFound" class="mt-4 px-4 py-2 bg-gray-700 text-white rounded-lg">Fermer</button>
-                </div>
+            <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" style="background-image: url('assets/image/<?php echo htmlspecialchars($result['image_entete']); ?>')" title="<?php echo htmlspecialchars($result['titre']);?>">
             </div>
+            <a href="<?php echo htmlspecialchars('index.php?action=mercato&id_mercato=' . $result['id_mercato']); ?>">
+            <div class="max-w-full w-full border-r border-b border-l border-grey-light lg:border-l-0 lg:border-t lg:border-grey-light bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
+                <div class="mb-8">
+                <div class="text-black font-bold text-xl mb-2">
+                    <?php echo limitText(htmlspecialchars($result['titre']), 60); ?></div>
+                    <p class="text-grey-darker text-base hidden lg:block">
+                    <?php echo limitText(htmlspecialchars($result['description']), 80); ?></p>
+                </div>
+                <div class="text-sm">
+                    <p class="text-color1"><?php echo htmlspecialchars($result['date_mercato']); ?></p>
+                </div>
+            </a>
+            </div>
+        </div>
+        <?php endforeach; ?>
+     <?php elseif ($search_no_results) : ?>
+        <div id="notFoundPopup" class="hidden fixed top-0 left-0 w-full h-full bg-gray-900 bg-opacity-50 flex justify-center items-center z-50">
+            <div class="bg-white p-8 rounded-lg">
+                <p>Aucun résultat trouvé pour votre recherche.</p>
+                <button id="closeBtnNotFound" class="mt-4 px-4 py-2 bg-gray-700 text-white rounded-lg">Fermer</button>
+            </div>
+        </div>
 
-        <?php else : ?>
-            <?php foreach ($all_mercato as $mercato) : ?>
-                <div class="w-11/12 lg:w-5/6 lg:flex">
-                    <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" style="background-image: url('assets/image/<?php echo htmlspecialchars($mercato['image_entete']); ?>')" title="<?php echo htmlspecialchars($mercato['titre']); ?>">
-                    </div>
-                    <div class="max-w-full w-full border-r border-b border-l border-grey-light lg:border-l-0 lg:border-t lg:border-grey-light bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
-                        <div class="mb-8">
-                        <div class="text-black font-bold text-xl mb-2"><a href="<?php echo htmlspecialchars('index.php?action=mercato&id_mercato=' . $mercato['id_mercato']); ?>"><?php echo limitText(htmlspecialchars($mercato['titre']), 60); ?></a></div>
-                        <p class="text-grey-darker text-base hidden lg:block">
-                        <?php echo limitText(htmlspecialchars($mercato['description']), 80); ?></p>
-                        </div>
-                        <div class="text-sm">
-                            <p class="text-color1"><?php echo htmlspecialchars($mercato['date_mercato']); ?></p>
-                        </div>
-                    </div>
-                    </div>
-            <?php endforeach; ?>
-        <?php endif; ?>
+    <?php else : ?>
+        <?php foreach ($all_mercato as $mercato) : ?>
+        <div class="w-11/12 lg:w-5/6 lg:flex">
+            <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" style="background-image: url('assets/image/<?php echo htmlspecialchars($mercato['image_entete']); ?>')" title="<?php echo htmlspecialchars($mercato['titre']); ?>">
+            </div>
+            <a href="<?php echo htmlspecialchars('index.php?action=mercato&id_mercato=' . $mercato['id_mercato']); ?>">
+            <div class="max-w-full w-full border-r border-b border-l border-grey-light lg:border-l-0 lg:border-t lg:border-grey-light bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
+                <div class="mb-8">
+                <div class="text-black font-bold text-xl mb-2">
+                    <?php echo limitText(htmlspecialchars($mercato['titre']), 60); ?></div>
+                <p class="text-grey-darker text-base hidden lg:block">
+                <?php echo limitText(htmlspecialchars($mercato['description']), 80); ?></p>
+                </div>
+                <div class="text-sm">
+                    <p class="text-color1"><?php echo htmlspecialchars($mercato['date_mercato']); ?></p>
+                </div>
+                </a>
+            </div>
+            </div>
+        <?php endforeach; ?>
+    <?php endif; ?>
 </div>
 
     <?php if ($show_pagination) : ?>

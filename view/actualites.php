@@ -4,8 +4,12 @@ include_once('src/model/connectBdd.php');
 
 // Pagination
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
-$limit = 10;
+if ($page < 1) {
+    header("Location: index.php?action=actualités");
+    exit();
+}
 
+$limit = 10;
 $offset = ($page - 1) * $limit;
 
 // Requête pour afficher les éléments sans recherche avec pagination
@@ -18,7 +22,16 @@ $stmt_actualite->bindValue(':offset', $offset, PDO::PARAM_INT);
 $stmt_actualite->execute();
 $all_actualite = $stmt_actualite->fetchAll(PDO::FETCH_ASSOC);
 
-$chemin = 'assets/image/'; // The path to the images directory
+$stmt_count = $connect->prepare("SELECT COUNT(*) FROM actualite");
+$stmt_count->execute();
+$total_rows = $stmt_count->fetchColumn();
+$total_pages = ceil($total_rows / $limit);
+
+// Ensure page number is not greater than the total number of pages
+if ($page > $total_pages && $total_pages > 0) {
+    header("Location: index.php?action=actualités&page=" . $total_pages);
+    exit();
+}
 
 // Initialiser la variable $show_error
 $show_error = false;
@@ -144,7 +157,7 @@ function limitText($text, $limit) {
                     </div>
                     <div class="max-w-full w-full border-r border-b border-l border-grey-light lg:border-l-0 lg:border-t lg:border-grey-light bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
                         <div class="mb-8">
-                        <div class="text-black font-bold text-xl mb-2"><a href="<?php echo htmlspecialchars('index.php?mercato.php?id=' . $result['id_actualite']); ?>"><?php echo limitText(htmlspecialchars($result['titre_actualite']),60); ?></a></div>
+                        <div class="text-black font-bold text-xl mb-2"><a href="<?php echo htmlspecialchars('index.php?actualité.php&id_actualite' . $result['id_actualite']); ?>"><?php echo limitText(htmlspecialchars($result['titre_actualite']),60); ?></a></div>
                             <p class="text-grey-darker text-base hidden lg:block"><?php echo limitText(htmlspecialchars($result['description']),80); ?></p>
                         </div>
                         <div class="text-sm">
@@ -168,7 +181,7 @@ function limitText($text, $limit) {
                     </div>
                     <div class="max-w-full w-full border-r border-b border-l border-grey-light lg:border-l-0 lg:border-t lg:border-grey-light bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
                         <div class="mb-8">
-                        <div class="text-black font-medium lg:font-bold text-lg lg:text-xl mb-2"><a href="<?php echo htmlspecialchars('index.php?action=actualité?id=' . $actualite['id_actualite']); ?>"><?php echo limitText(htmlspecialchars($actualite['titre_actualite']),60); ?></a></div>
+                        <div class="text-black font-medium lg:font-bold text-lg lg:text-xl mb-2"><a href="<?php echo htmlspecialchars('index.php?action=actualité&id_actualite=' . $actualite['id_actualite']); ?>"><?php echo limitText(htmlspecialchars($actualite['titre_actualite']),60); ?></a></div>
                             <p class="text-grey-darker text-base hidden lg:block"><?php echo limitText(htmlspecialchars($actualite['description']),80); ?></p>
                         </div>
                         <div class="text-sm">

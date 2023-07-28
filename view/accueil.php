@@ -120,12 +120,12 @@ function limitText($text, $limit) {
         <div class="card ntshow">
             <div class="card-content">
                 <div class="card-image" title="<?php echo htmlspecialchars($mercato['titre']); ?>">
-                <a href="">
+                <a href="<?php echo htmlspecialchars('index.php?action=mercato&id_mercato=' . $mercato['id_mercato'])?>">
                 <img src="assets/image/<?php echo $mercato['image_entete']; ?>"/>
                 </div>
                 </a>
                 <div class="card-info-wrapper">
-                <a href="">
+                <a href="<?php echo htmlspecialchars('index.php?action=mercato&id_mercato=' . $mercato['id_mercato'])?>">
                     <div class="card-info">
                         <div class="card-info-title">
                             <h3><?php echo limitText(htmlspecialchars($mercato['titre']),60); ?></h3>

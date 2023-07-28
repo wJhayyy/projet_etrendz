@@ -91,7 +91,7 @@ function limitText($text, $limit) {
         <hr class="hrgradient w-4/6 m-auto mt-24 md:w-3/6">
             <h2 class="text-color5 text-2xl lg:text-3xl text-center py-8"><?php echo htmlspecialchars($mercato['titre'])?></h2>
         <hr class="hrgradient w-4/6 m-auto mb-16 md:w-3/6">
-            <img class="rounded m-auto" src="assets/image/<?php echo htmlspecialchars($mercato['image_entete'])?>">
+            <img class="rounded m-auto max-w-sm md:max-w-lg lg:max-w-3xl" src="assets/image/<?php echo htmlspecialchars($mercato['image_entete'])?>">
             <hr class="hrgradient w-4/6 m-auto mt-16 md:w-3/6">
                 <h3 class="text-color5 text-center mt-8 lg:mt-12 text-lg lg:text-xl mb-8 lg:mb-12"><?php echo htmlspecialchars($mercato['titre1'])?></h3>
             <hr class="hrgradient w-4/6 m-auto mb-16 md:w-3/6">
@@ -120,6 +120,7 @@ function limitText($text, $limit) {
         <div class="w-11/12 lg:w-5/6 lg:flex">
             <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" style="background-image: url('assets/image/<?php echo htmlspecialchars($mercato['image_entete']); ?>')" title="<?php echo htmlspecialchars($mercato['titre']); ?>">
             </div>
+            <a href="<?php echo htmlspecialchars('index.php?action=mercato&id_mercato=' . $mercato['id_mercato']); ?>">
             <div class="max-w-full w-full border-r border-b border-l border-grey-light lg:border-l-0 lg:border-t lg:border-grey-light bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
                 <div class="mb-8">
                 <div class="text-black font-bold text-xl mb-2"><a href="<?php echo htmlspecialchars('index.php?action=mercato&id_mercato=' . $mercato['id_mercato']); ?>"><?php echo limitText(htmlspecialchars($mercato['titre']), 60); ?></a></div>
@@ -129,6 +130,7 @@ function limitText($text, $limit) {
                  <div class="text-sm">
                     <p class="text-color1"><?php echo htmlspecialchars($mercato['date_mercato']); ?></p>
                 </div>
+            </a>
             </div>
             </div>
     <?php endforeach; ?>
