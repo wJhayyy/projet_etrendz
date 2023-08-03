@@ -132,7 +132,7 @@ function limitText($text, $limit) {
             <option value="" selected="">Toutes les catégories</option>
             <?php foreach ($all_filter as $filter) : ?>
             <option value="<?php echo htmlspecialchars($filter['id_category'])?>"><?php echo htmlspecialchars($filter['name_category'])?></option>
-            <?php endforeach ?>
+            <?php endforeach; ?>
         </select>
     </div>
     <button class="text-color5 hidden" id="btnClearCategories">Supprimer le filtre</button>
@@ -153,18 +153,20 @@ function limitText($text, $limit) {
     <?php if (isset($search_results) && !empty($search_results)) : ?>
     <?php foreach ($search_results as $index => $result) : ?>
         <div class="w-11/12 lg:w-5/6 lg:flex">
-                    <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" style="background-image: url('assets/image/<?php echo htmlspecialchars($result['image_entete']); ?>')" title="<?php echo htmlspecialchars($result['titre_actualite']);?>">
+                    <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" style="background-image: url('assets/upload/<?php echo htmlspecialchars($result['image_entete']); ?>')" title="<?php echo htmlspecialchars($result['titre_actualite']);?>">
                     </div>
+                    <a href="<?php echo htmlspecialchars('index.php?action=actualité&id_actualite=' . $result['id_actualite']); ?>">
                     <div class="max-w-full w-full border-r border-b border-l border-grey-light lg:border-l-0 lg:border-t lg:border-grey-light bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
                         <div class="mb-8">
-                        <div class="text-black font-bold text-xl mb-2"><a href="<?php echo htmlspecialchars('index.php?actualité.php&id_actualite' . $result['id_actualite']); ?>"><?php echo limitText(htmlspecialchars($result['titre_actualite']),60); ?></a></div>
+                        <div class="text-black font-bold text-xl mb-2"><?php echo limitText(htmlspecialchars($result['titre_actualite']),60); ?></div>
                             <p class="text-grey-darker text-base hidden lg:block"><?php echo limitText(htmlspecialchars($result['description']),80); ?></p>
                         </div>
                         <div class="text-sm">
                             <p class="text-color1"><?php echo htmlspecialchars($result['date_actualite']); ?></p>
                         </div>
+                    </a>
                     </div>
-                    </div>
+    </div>
             <?php endforeach; ?>
         <?php elseif ($search_no_results) : ?>
             <div id="notFoundPopup" class="hidden fixed top-0 left-0 w-full h-full bg-gray-900 bg-opacity-50 flex justify-center items-center z-50">
@@ -177,16 +179,18 @@ function limitText($text, $limit) {
         <?php else : ?>
             <?php foreach ($all_actualite as $actualite) : ?>
                 <div class="w-11/12 lg:w-5/6 lg:flex">
-                    <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" style="background-image: url('assets/image/<?php echo htmlspecialchars($actualite['image_entete']); ?>')" title="<?php echo htmlspecialchars($actualite['titre_actualite']); ?>">
+                    <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" style="background-image: url('assets/upload/<?php echo htmlspecialchars($actualite['image_entete']); ?>')" title="<?php echo htmlspecialchars($actualite['titre_actualite']); ?>">
                     </div>
+                    <a href="<?php echo htmlspecialchars('index.php?action=actualité&id_actualite=' . $actualite['id_actualite']); ?>">
                     <div class="max-w-full w-full border-r border-b border-l border-grey-light lg:border-l-0 lg:border-t lg:border-grey-light bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
                         <div class="mb-8">
-                        <div class="text-black font-medium lg:font-bold text-lg lg:text-xl mb-2"><a href="<?php echo htmlspecialchars('index.php?action=actualité&id_actualite=' . $actualite['id_actualite']); ?>"><?php echo limitText(htmlspecialchars($actualite['titre_actualite']),60); ?></a></div>
+                        <div class="text-black font-medium lg:font-bold text-lg lg:text-xl mb-2"><?php echo limitText(htmlspecialchars($actualite['titre_actualite']),60); ?></div>
                             <p class="text-grey-darker text-base hidden lg:block"><?php echo limitText(htmlspecialchars($actualite['description']),80); ?></p>
                         </div>
                         <div class="text-sm">
                             <p class="text-color1"><?php echo htmlspecialchars($actualite['date_actualite']); ?></p>
                         </div>
+                        </a>
                     </div>
                     </div>
             <?php endforeach; ?>
@@ -228,6 +232,8 @@ function limitText($text, $limit) {
     // Appeler la fonction pour mettre à jour le texte initial
     updateFilterText();
 </script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
     $(document).ready(function () {

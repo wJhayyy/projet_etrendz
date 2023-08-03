@@ -86,6 +86,10 @@
         <input type="text" name="text1" id="text1" required>
         <br>
 
+        <label for="image_upload">Choisir une deuxieme image :</label>
+        <input type="file" name="image_upload2" id="image_upload2" accept=".jpg, .jpeg, .png" required>
+        <br>
+
         <label for="tweet1">Tweet 1 :</label>
         <input type="text" name="tweet1" id="tweet1" required>
         <br>

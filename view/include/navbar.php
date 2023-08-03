@@ -1,6 +1,6 @@
 <nav class="fixed top-0 left-0 right-0 z-50 px-4 py-4 flex justify-between items-center bg-gradient-to-b from-color1 to-transparent">
-		<a class="text-3xl font-bold leading-none w-20" href="index.php?action=">
-                <img class="w-full h-full" src="assets/image/logonobg.png">
+		<a class="text-3xl font-bold leading-none w-20" href="index.php?action=accueil">
+                <img class="w-full h-full" src="assets/upload/logonobg.png">
 		</a>
 		<div class="lg:hidden">
 			<button class="navbar-burger flex items-center text-blue-600 p-3">
@@ -26,8 +26,8 @@
 		<div class="navbar-backdrop fixed inset-0 bg-gray-800 opacity-25"></div>
 		<nav class="fixed top-0 left-0 bottom-0 flex flex-col w-5/6 max-w-sm py-4 px-4 bg-gradient-to-r from-color1 via-color1 to-transparent overflow-y-auto">
 			<div class="flex items-center mb-8">
-				<a class="mr-auto text-3xl font-bold leading-none w-20" href="#">
-                    <img class="w-full h-full" src="assets/image/logonobg.png">
+				<a class="mr-auto text-3xl font-bold leading-none w-20" href="index.php?action=accueil">
+                    <img class="w-full h-full" src="assets/upload/logonobg.png">
 				</a>
 				<button class="navbar-close">
 					<svg class="h-6 w-6 text-color4 cursor-pointer hover:text-color5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">

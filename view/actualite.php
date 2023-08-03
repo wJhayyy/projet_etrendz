@@ -91,19 +91,19 @@ function limitText($text, $limit) {
         <hr class="hrgradient w-4/6 m-auto mt-24 md:w-3/6">
             <h2 class="text-color5 text-2xl lg:text-3xl text-center py-8"><?php echo htmlspecialchars($actualite['titre_actualite'])?></h2>
         <hr class="hrgradient w-4/6 m-auto mb-16 md:w-3/6">
-            <img class="rounded m-auto max-w-sm mb-10 md:max-w-lg lg:max-w-3xl" src="assets/image/<?php echo htmlspecialchars($actualite['image_entete'])?>">
+            <img class="rounded m-auto max-w-sm mb-10 md:max-w-lg lg:max-w-3xl" src="assets/upload/<?php echo htmlspecialchars($actualite['image_entete'])?>">
             <p class="text-color5 text-center m-auto mb-10 w-10/12 lg:w-8/12 lg:text-lg"><?php echo htmlspecialchars($actualite['introduction'])?></p>
             <div class="flex justify-center m-auto mb-10 w-10/12 w-[400px] sm:w-[500px] md:w-[600px] lg:w-7/12 h-[200px] sm:h-[300px] md:h-[400px] lg:h-[500px]">
                 <iframe width="1000%" height="100%" src="<?php echo htmlspecialchars($actualite['video'])?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
             <p class="text-color5 text-center m-auto mt-10 mb-10 w-10/12 lg:w-8/12 lg:text-lg"><?php echo htmlspecialchars($actualite['text1'])?></p>
-                <img class="rounded m-auto max-w-sm md:max-w-lg lg:max-w-3xl" src="assets/image/<?php echo htmlspecialchars($actualite['image1'])?>">
+                <img class="rounded m-auto max-w-sm md:max-w-lg lg:max-w-3xl" src="assets/upload/<?php echo htmlspecialchars($actualite['image1'])?>">
             <p class="text-color5 text-center m-auto mt-10 mb-10 w-10/12 lg:w-8/12 lg:text-lg"><?php echo htmlspecialchars($actualite['text2'])?></p>
             <hr class="hrgradient w-4/6 m-auto mt-16 md:w-3/6">
-                <h3 class="text-color5 text-center mt-8 lg:mt-12 text-lg lg:text-xl mb-8 lg:mb-12"><?php echo htmlspecialchars($actualite['titre2'])?></h3>
+                <h3 class="text-color5 text-center mt-8 lg:mt-12 text-xl lg:text-2xl mb-8 lg:mb-12"><?php echo htmlspecialchars($actualite['titre2'])?></h3>
             <hr class="hrgradient w-4/6 m-auto mb-16 md:w-3/6">
             <p class="text-color5 text-center m-auto mt-10 mb-10 w-10/12 lg:w-8/12 lg:text-lg"><?php echo htmlspecialchars($actualite['introduction2'])?></p>
-                <img class="rounded m-auto max-w-sm md:max-w-lg lg:max-w-3xl" src="assets/image/<?php echo htmlspecialchars($actualite['image2'])?>">
+                <img class="rounded m-auto max-w-sm md:max-w-lg lg:max-w-3xl" src="assets/upload/<?php echo htmlspecialchars($actualite['image2'])?>">
             <p class="text-color5 text-center m-auto mt-10 mb-10 w-10/12 lg:w-8/12 lg:text-lg"><?php echo htmlspecialchars($actualite['text3'])?></p>
             <p class="text-color5 text-center m-auto mt-10 mb-10 w-10/12 lg:w-8/12 lg:text-lg"><?php echo htmlspecialchars($actualite['conclusion'])?></p>
             <p class="text-color5 text-center">Date : <?php echo htmlspecialchars($actualite['date_actualite'])?></p>
@@ -113,7 +113,7 @@ function limitText($text, $limit) {
 <div class="contain grid grid-cols-2 gap-2 sm:gap-8 justify-items-center">
     <?php foreach ($all_actualite as $actualite) : ?>
         <div class="w-11/12 lg:w-5/6 lg:flex">
-            <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" style="background-image: url('assets/image/<?php echo htmlspecialchars($actualite['image_entete']); ?>')" title="<?php echo htmlspecialchars($actualite['titre_actualite']); ?>">
+            <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" style="background-image: url('assets/upload/<?php echo htmlspecialchars($actualite['image_entete']); ?>')" title="<?php echo htmlspecialchars($actualite['titre_actualite']); ?>">
             </div>
             <a href="<?php echo htmlspecialchars('index.php?action=mercato&id_mercato=' . $actualite['id_actualite']); ?>">
             <div class="max-w-full w-full border-r border-b border-l border-grey-light lg:border-l-0 lg:border-t lg:border-grey-light bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">

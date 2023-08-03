@@ -19,15 +19,15 @@
                 <div class="w-full px-4 mb-10 xl:w-1/2 lg:mb-8">
                     <div class="flex flex-wrap">
                         <div class="w-full px-4 md:w-1/2">
-                            <img src="assets/image/aboutme1.jpg" alt=""
+                            <img src="assets/upload/aboutme1.jpg" alt=""
                                 class="object-cover w-full mb-6 rounded-lg h-80">
-                            <img src="assets/image/aboutme3.jpg" alt=""
+                            <img src="assets/upload/aboutme3.jpg" alt=""
                                 class="object-cover w-full rounded-lg h-80">
                         </div>
                         <div class="w-full px-4 my-6 md:w-1/2 xl:mt-11">
-                            <img src="assets/image/aboutme2.jpg" alt=""
+                            <img src="assets/upload/aboutme2.jpg" alt=""
                                 class="object-cover w-full mb-6 rounded-lg h-80">
-                            <img src="assets/image/aboutme4.jpg" alt=""
+                            <img src="assets/upload/aboutme4.jpg" alt=""
                                 class="object-cover w-full rounded-lg h-80">
                         </div>
                     </div>

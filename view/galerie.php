@@ -18,7 +18,7 @@ $stmt_galerie->bindValue(':offset', $offset, PDO::PARAM_INT);
 $stmt_galerie->execute();
 $all_galerie = $stmt_galerie->fetchAll(PDO::FETCH_ASSOC);
 
-$chemin = 'assets/image/'; // Removed htmlspecialchars for this variable
+$chemin = 'assets/upload/'; // Removed htmlspecialchars for this variable
 
 // Initialiser la variable $show_error
 $show_error = false;
@@ -110,7 +110,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php if (isset($search_results) && !empty($search_results)) : ?>
             <?php foreach ($search_results as $index => $result) : ?>
                 <div class="anim-galerie items flex flex-col items-center slide-in">
-                    <img class="w-11/12 lg:w-5/6 hover:cursor-pointer mb-4 rounded" src="<?php echo htmlspecialchars($chemin)?><?php echo htmlspecialchars($result['img_photo']); ?>" onclick="openImage('assets/image/<?php echo htmlspecialchars($result['img_photo']); ?>')" />
+                    <img class="object-cover w-60 h-48 md:w-80 md:h-72 lg:w-96 lg:h-80 hover:cursor-pointer mb-4 rounded" src="<?php echo htmlspecialchars($chemin)?><?php echo htmlspecialchars($result['img_photo']); ?>" onclick="openImage('assets/upload/<?php echo htmlspecialchars($result['img_photo']); ?>')" />
                     <a href="<?php echo htmlspecialchars($chemin)?><?php echo htmlspecialchars($result['img_photo']); ?>" download="<?php echo htmlspecialchars($result['nom_photo']); ?>.jpg" class="w-5/6 lg:w-2/3 px-4 py-3 bg-blue-600 hover:bg-blue-800 transition duration-300 rounded-md text-white outline-none focus:ring-4 shadow-lg mx-5 flex">
                         <span class="m-auto">Télécharger</span>
                         <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -131,7 +131,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php else : ?>
             <?php foreach ($all_galerie as $galerie) : ?>
                 <div class="anim-galerie items flex flex-col items-center slide-in">
-                    <img class="w-11/12 lg:w-5/6 hover:cursor-pointer mb-4 rounded" src="<?php echo htmlspecialchars($chemin)?><?php echo htmlspecialchars($galerie['img_photo']); ?>" onclick="openImage('assets/image/<?php echo htmlspecialchars($galerie['img_photo']); ?>')" />
+                    <img class="object-cover w-60 h-48 md:w-80 md:h-72 lg:w-96 lg:h-80 hover:cursor-pointer mb-4 rounded" src="<?php echo htmlspecialchars($chemin)?><?php echo htmlspecialchars($galerie['img_photo']); ?>" onclick="openImage('assets/upload/<?php echo htmlspecialchars($galerie['img_photo']); ?>')" />
                     <a href="<?php echo htmlspecialchars($chemin)?><?php echo htmlspecialchars($galerie['img_photo']); ?>" download="<?php echo htmlspecialchars($galerie['nom_photo']); ?>.jpg" class="w-5/6 lg:w-2/3 px-4 py-3 bg-blue-600 hover:bg-blue-800 transition duration-300 rounded-md text-white outline-none focus:ring-4 shadow-lg mx-5 flex">
                         <span class="m-auto">Télécharger</span>
                         <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -156,7 +156,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Afficher les boutons de pagination
             for ($i = 1; $i <= $total_pages; $i++) {
                 $active_class = ($i === $page) ? "" : "";
-                echo '<a href="index.php?action=mercatos&page=' . $i . '" class="w-fit flex justify-center button-twitch bg-transparent text-color5 font-semibold hover:text-color4 mx-4 py-2 px-4 border border-rose hover:border-transparent rounded mt-8 mb-12 ' . $active_class . '">' . '<p class="z-10">' .$i .'</p>'.'</a>';
+                echo '<a href="index.php?action=galerie&page=' . $i . '" class="w-fit flex justify-center button-twitch bg-transparent text-color5 font-semibold hover:text-color4 mx-4 py-2 px-4 border border-rose hover:border-transparent rounded mt-8 mb-12 ' . $active_class . '">' . '<p class="z-10">' .$i .'</p>'.'</a>';
             }
             ?>
         </div>

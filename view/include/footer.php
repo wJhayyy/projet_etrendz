@@ -3,7 +3,7 @@
   <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 md:gap-8 gap-4">
     <div class="flex flex-col m-auto text-center flex-shrink-0">
       <div class="w-4/6 sm:w-3/6 md:w-2/6 m-auto dark:text-white">
-        <img class="" src="assets/image/logonobg.png"/>
+        <img class="" src="assets/upload/logonobg.png"/>
       </div>
       <p class="text-sm leading-none text-color4 mt-4 dark:text-white">Copyright © 2023 GameRush</p>
       <p class="text-sm leading-none text-color4 mt-4 dark:text-white">Tout droit réservé.</p>

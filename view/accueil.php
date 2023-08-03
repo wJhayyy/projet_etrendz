@@ -64,7 +64,7 @@ function limitText($text, $limit) {
 <header>
     <div class="box-position">
         <video class="box-video"autoplay muted loop id="myVideo" disablePictureInPicture>
-            <source src="assets/image/videoplayback.mp4">
+            <source src="assets/upload/videoplayback.mp4">
         </video>
         <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-[#0f0f0f] via-transparent to-[#0f0f0f]"></div>
     </div>
@@ -121,7 +121,7 @@ function limitText($text, $limit) {
             <div class="card-content">
                 <div class="card-image" title="<?php echo htmlspecialchars($mercato['titre']); ?>">
                 <a href="<?php echo htmlspecialchars('index.php?action=mercato&id_mercato=' . $mercato['id_mercato'])?>">
-                <img src="assets/image/<?php echo $mercato['image_entete']; ?>"/>
+                <img src="assets/upload/<?php echo $mercato['image_entete']; ?>"/>
                 </div>
                 </a>
                 <div class="card-info-wrapper">
@@ -161,12 +161,12 @@ function limitText($text, $limit) {
 	<div class="card ntshow">
 	<div class="card-content">
           <div class="card-image" title="<?php echo htmlspecialchars($actualite['titre_actualite']); ?>">
-				    <a href="">
-				    <img src="assets/image/<?php echo $actualite['image_entete']; ?>">
+				    <a href="<?php echo htmlspecialchars('index.php?action=actualité&id_actualite=' . $actualite['id_actualite'])?>">
+				    <img src="assets/upload/<?php echo $actualite['image_entete']; ?>">
 				  </div>
 				  </a>
 				<div class="card-info-wrapper">
-        <a href="">
+        <a href="<?php echo htmlspecialchars('index.php?action=actualité&id_actualite=' . $actualite['id_actualite'])?>">
           <div class="card-info">
             <div class="card-info-title">
               <h3><?php echo limitText(htmlspecialchars($actualite['titre_actualite']),60); ?></h3>  
@@ -192,7 +192,7 @@ function limitText($text, $limit) {
 </div>
 
 <div class="max-comment-width grid grid-cols-3 gap-2">
-  <figure class="snip1574 ntshow"><img src="assets/image/comment1.jpeg" alt="profile-sample1" />
+  <figure class="snip1574 ntshow"><img src="assets/upload/comment1.jpeg" alt="profile-sample1" />
     <figcaption>
       <blockquote>
         <p>Gamerush fais du bien à l'eSport en général.</p>
@@ -201,7 +201,7 @@ function limitText($text, $limit) {
       <h5>Ancien joueur de la team "Vitality"</h5>
     </figcaption>
   </figure>
-  <figure class="snip1574 ntshow"><img src="assets/image/comment2.jpg" alt="profile-sample2" />
+  <figure class="snip1574 ntshow"><img src="assets/upload/comment2.jpg" alt="profile-sample2" />
     <figcaption>
       <blockquote>
         <p>L'impact international de Gamerush est même visible au Brésil.</p>
@@ -210,7 +210,7 @@ function limitText($text, $limit) {
       <h5>Joueur de la team "Furia"</h5>
     </figcaption>
   </figure>
-  <figure class="snip1574 ntshow"><img src="assets/image/comment3.jpg" alt="profile-sample3" />
+  <figure class="snip1574 ntshow"><img src="assets/upload/comment3.jpg" alt="profile-sample3" />
     <figcaption>
       <blockquote>
         <p>La communauté qu'apporte Gamerush nous donnent tous envie d'être à fond.</p>
@@ -219,7 +219,7 @@ function limitText($text, $limit) {
       <h5>Joueur de la team "Falcon"</h5>
     </figcaption>
   </figure>
-  <figure class="snip1574 ntshow"><img src="assets/image/comment4.jpg" alt="profile-sample4" />
+  <figure class="snip1574 ntshow"><img src="assets/upload/comment4.jpg" alt="profile-sample4" />
     <figcaption>
       <blockquote>
         <p>Avoir un site qui publie de l'actualité sur plusieurs scènes eSport, c'est le top.</p>
@@ -228,7 +228,7 @@ function limitText($text, $limit) {
       <h5>Joueur de la team "Karmine Corp"</h5>
     </figcaption>
   </figure>
-  <figure class="snip1574 ntshow"><img src="assets/image/comment5.jpg" alt="profile-sample5" />
+  <figure class="snip1574 ntshow"><img src="assets/upload/comment5.jpg" alt="profile-sample5" />
     <figcaption>
       <blockquote>
         <p>Maintenant que je suis sur le banc, je peux suivre à fond l'eSport grâce à Gamerush.</p>
@@ -237,7 +237,7 @@ function limitText($text, $limit) {
       <h5>Ancien joueur de la team "BDS"</h5>
     </figcaption>
   </figure>
-  <figure class="snip1574 ntshow"><img src="assets/image/comment6.jpg" alt="profile-sample6" />
+  <figure class="snip1574 ntshow"><img src="assets/upload/comment6.jpg" alt="profile-sample6" />
     <figcaption>
       <blockquote>
         <p>Après le titre de Champion du monde, on a suivi de prêt le mercato grâce à Gamerush.</p>
@@ -268,7 +268,7 @@ function limitText($text, $limit) {
 <div class="ntshow">
 	<div id="image-track" data-mouse-down-at="0" data-prev-percentage="0">
     <?php foreach ($all_galerie as $galerie): ?>
-		<img class="image" src="assets/image/<?php echo $galerie['img_photo']?>" draggable="false" />
+		<img class="image" src="assets/upload/<?php echo $galerie['img_photo']?>" draggable="false" />
     <?php endforeach;?>
 	</div>
 </div>

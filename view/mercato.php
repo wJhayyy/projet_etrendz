@@ -91,9 +91,9 @@ function limitText($text, $limit) {
         <hr class="hrgradient w-4/6 m-auto mt-24 md:w-3/6">
             <h2 class="text-color5 text-2xl lg:text-3xl text-center py-8"><?php echo htmlspecialchars($mercato['titre'])?></h2>
         <hr class="hrgradient w-4/6 m-auto mb-16 md:w-3/6">
-            <img class="rounded m-auto max-w-sm md:max-w-lg lg:max-w-3xl" src="assets/image/<?php echo htmlspecialchars($mercato['image_entete'])?>">
+            <img class="rounded m-auto max-w-sm md:max-w-lg lg:max-w-3xl" src="assets/upload/<?php echo htmlspecialchars($mercato['image_entete'])?>">
             <hr class="hrgradient w-4/6 m-auto mt-16 md:w-3/6">
-                <h3 class="text-color5 text-center mt-8 lg:mt-12 text-lg lg:text-xl mb-8 lg:mb-12"><?php echo htmlspecialchars($mercato['titre1'])?></h3>
+                <h3 class="text-color5 text-center mt-8 lg:mt-12 text-xl lg:text-2xl mb-8 lg:mb-12"><?php echo htmlspecialchars($mercato['titre1'])?></h3>
             <hr class="hrgradient w-4/6 m-auto mb-16 md:w-3/6">
             <p class="text-color5 text-center m-auto mb-10 w-10/12 lg:w-8/12 lg:text-lg"><?php echo htmlspecialchars($mercato['text1'])?></p>
             <div class="flex justify-center m-auto w-10/12 sm:w-full">
@@ -105,7 +105,7 @@ function limitText($text, $limit) {
             </div>
             <p class="text-color5 text-center m-auto mt-10 mb-10 w-10/12 lg:w-8/12 lg:text-lg"><?php echo htmlspecialchars($mercato['text3'])?></p>
             <hr class="hrgradient w-4/6 m-auto mt-16 md:w-3/6">
-                <h3 class="text-color5 text-center mt-8 lg:mt-12 text-lg lg:text-xl mb-8 lg:mb-12"><?php echo htmlspecialchars($mercato['titre2'])?></h3>
+                <h3 class="text-color5 text-center mt-8 lg:mt-12 text-xg lg:text-2xl mb-8 lg:mb-12"><?php echo htmlspecialchars($mercato['titre2'])?></h3>
             <hr class="hrgradient w-4/6 m-auto mb-16 md:w-3/6">
             <p class="text-color5 text-center m-auto mt-10 mb-10 w-10/12 lg:w-8/12 lg:text-lg"><?php echo htmlspecialchars($mercato['text4'])?></p>
             <div class="flex justify-center m-auto w-10/12 sm:w-full">
@@ -118,7 +118,7 @@ function limitText($text, $limit) {
 <div class="contain grid grid-cols-2 gap-2 sm:gap-8 justify-items-center">
     <?php foreach ($all_mercato as $mercato) : ?>
         <div class="w-11/12 lg:w-5/6 lg:flex">
-            <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" style="background-image: url('assets/image/<?php echo htmlspecialchars($mercato['image_entete']); ?>')" title="<?php echo htmlspecialchars($mercato['titre']); ?>">
+            <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" style="background-image: url('assets/upload/<?php echo htmlspecialchars($mercato['image_entete']); ?>')" title="<?php echo htmlspecialchars($mercato['titre']); ?>">
             </div>
             <a href="<?php echo htmlspecialchars('index.php?action=mercato&id_mercato=' . $mercato['id_mercato']); ?>">
             <div class="max-w-full w-full border-r border-b border-l border-grey-light lg:border-l-0 lg:border-t lg:border-grey-light bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">

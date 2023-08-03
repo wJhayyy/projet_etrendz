@@ -28,7 +28,10 @@ if (isset($_GET['action']) && $_GET['action'] !== '') {
             break; 
         case 'accueil':
             homepage();
-            break;      
+            break;
+        case 'contactForm':
+            ContactForm();
+             break;       
         // génère la home si aucun des cases n'est trouvé
     }
 } elseif (isset($_GET['admin']) && $_GET['admin'] !== '') {
@@ -54,6 +57,100 @@ if (isset($_GET['action']) && $_GET['action'] !== '') {
             case 'utilisateurs':
                 crudUsers();
                 break;
+
+
+            case 'deleteActu':
+                deleteActu();
+                break;
+            case 'deleteMercato':
+                deleteMercato();
+                break;
+            case 'deleteGalerie':
+                deleteGalerie();
+                break;
+            case 'deleteCategory':
+                deleteCategory();
+                break;
+            case 'deleteUser':
+                deleteUser();
+                break;
+            case 'deleteBoutique':
+                deleteBoutique();
+                break;
+
+
+            case 'ajoutActu':
+                ajoutActu();
+                break;
+            case 'addActu':
+                addActu();
+                break;
+            case 'ajoutMercato':
+                ajoutMercato();
+                break;
+            case 'addMercato':
+                addMercato();
+                break;
+            case 'ajoutGalerie':
+                ajoutGalerie();
+                break;
+            case 'addGalerie':
+                addGalerie();
+                break;
+            case 'ajoutCategory':
+                ajoutCategory();
+                break;
+            case 'addCategory':
+                addCategory();
+                break;
+            case 'ajoutUser':
+                ajoutUser();
+                break;
+            case 'addUser':
+                addUser();
+                break;
+            case 'ajoutBoutique':
+                ajoutBoutique();
+                break;
+            case 'addBoutique':
+                addBoutique();
+                break;
+
+
+            case 'modifyActu':
+                modifyActu();
+                break;
+            case 'editActu':
+                editActu();
+                break;
+            case 'modifyMercato':
+                modifyMercato();
+                break;
+            case 'editMercato':
+                addMercato();
+                break;
+            case 'modifyGalerie':
+                ajoutGalerie();
+                break;
+            case 'editGalerie':
+                addGalerie();
+                break;
+            case 'modifyCategory':
+                ajoutCategory();
+                break;
+            case 'editCategory':
+                addCategory();
+                break;
+            case 'modifyUser':
+                ajoutUser();
+                break;
+            case 'editUser':
+                addUser();
+                break;
+            case 'addBoutique':
+                addBoutique();
+                break;
+
             default:
                 homepage();
                 break;

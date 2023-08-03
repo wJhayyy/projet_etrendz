@@ -46,6 +46,10 @@ function vueContact()
     require_once('view/contact.php');
 }
 
+function ContactForm(){
+    require_once('src/model/form-contact.php');
+}
+
 function vueApropos(){
     require_once('view/aboutus.php');
 }
