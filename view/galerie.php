@@ -74,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php include_once('include/link.php') ?>
 </head>
 
-<body class="bg-color1">
+<body class="bg-gradient-to-b from-color1 to-black">
     <?php include_once('include/navbar.php') ?>
 
     <div class="flex items-center justify-center my-28">
@@ -117,7 +117,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                         </svg>
                     </a>
-                    <h3 class="text-color4"><?php echo htmlspecialchars($result['nom_photo']); ?></h3>
+                    <h3 class="text-color4 text-md md:text-lg"><?php echo htmlspecialchars($result['nom_photo']); ?></h3>
                 </div>
             <?php endforeach; ?>
         <?php elseif ($search_no_results) : ?>
@@ -138,7 +138,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                         </svg>
                     </a>
-                    <h3 class="text-color4"><?php echo htmlspecialchars($galerie['nom_photo']); ?></h3>
+                    <h3 class="text-color4 text-md md:text-lg"><?php echo htmlspecialchars($galerie['nom_photo']); ?></h3>
                 </div>
             <?php endforeach; ?>
         <?php endif; ?>

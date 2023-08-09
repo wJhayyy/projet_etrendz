@@ -105,7 +105,7 @@ function limitText($text, $limit) {
     <?php include_once('include/link.php') ?>
 </head>
 
-<body class="bg-color1">
+<body class="bg-gradient-to-b from-color1 to-black">
 <?php include_once('include/navbar.php') ?>
 
 <div class="flex my-28 flex-col lg:flex-row justify-evenly">
@@ -153,7 +153,7 @@ function limitText($text, $limit) {
     <?php if (isset($search_results) && !empty($search_results)) : ?>
     <?php foreach ($search_results as $index => $result) : ?>
         <div class="w-11/12 lg:w-5/6 lg:flex">
-                    <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" style="background-image: url('assets/upload/<?php echo htmlspecialchars($result['image_entete']); ?>')" title="<?php echo htmlspecialchars($result['titre_actualite']);?>">
+                    <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover lg:rounded-tl lg:rounded-l text-center overflow-hidden" style="background-image: url('assets/upload/<?php echo htmlspecialchars($result['image_entete']); ?>')" title="<?php echo htmlspecialchars($result['titre_actualite']);?>">
                     </div>
                     <a href="<?php echo htmlspecialchars('index.php?action=actualité&id_actualite=' . $result['id_actualite']); ?>">
                     <div class="max-w-full w-full border-r border-b border-l border-grey-light lg:border-l-0 lg:border-t lg:border-grey-light bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
@@ -179,7 +179,7 @@ function limitText($text, $limit) {
         <?php else : ?>
             <?php foreach ($all_actualite as $actualite) : ?>
                 <div class="w-11/12 lg:w-5/6 lg:flex">
-                    <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" style="background-image: url('assets/upload/<?php echo htmlspecialchars($actualite['image_entete']); ?>')" title="<?php echo htmlspecialchars($actualite['titre_actualite']); ?>">
+                    <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover lg:rounded-tl lg:rounded-l text-center overflow-hidden" style="background-image: url('assets/upload/<?php echo htmlspecialchars($actualite['image_entete']); ?>')" title="<?php echo htmlspecialchars($actualite['titre_actualite']); ?>">
                     </div>
                     <a href="<?php echo htmlspecialchars('index.php?action=actualité&id_actualite=' . $actualite['id_actualite']); ?>">
                     <div class="max-w-full w-full border-r border-b border-l border-grey-light lg:border-l-0 lg:border-t lg:border-grey-light bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">

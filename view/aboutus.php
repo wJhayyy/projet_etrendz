@@ -1,3 +1,14 @@
+<?php 
+
+include_once('src/model/connectBdd.php');
+
+$stmt_users = $connect->prepare("SELECT u.*, r.role AS role_name FROM users u
+                                 JOIN roles r ON u.id_role = r.id_role
+                                 WHERE u.id_role > 1");
+$stmt_users->execute();
+$all_users = $stmt_users->fetchAll(PDO::FETCH_ASSOC);
+?>
+
 <!doctype html>
 
 <html lang="fr">
@@ -9,7 +20,7 @@
   <?php include_once('include/link.php')?>
 </head>
 
-<body class="bg-color1">
+<body class="bg-gradient-to-b from-color1 to-black">
 
 <?php include_once('include/navbar.php')?>
 
@@ -57,66 +68,14 @@
     </h2>
 
     <div class="lg:gap-xl-12 grid gap-x-6 md:grid-cols-3 xl:grid-cols-4">
-      <div class="mb-12">
-        <img src="https://picsum.photos/300/300"
-          class="mx-auto mb-4 rounded-full shadow-lg" alt="" style="max-width: 100px" />
-
-        <p class="mb-2 font-bold text-color4">John Doe</p>
-        <p class="text-neutral-500">Co-founder</p>
-      </div>
-
-      <div class="mb-12">
-        <img src="https://picsum.photos/300/300"
-          class="mx-auto mb-4 rounded-full shadow-lg" alt="" style="max-width: 100px" />
-
-        <p class="mb-2 font-bold text-color4">Lisa Ferrol</p>
-        <p class="text-neutral-500">Web designer</p>
-      </div>
-
-      <div class="mb-12">
-        <img src="https://picsum.photos/300/300"
-          class="mx-auto mb-4 rounded-full shadow-lg" alt="" style="max-width: 100px" />
-        <p class="mb-2 font-bold text-color4">Maria Smith</p>
-        <p class="text-neutral-500">
-          Senior consultant
-        </p>
-      </div>
-      <div class="mb-12">
-        <img src="https://picsum.photos/300/300"
-          class="mx-auto mb-4 rounded-full shadow-lg" alt="" style="max-width: 100px" />
-        <p class="mb-2 font-bold text-color4">Agatha Bevos</p>
-        <p class="text-neutral-500">Co-founder</p>
-      </div>
-
-      <div class="mb-12">
-        <img src="https://picsum.photos/300/300"
-          class="mx-auto mb-4 rounded-full shadow-lg" alt="" style="max-width: 100px" />
-        <p class="mb-2 font-bold text-color4">Darren Randolph</p>
-        <p class="text-neutral-500">
-          Marketing expert
-        </p>
-      </div>
-
-      <div class="mb-12">
-        <img src="https://picsum.photos/300/300"
-          class="mx-auto mb-4 rounded-full shadow-lg" alt="" style="max-width: 100px" />
-        <p class="mb-2 font-bold text-color4">Soraya Letto</p>
-        <p class="text-neutral-500">SEO expert</p>
-      </div>
-
-      <div class="mb-12">
-        <img src="https://picsum.photos/300/300"
-          class="mx-auto mb-4 rounded-full shadow-lg" alt="" style="max-width: 100px" />
-        <p class="mb-2 font-bold text-color4">Maliha Welch</p>
-        <p class="text-neutral-500">Web designer</p>
-      </div>
-
-      <div class="mb-12">
-        <img src="https://picsum.photos/300/300"
-          class="mx-auto mb-4 rounded-full shadow-lg" alt="" style="max-width: 100px" />
-        <p class="mb-2 font-bold text-color4">Zeynep Dudley</p>
-        <p class="text-neutral-500">Web developer</p>
-      </div>
+      <?php foreach($all_users as $user) : ?>
+        <div class="mb-12">
+          <img src="assets/upload/<?php echo htmlspecialchars($user['img_profil'])?>"
+            class="mx-auto mb-4 rounded-full shadow-lg h-36 w-36 object-cover" alt="" />
+          <p class="mb-2 font-bold text-color4"><?php echo htmlspecialchars($user['name'])?> <?php echo htmlspecialchars($user['firstname'])?></p>
+          <p class="text-neutral-500"><?php echo htmlspecialchars($user['role_name'])?></p>
+        </div>
+      <?php endforeach; ?>
     </div>
   </section>
   <!-- Section: Design Block -->

@@ -85,7 +85,7 @@ function limitText($text, $limit) {
     <?php include_once('include/link.php') ?>
 </head>
 
-<body class="bg-color1">
+<body class="bg-gradient-to-b from-color1 to-black">
     <?php include_once('include/navbar.php') ?>
     <div class="w-full">
         <hr class="hrgradient w-4/6 m-auto mt-24 md:w-3/6">
@@ -114,28 +114,31 @@ function limitText($text, $limit) {
             <p class="text-color5 text-center m-auto mt-10 mb-10 w-10/12 lg:w-8/12 lg:text-lg"><?php echo htmlspecialchars($mercato['conclusion'])?></p>
             <p class="text-color5 text-center">Catégorie : <?php echo htmlspecialchars(str_replace('- Mercato', '', $mercato['name_category']))?></p>
     </div>
-    <h4 class="text-color5 text-center text-xl mt-12 mb-12">Voici d'autres actualités : </h4>
-<div class="contain grid grid-cols-2 gap-2 sm:gap-8 justify-items-center">
-    <?php foreach ($all_mercato as $mercato) : ?>
-        <div class="w-11/12 lg:w-5/6 lg:flex">
-            <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" style="background-image: url('assets/upload/<?php echo htmlspecialchars($mercato['image_entete']); ?>')" title="<?php echo htmlspecialchars($mercato['titre']); ?>">
-            </div>
-            <a href="<?php echo htmlspecialchars('index.php?action=mercato&id_mercato=' . $mercato['id_mercato']); ?>">
-            <div class="max-w-full w-full border-r border-b border-l border-grey-light lg:border-l-0 lg:border-t lg:border-grey-light bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
-                <div class="mb-8">
-                <div class="text-black font-bold text-xl mb-2"><a href="<?php echo htmlspecialchars('index.php?action=mercato&id_mercato=' . $mercato['id_mercato']); ?>"><?php echo limitText(htmlspecialchars($mercato['titre']), 60); ?></a></div>
-                <p class="text-grey-darker text-base hidden lg:block">
-                <?php echo limitText(htmlspecialchars($mercato['description']), 80); ?></p>
+<div class="pt-12 pb-12 bg-gradient-to-t from-transparent via-color1 to-transparent">
+    <h4 class="text-color5 text-center text-xl mb-10">Voici d'autres actualités : </h4>
+        <div class="contain grid grid-cols-2 gap-2 sm:gap-8 justify-items-center">
+            <?php foreach ($all_mercato as $mercato) : ?>
+                <div class="w-11/12 lg:w-5/6 lg:flex">
+                    <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover lg:rounded-tl lg:rounded-l text-center overflow-hidden" style="background-image: url('assets/upload/<?php echo htmlspecialchars($mercato['image_entete']); ?>')" title="<?php echo htmlspecialchars($mercato['titre']); ?>">
+                    </div>
+                    <a href="<?php echo htmlspecialchars('index.php?action=mercato&id_mercato=' . $mercato['id_mercato']); ?>">
+                    <div class="max-w-full w-full border-r border-b border-l border-grey-light lg:border-l-0 lg:border-t lg:border-grey-light bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
+                        <div class="mb-8">
+                        <div class="text-black font-bold text-lg md:text-xl mb-2"><a href="<?php echo htmlspecialchars('index.php?action=mercato&id_mercato=' . $mercato['id_mercato']); ?>"><?php echo limitText(htmlspecialchars($mercato['titre']), 60); ?></a></div>
+                        <p class="text-grey-darker text-base hidden lg:block">
+                        <?php echo limitText(htmlspecialchars($mercato['description']), 80); ?></p>
+                        </div>
+                        <div class="text-sm">
+                            <p class="text-color1"><?php echo htmlspecialchars($mercato['date_mercato']); ?></p>
+                        </div>
+                    </a>
                 </div>
-                 <div class="text-sm">
-                    <p class="text-color1"><?php echo htmlspecialchars($mercato['date_mercato']); ?></p>
-                </div>
-            </a>
-            </div>
-            </div>
+        </div>
     <?php endforeach; ?>
 </div>
+</div>
     <?php include_once('include/footer.php') ?>
+
 </body>
 
 </html>

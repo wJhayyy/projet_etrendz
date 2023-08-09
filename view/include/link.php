@@ -3,6 +3,12 @@
   <link rel="stylesheet" href="assets/css/button-navbar.css">
   <link rel="stylesheet" href="assets/css/font.css">
 
+  <!-- sweetAlert2 -->
+  
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src=" https://cdn.jsdelivr.net/npm/sweetalert2@11.7.20/dist/sweetalert2.all.min.js "></script>
+  <link href=" https://cdn.jsdelivr.net/npm/sweetalert2@11.7.20/dist/sweetalert2.min.css " rel="stylesheet"> 
+
   <!-- google -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,7 +22,7 @@
       theme: {
         extend: {
           colors: {
-            color1: '#0f0f0f',
+            color1: '#1d1d1f',
             color2: '#14213D',
             color3: '#fca311',
             color4: '#e5e5e5',

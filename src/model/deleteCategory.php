@@ -4,22 +4,24 @@ include_once('connectBdd.php');
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Vérifiez si l'ID de l'actualité est présent dans la requête POST
-    if (isset($_POST["id_category"])) {
+    if (isset($_POST["deleteId"])) {
         // Récupérez l'ID de l'actualité à supprimer depuis la requête POST
-        $id_category = $_POST["id_category"];
+        $id_category = $_POST["deleteId"];
 
         try {
 
             // Préparez la requête de suppression
-            $query = "DELETE FROM category WHERE id_category = :id_category";
+            $query = "DELETE * FROM category WHERE id_category = :deleteId";
 
             // Exécutez la requête en utilisant un paramètre nommé pour éviter les injections SQL
             $stmt = $connect->prepare($query);
-            $stmt->bindParam(":id_category", $id_category, PDO::PARAM_INT);
+            $stmt->bindParam(":deleteId", $id_category, PDO::PARAM_INT);
 
             // Exécutez la requête
             $stmt->execute();
 
+            $connect = null;
+            
             // Redirigez l'utilisateur vers la page d'origine après la suppression
             header("Location: index.php?admin=crud");
             exit;

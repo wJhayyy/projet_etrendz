@@ -9,7 +9,7 @@
   <?php include_once('include/link.php')?>
 </head>
 
-<body class="bg-color1">
+<body class="bg-gradient-to-b from-color1 to-black">
 
 <?php include_once('include/navbar.php')?>
 

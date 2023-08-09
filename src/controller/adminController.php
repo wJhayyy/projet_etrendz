@@ -177,7 +177,7 @@ function editCategory()
 
 function modifyUser()
 {
-    require_once('view/admin/modifytUser.php');
+    require_once('view/admin/modifyUser.php');
 }
 
 function editUser()

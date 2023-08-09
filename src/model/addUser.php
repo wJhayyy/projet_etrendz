@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 include_once('connectBdd.php');
 
@@ -10,24 +10,53 @@ function checkEmailDomain($email, $allowedDomains) {
     return in_array($domain, $allowedDomains);
 }
 
+// Fonction pour valider, échapper et décoder les entités HTML des données
+    function validateEscapeAndDecode($data) {
+        $data = trim($data);
+        $data = htmlspecialchars($data);
+        $data = html_entity_decode($data); // Ajout de html_entity_decode
+        // Vous pouvez ajouter d'autres validations spécifiques ici si nécessaire
+        return $data;
+    }
+
 // Liste des domaines autorisés
 $allowedDomains = array("gmail.com", "laposte.com", "example.com"); // Ajoutez d'autres domaines si nécessaire
 
-
 if (isset($_POST['submit'])) {
-    // Récupération des images
-    $img_profil = $_FILES['img_profil']['name'];
-    $tmp_img_profil = $_FILES['img_profil']['tmp_name'];
-    move_uploaded_file($tmp_img_profil, "assets/upload/" . $img_profil);
+    // Vérifier si un fichier a été téléchargé
+    if (isset($_FILES['img_profil']) && $_FILES['img_profil']['error'] === UPLOAD_ERR_OK) {
+        $img_profil = $_FILES['img_profil']['name'];
+        $tmp_img_profil = $_FILES['img_profil']['tmp_name'];
+
+        // Générer un nom de fichier aléatoire
+        function generateRandomFileName($originalName) {
+            $randomString = uniqid();
+            $fileExtension = pathinfo($originalName, PATHINFO_EXTENSION);
+            return $randomString . '.' . $fileExtension;
+        }
+
+        $random_img_profil = generateRandomFileName($img_profil);
+
+        // Déplacer l'image vers le dossier "upload" avec le nom aléatoire
+        $destination = "assets/upload/" . $random_img_profil;
+        if (move_uploaded_file($tmp_img_profil, $destination)) {
+            // Le téléchargement du fichier a réussi
+        } else {
+            echo "Erreur lors du téléchargement de l'image.";
+            exit;
+        }
+    } else {
+        echo "Aucun fichier n'a été téléchargé ou une erreur s'est produite.";
+        exit;
+    }
 
     try {
-
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-        $name = $_POST['name'];
-        $firstname = $_POST['firstname'];
-        $adresse = $_POST['adresse'];
-        $role = $_POST['role'];
+        $email = validateEscapeAndDecode($_POST['email']);
+        $password = validateEscapeAndDecode($_POST['password']);
+        $name = validateEscapeAndDecode($_POST['name']);
+        $firstname = validateEscapeAndDecode($_POST['firstname']);
+        $adresse = validateEscapeAndDecode($_POST['adresse']);
+        $role = validateEscapeAndDecode($_POST['role']);
 
         if (!checkEmailDomain($email, $allowedDomains)) {
             echo "L'adresse e-mail n'est pas autorisée.";
@@ -39,7 +68,7 @@ if (isset($_POST['submit'])) {
         $stmt = $connect->prepare($sql);
 
         // Lier les valeurs aux marqueurs de position
-        $stmt->bindParam(":img_profil", $img_profil);
+        $stmt->bindParam(":img_profil", $random_img_profil);
         $stmt->bindParam(":email", $email);
         $stmt->bindParam(":password", $password);
         $stmt->bindParam(":name", $name);
@@ -57,10 +86,10 @@ if (isset($_POST['submit'])) {
         }
     } catch (PDOException $e) {
         echo "Erreur de connexion à la base de données : " . $e->getMessage();
+    } finally {
+        // Fermez la connexion à la base de données après avoir terminé les opérations.
+        $connect = null;
     }
-
-    // Fermez la connexion à la base de données après avoir terminé les opérations.
-    $connect = null;
 }
 
 ?>

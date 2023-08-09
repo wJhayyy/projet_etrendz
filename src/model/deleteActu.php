@@ -4,21 +4,24 @@ include_once('connectBdd.php');
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Vérifiez si l'ID de l'actualité est présent dans la requête POST
-    if (isset($_POST["id_actualite"])) {
+    if (isset($_POST["deleteId"])) {
         // Récupérez l'ID de l'actualité à supprimer depuis la requête POST
-        $id_actualite = $_POST["id_actualite"];
+        $id_actualite = $_POST["deleteId"];
 
         try {
 
             // Préparez la requête de suppression
-            $query = "DELETE FROM actualite WHERE id_actualite = :id_actualite";
+            $query = "DELETE * FROM actualite WHERE id_actualite = :deleteId";
 
             // Exécutez la requête en utilisant un paramètre nommé pour éviter les injections SQL
             $stmt = $connect->prepare($query);
-            $stmt->bindParam(":id_actualite", $id_actualite, PDO::PARAM_INT);
+            $stmt->bindParam(":deleteId", $id_actualite, PDO::PARAM_INT);
 
             // Exécutez la requête
             $stmt->execute();
+
+            // Fermez la connexion à la base de données
+            $connect = null;
 
             // Redirigez l'utilisateur vers la page d'origine après la suppression
             header("Location: index.php?admin=crud");
@@ -30,4 +33,5 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         echo "ID de l'actualité manquant.";
     }
 }
+
 ?>

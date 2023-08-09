@@ -127,25 +127,25 @@ if (isset($_GET['action']) && $_GET['action'] !== '') {
                 modifyMercato();
                 break;
             case 'editMercato':
-                addMercato();
+                editMercato();
                 break;
             case 'modifyGalerie':
-                ajoutGalerie();
+                modifyGalerie();
                 break;
             case 'editGalerie':
-                addGalerie();
+                editGalerie();
                 break;
             case 'modifyCategory':
-                ajoutCategory();
+                modifyCategory();
                 break;
             case 'editCategory':
-                addCategory();
+                editCategory();
                 break;
             case 'modifyUser':
-                ajoutUser();
+                modifyUser();
                 break;
             case 'editUser':
-                addUser();
+                editUser();
                 break;
             case 'addBoutique':
                 addBoutique();

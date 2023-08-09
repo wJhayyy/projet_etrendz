@@ -52,7 +52,7 @@ $all_user = $stmt_user->fetchAll(PDO::FETCH_ASSOC);
 }
 </style>
 
-<body class="bg-color1">
+<body class="bg-gradient-to-b from-color1 to-black">
 <?php include_once('view/include/navbar.php');?>
 <br class="mt-28">
 
@@ -110,14 +110,14 @@ $all_user = $stmt_user->fetchAll(PDO::FETCH_ASSOC);
             <td class="text-color5"><?php echo htmlspecialchars(str_replace(' - Actualité', '', $actualite['name_category']))?></td>
             <td class="text-color5"><?php echo htmlspecialchars($actualite['date_actualite'])?></td>
             <td class="flex flex-row justify-center items-center h-20">
-            <a href="index.php?admin=modifyActu" class="h-1/2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                <span class="">
-                    Modifier l'actualité
-                </span>
-            </a>
-            <form class="w-fit" method="post" action="index.php?admin=deleteActu">
+            <form class="w-fit" method="post" action="index.php?admin=modifyActu">
                 <input type="hidden" name="id_actualite" value="<?php echo htmlspecialchars($actualite['id_actualite'])?>">
-                <button class="ml-2 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" type="submit">Supprimer</button>
+                <button class="h-1/2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">Modifier</button>
+            </form>
+            <form class="w-fit">
+            <button class="ml-2 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded delete-button"
+            data-category="actu"
+            data-id="<?php echo htmlspecialchars($actualite['id_actualite'])?>">Supprimer</button>
             </form>
             </td>
           </tr>
@@ -132,7 +132,7 @@ $all_user = $stmt_user->fetchAll(PDO::FETCH_ASSOC);
     <div class="flex justify-end mb-2">
         <a href="index.php?admin=ajoutMercato" class="relative inline-flex items-center justify-center p-0.5 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-blue-400 to-blue-600 hover:text-white focus:ring-4 focus:outline-none focus:ring-green-200">
             <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-                Ajouter un Mercato
+                Ajouter un article mercato
             </span>
         </a>
     </div>
@@ -156,10 +156,14 @@ $all_user = $stmt_user->fetchAll(PDO::FETCH_ASSOC);
             <td class="text-color5"><?php echo htmlspecialchars(str_replace(' - Mercato', '', $mercato['name_category']))?></td>
             <td class="text-color5"><?php echo htmlspecialchars($mercato['date_mercato'])?></td>
             <td class="flex flex-row justify-center items-center h-20">
-            <button class="h-1/2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Modifier</button>
-            <form class="w-fit" method="post" action="index.php?admin=deleteMercato">
+            <form class="w-fit" method="post" action="index.php?admin=modifyMercato">
                 <input type="hidden" name="id_mercato" value="<?php echo htmlspecialchars($mercato['id_mercato'])?>">
-                <button class="ml-2 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" type="submit">Supprimer</button>
+                <button class="h-1/2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">Modifier</button>
+            </form>
+            <form class="w-fit">
+            <button class="ml-2 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded delete-button"
+            data-category="mercato"
+            data-id="<?php echo htmlspecialchars($mercato['id_mercato'])?>">Supprimer</button>
             </form>
             </td>
           </tr>
@@ -194,10 +198,14 @@ $all_user = $stmt_user->fetchAll(PDO::FETCH_ASSOC);
             <td class="text-color5"><img src="assets/upload/<?php echo htmlspecialchars($galerie['img_photo'])?>" alt="Image 2" width="150px"></td>
             <td class="text-color5"><?php echo htmlspecialchars($galerie['mot_clé'])?></td>
             <td class="flex flex-row justify-center items-center h-20">
-            <button class="h-1/2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Modifier</button>
-            <form class="w-fit" method="post" action="index.php?admin=deleteGalerie">
+            <form class="w-fit" method="post" action="index.php?admin=modifyGalerie">
                 <input type="hidden" name="id_galerieimg" value="<?php echo htmlspecialchars($galerie['id_galerieimg'])?>">
-                <button class="ml-2 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" type="submit">Supprimer</button>
+                <button class="h-1/2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">Modifier</button>
+            </form>
+            <form class="w-fit">
+            <button class="ml-2 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded delete-button"
+            data-category="galerie"
+            data-id="<?php echo htmlspecialchars($galerie['id_galerieimg'])?>">Supprimer</button>
             </form>
             </td>
           </tr>
@@ -219,6 +227,7 @@ $all_user = $stmt_user->fetchAll(PDO::FETCH_ASSOC);
           <tr class="text-color5">
               <th>Id</th>
               <th>Nom de la catégorie</th>
+              <th>Domaine</th>
               <th>Action</th>
           </tr>
       </thead>
@@ -227,11 +236,16 @@ $all_user = $stmt_user->fetchAll(PDO::FETCH_ASSOC);
             <?php foreach($all_category as $category) :?>
             <td class="text-color5"><?php echo htmlspecialchars($category['id_category'])?></td>
             <td class="text-color5"><?php echo htmlspecialchars($category['name_category'])?></td>
+            <td class="text-color5"><?php echo htmlspecialchars($category['type'])?></td>
             <td class="flex flex-row justify-center items-center h-20">
-            <button class="h-1/2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Modifier</button>
-            <form class="w-fit" method="post" action="index.php?admin=deleteCategory">
+            <form class="w-fit" method="post" action="index.php?admin=modifyCategory">
                 <input type="hidden" name="id_category" value="<?php echo htmlspecialchars($category['id_category'])?>">
-                <button class="ml-2 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" type="submit">Supprimer</button>
+                <button class="h-1/2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">Modifier</button>
+            </form>
+            <form class="w-fit">
+            <button class="ml-2 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded delete-button"
+            data-category="category"
+            data-id="<?php echo htmlspecialchars($category['id_category'])?>">Supprimer</button>
             </form>
             </td>
           </tr>
@@ -244,7 +258,7 @@ $all_user = $stmt_user->fetchAll(PDO::FETCH_ASSOC);
     <div class="flex justify-end mb-2">
         <a href="index.php?admin=ajoutUser" class="relative inline-flex items-center justify-center p-0.5 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-blue-400 to-blue-600 hover:text-white focus:ring-4 focus:outline-none focus:ring-green-200">
             <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-                Ajouter une categorie
+                Ajouter un user
             </span>
         </a>
     </div>
@@ -270,10 +284,13 @@ $all_user = $stmt_user->fetchAll(PDO::FETCH_ASSOC);
             <td class="text-color5"><?php echo htmlspecialchars($user['adresse'])?></td>
             <td class="text-color5"><?php echo htmlspecialchars($user['role'])?></td>
             <td class="flex flex-row justify-center items-center h-20">
-            <button class="h-1/2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Modifier</button>
-            <form class="w-fit" method="post" action="index.php?admin=deleteUser">
+            <form class="w-fit" method="post" action="index.php?admin=modifyUser">
                 <input type="hidden" name="id_user" value="<?php echo htmlspecialchars($user['id_user'])?>">
-                <button class="ml-2 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" type="submit">Supprimer</button>
+                <button class="h-1/2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">Modifier</button>
+            </form>
+            <button class="ml-2 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded delete-button"
+            data-category="user"
+            data-id="<?php echo htmlspecialchars($user['id_user'])?>">Supprimer</button>
             </form>
             </td>
           </tr>
@@ -332,6 +349,80 @@ $all_user = $stmt_user->fetchAll(PDO::FETCH_ASSOC);
 
 <!-- datatable -->
 <script src="DataTables/datatables.min.js"></script>
+
+<script>
+
+$(document).ready(function() {
+    $(".delete-button").on("click", function(event) {
+        event.preventDefault();
+
+        var deleteButton = $(this);
+        var dataCategory = deleteButton.data("category");
+        var dataId = deleteButton.data("id");
+        var deleteMethod;
+        var deleteId;
+
+        // Correspondance entre les catégories et les noms de méthodes de suppression
+        if (dataCategory === "actu") {
+            deleteMethod = "deleteActu";
+            deleteId = "id_actualite";
+        } else if (dataCategory === "mercato") {
+            deleteMethod = "deleteMercato";
+            deleteId = "id_mercato";
+        } else if (dataCategory === "galerie") {
+            deleteMethod = "deleteGalerie";
+            deleteId = "id_galerieimg";
+        } else if (dataCategory === "category") {
+            deleteMethod = "deleteCategory";
+            deleteId = "id_category";
+        } else if (dataCategory === "user") {
+            deleteMethod = "deleteUser";
+            deleteId = "id_user";
+        }
+
+        Swal.fire({
+        title: 'Êtes-vous sûr de vouloir supprimer cet élément ?',
+        text: "Vous ne pourrez pas revenir en arrière !",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#22c55e',
+        cancelButtonColor: '#ef4444',
+        color:'#F5F5F5',
+        background:'#1d1d1f',
+        confirmButtonText: 'Oui, supprimer !',
+        cancelButtonText: 'Annuler !',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                var requestData = {
+                    deleteId: dataId
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: "index.php?admin=" + deleteMethod,
+                    data: { deleteId: dataId },
+                    success: function(response) {
+                        deleteButton.closest("tr").fadeOut(function() {
+                            $(this).remove();
+                        });
+
+                        Swal.fire(
+                            'Supprimé !',
+                            'Votre fichier a été supprimé.',
+                            'success',
+                        );
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(error);
+                    }
+                });
+            }
+        });
+    });
+});
+
+
+</script>
 
 <script>
         function openTab(evt, tabName) {

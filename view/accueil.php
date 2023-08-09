@@ -57,7 +57,7 @@ function limitText($text, $limit) {
   <?php include_once('include/link.php')?>
 </head>
 
-<body class="bg-color1 overflow-x-hidden">
+<body class="bg-gradient-to-b from-color1 to-black overflow-x-hidden">
 
 <?php include_once('include/navbar.php')?>
 
