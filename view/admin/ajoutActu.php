@@ -28,7 +28,7 @@ $all_filter = $stmt_filter->fetchAll(PDO::FETCH_ASSOC);
 
 <section class="max-w-4xl p-6 mx-auto bg-color2 rounded-md shadow-md dark:bg-gray-800 mt-24">
     <h2 class="text-xl font-bold text-white capitalize dark:text-white">Ajout d'une actualité</h2>
-    <form id="addActuForm" method="POST" action="index.php?admin=addActu" enctype="multipart/form-data">
+    <form method="POST" action="index.php?admin=addActu" enctype="multipart/form-data">
         <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
             <div>
                 <label class="text-white dark:text-gray-200" for="titre_actualite">Titre</label>
@@ -176,63 +176,44 @@ $all_filter = $stmt_filter->fetchAll(PDO::FETCH_ASSOC);
 </section>
 
 <?php include_once('view/include/footer.php');?>
-
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-$(document).ready(function () {
-    $("#addActuForm").on("submit", function (event) {
-        event.preventDefault(); // Empêche l'envoi du formulaire par défaut
-        var formData = new FormData(this); 
+document.addEventListener("DOMContentLoaded", function() {
+    document.querySelector("form").addEventListener("submit", function(event) {
+        var isFormValid = true; // Variable pour vérifier si le formulaire est valide
 
-        formData.forEach(function(value, key) {
-            console.log(key + ": " + value);
-        });
-
-                // Vérifier si tous les champs du formulaire sont remplis
-                var isFormValid = true;
-        formData.forEach(function(value) {
-            if (value === "") {
+        // Vérifier chaque champ du formulaire
+        var formFields = document.querySelectorAll("input, textarea, select");
+        for (var i = 0; i < formFields.length; i++) {
+            if (formFields[i].value.trim() === "") {
                 isFormValid = false;
-                return false;
+                break; // Sortir de la boucle dès qu'un champ vide est trouvé
             }
-        });
-
-        if (!isFormValid) {
-            // Afficher un message d'erreur si des champs sont vides
-            Swal.fire({
-                title: "Erreur!",
-                text: "Veuillez remplir tous les champs du formulaire.",
-                icon: "error",
-                color:'#F5F5F5',
-                background:'#1d1d1f',
-                confirmButtonText: "OK"
-            });
-            return;
         }
 
-        $.ajax({
-            type: "POST",
-            url: "index.php?admin=addActu", // Créez ce fichier pour gérer la logique de l'ajout en AJAX
-            data: formData,
-            processData: false,
-            contentType: false,
-            success: function (data) {
-                // Afficher la pop-up en utilisant la bibliothèque SweetAlert (Swal)
-                Swal.fire({
-                    title: "Succès!",
-                    text: "L'actualité a été ajoutée avec succès.",
-                    icon: "success",
-                    color:'#F5F5F5',
-                    background:'#1d1d1f',
-                    confirmButtonText: "OK"
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        // Rechargez la page ou effectuez toute autre action que vous souhaitez
-                        location.reload();
-                    }
-                });
-            },
-        });
+        if (!isFormValid) {
+            event.preventDefault(); // Empêcher l'envoi du formulaire
+            Swal.fire({
+                title: 'Erreur',
+                text: 'Tous les champs doivent être remplis.',
+                icon: 'error',
+                confirmButtonText: 'Fermer',
+                confirmButtonColor: '#ef4444',
+                color:'#F5F5F5',
+                background:'#1d1d1f',
+            });
+        } else {
+            // Le formulaire est valide, la page se rafraîchira automatiquement après l'envoi
+
+            // Afficher un message de confirmation
+            Swal.fire({
+                title: 'Succès',
+                text: 'Le formulaire a été soumis avec succès !',
+                icon: 'success',
+                color:'#F5F5F5',
+                background:'#1d1d1f',
+            });
+        }
     });
 });
 </script>

@@ -5,39 +5,24 @@ function panelCrud()
     require_once('view/admin/crud.php');
 }
 
-function vueInscription()
+function vueConnexion()
 {
-    require_once('view/admin/signupForm.php');
+    require_once('view/admin/connexionAdmin.php');
 }
 
-function vueLogin()
+function loginAdmin()
 {
-    require_once('view/admin/loginForm.php');
+    require_once('src/model/loginAdmin.php');
 }
 
-function crudUsers()
+function profilAdmin()
 {
-    require_once('view/admin/crud-utilisateur.php');
+    require_once('view/admin/profilAdmin.php');
 }
 
-function crudPosts()
+function forgottenPassword()
 {
-    require_once('view/admin/crud-article.php');
-}
-
-function crudProjects()
-{
-    require_once('view/admin/crud-projets.php');
-}
-
-function crudComments()
-{
-    require_once('view/admin/crud-commentaires.php');
-}
-
-function crudFaq()
-{
-    require_once('view/admin/crud-faq.php');
+    require_once('view/admin/forgottenPassword.php');
 }
 
 // ----------------------------- //

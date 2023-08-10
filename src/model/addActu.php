@@ -1,14 +1,13 @@
 <?php
 if (isset($_POST['submit'])) {
-
-    // Fonction pour valider, échapper et décoder les entités HTML des données
-    function validateEscapeAndDecode($data) {
-        $data = trim($data);
-        $data = htmlspecialchars($data);
-        $data = html_entity_decode($data); // Ajout de html_entity_decode
-        // Vous pouvez ajouter d'autres validations spécifiques ici si nécessaire
-        return $data;
-    }
+    // Vérifier que tous les champs sont remplis
+        // Fonction pour valider, échapper et décoder les entités HTML des données
+        function validateEscapeAndDecode($data) {
+            $data = trim($data);
+            $data = htmlspecialchars($data);
+            $data = html_entity_decode($data);
+            return $data;
+        }
     
     // Vérifier que les images ont été téléchargées avec succès
     if (
@@ -85,33 +84,32 @@ if (isset($_POST['submit'])) {
             $sql = "INSERT INTO actualite (image_entete, image1, image2, imagegain, titre_actualite, introduction, video, text1, text2, titre2, introduction2, text3, conclusion, description, date_actualite, id_category) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             $stmt = $connect->prepare($sql);
 
-            if ($stmt) {
-                // Assurez-vous de lier les valeurs correctement avec le type de données attendu dans la base de données
-                $stmt->bind_param("ssssssssssssssss", $random_image_entete, $random_image1, $random_image2, $random_imagegain, $titre_actualite, $introduction, $video, $text1, $text2, $titre2, $introduction2, $text3, $conclusion, $description, $date_actualite, $category);
+                if ($stmt) {
+                    // Assurez-vous de lier les valeurs correctement avec le type de données attendu dans la base de données
+                    $stmt->bind_param("ssssssssssssssss", $random_image_entete, $random_image1, $random_image2, $random_imagegain, $titre_actualite, $introduction, $video, $text1, $text2, $titre2, $introduction2, $text3, $conclusion, $description, $date_actualite, $category);
 
-                // Exécutez la requête
-                if ($stmt->execute()) {
-                    // La requête a été exécutée avec succès, vous pouvez afficher un message ou rediriger l'utilisateur vers une autre page si nécessaire.
-                    header("Location: index.php?admin=ajoutActu");
-                    exit();
+                    // Exécutez la requête
+                    if ($stmt->execute()) {
+                        // La requête a été exécutée avec succès, vous pouvez afficher un message ou rediriger l'utilisateur vers une autre page si nécessaire.
+                        sleep(2);
+                        header("Location: index.php?admin=ajoutActu");
+                        exit();
+                    } else {
+                        // Si la requête échoue, vous pouvez afficher un message d'erreur ou faire un traitement supplémentaire.
+                        echo "Erreur lors de l'enregistrement des données : " . $stmt->error;
+                    }
+                    // Fermez la connexion à la base de données après avoir terminé les opérations.
+                    $stmt->close();
                 } else {
-                    // Si la requête échoue, vous pouvez afficher un message d'erreur ou faire un traitement supplémentaire.
-                    echo "Erreur lors de l'enregistrement des données : " . $stmt->error;
+                    echo "Erreur de préparation de la requête : " . $connect->error;
                 }
 
-                // Fermez la connexion à la base de données après avoir terminé les opérations.
-                $stmt->close();
+                $connect->close();
             } else {
-                echo "Erreur de préparation de la requête : " . $connect->error;
+                echo "Les types de fichiers téléchargés ne sont pas autorisés.";
             }
-
-            $connect->close();
         } else {
-            echo "Les types de fichiers téléchargés ne sont pas autorisés.";
-        }
-    } else {
         echo "Une erreur est survenue lors du téléchargement des images.";
-    }
+    } 
 }
-
 ?>

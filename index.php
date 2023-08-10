@@ -42,20 +42,17 @@ if (isset($_GET['action']) && $_GET['action'] !== '') {
             case 'crud':
                 panelCrud();
                 break;
-            case 'projets':
-                crudProjects();
+            case 'connexionAdmin':
+                vueConnexion();
                 break;
-            case 'articles':
-                crudPosts();
+            case 'loginAdmin':
+                loginAdmin();
                 break;
-            case 'commentaires':
-                crudComments();
+            case 'profilAdmin':
+                profilAdmin();
                 break;
-            case 'faq':
-                crudFaq();
-                break;
-            case 'utilisateurs':
-                crudUsers();
+            case 'forgottenPassword':
+                forgottenPassword();
                 break;
 
 

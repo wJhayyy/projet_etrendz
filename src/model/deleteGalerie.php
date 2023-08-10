@@ -11,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         try {
 
             // Préparez la requête de suppression
-            $query = "DELETE * FROM galerie WHERE id_galerieimg = :deleteId";
+            $query = "DELETE FROM galerie WHERE id_galerieimg = :deleteId";
 
             // Exécutez la requête en utilisant un paramètre nommé pour éviter les injections SQL
             $stmt = $connect->prepare($query);

@@ -58,6 +58,8 @@ if (isset($_POST['submit'])) {
         $adresse = validateEscapeAndDecode($_POST['adresse']);
         $role = validateEscapeAndDecode($_POST['role']);
 
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
         if (!checkEmailDomain($email, $allowedDomains)) {
             echo "L'adresse e-mail n'est pas autorisée.";
             exit; // Arrêter l'exécution du code si l'e-mail n'est pas autorisé.
@@ -70,7 +72,7 @@ if (isset($_POST['submit'])) {
         // Lier les valeurs aux marqueurs de position
         $stmt->bindParam(":img_profil", $random_img_profil);
         $stmt->bindParam(":email", $email);
-        $stmt->bindParam(":password", $password);
+        $stmt->bindParam(":password", $hashed_password);
         $stmt->bindParam(":name", $name);
         $stmt->bindParam(":firstname", $firstname);
         $stmt->bindParam(":adresse", $adresse);
@@ -79,7 +81,8 @@ if (isset($_POST['submit'])) {
         // Exécutez la requête
         if ($stmt->execute()) {
             // La requête a été exécutée avec succès, vous pouvez afficher un message ou rediriger l'utilisateur vers une autre page si nécessaire.
-            echo "Les données ont été enregistrées avec succès.";
+            sleep(2);
+            header("Location: index.php?admin=ajoutUser");
         } else {
             // Si la requête échoue, vous pouvez afficher un message d'erreur ou faire un traitement supplémentaire.
             echo "Erreur lors de l'enregistrement des données : " . $stmt->errorInfo()[2];

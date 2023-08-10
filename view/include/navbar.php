@@ -20,6 +20,12 @@
 			<li><a class="block text-base font-semibold rounded gradient-button-desktop" href="index.php?action=apropos">A propos</a></li>
 			<hr class="vertical-hr">
 			<li><a class="block text-base font-semibold rounded gradient-button-desktop" href="index.php?action=contact">Contact</a></li>
+			<?php
+			if (isset($_SESSION['id_role']) && $_SESSION['id_role'] > 1) {
+				echo '<hr class="vertical-hr">';
+				echo '<li><a class="block text-base font-semibold rounded gradient-button-desktop" href="index.php?admin=profilAdmin">Profil</a></li>';
+			}
+			?>
 		</ul>
 	</nav>
 	<div class="navbar-menu relative z-50 hidden">
@@ -52,6 +58,11 @@
 					<li class="mb-2">
 						<a class="block p-4 text-base font-semibold rounded gradient-button" href="index.php?action=contact">Contact</a>
 					</li>
+					<?php
+					if (isset($_SESSION['id_role']) && $_SESSION['id_role'] > 1) {
+						echo '<li class="mb-2"> <a class="block p-4 text-base font-semibold rounded gradient-button" href="index.php?admin=profilAdmin">Profil</a></li>';
+					}
+					?>
 				</ul>
 			</div>
 				<p class="my-4 text-xs text-gray-400">

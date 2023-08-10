@@ -11,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         try {
 
             // Préparez la requête de suppression
-            $query = "DELETE * FROM mercato WHERE id_mercato = :deleteId";
+            $query = "DELETE FROM mercato WHERE id_mercato = :deleteId";
 
             // Exécutez la requête en utilisant un paramètre nommé pour éviter les injections SQL
             $stmt = $connect->prepare($query);

@@ -121,6 +121,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
         $stmt_update->execute();
 
         // Redirigez vers une page de confirmation ou une autre page appropriée après la mise à jour
+        sleep(2);
         header('Location: index.php?admin=crud');
         exit;
     } catch (PDOException $e) {

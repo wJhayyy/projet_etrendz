@@ -36,7 +36,6 @@ function limitText($text, $limit) {
       return rtrim(mb_substr($shortenedText, 0, $lastSpace)) . '...';
   }
 }
-
 ?>
 
 <!doctype html>
@@ -99,7 +98,7 @@ function limitText($text, $limit) {
 </div> -->
 
 <div class="ntshow">
-<hr class="hrgradient w-4/6 m-auto mt-32 md:w-2/6">
+<hr class="hrgradient w-4/6 m-auto mt-32 mb-6 md:w-2/6">
 
 <h3 class="text-3xl text-blanc text-center">
   Les revues 
@@ -108,7 +107,7 @@ function limitText($text, $limit) {
   </span>
 </h3>
 
-<hr class="hrgradient w-4/6 m-auto mb-16 md:w-2/6">
+<hr class="hrgradient w-4/6 m-auto mb-16 mt-6 md:w-2/6">
 </div>
 
 	<a href="index.php?action=mercatos" class="w-fit m-auto flex justify-center button-twitch bg-transparent text-color5 font-semibold hover:text-white py-2 px-4 border border-rose hover:border-transparent rounded mt-8 mb-12">
@@ -140,7 +139,7 @@ function limitText($text, $limit) {
 </div>
 
 		   <div class="ntshow">
-<hr class="hrgradient w-4/6 m-auto mt-32 md:w-2/6">
+<hr class="hrgradient w-4/6 m-auto mt-32 mb-6 md:w-2/6">
 
 <h3 class="text-3xl text-blanc text-center">
   L'actualités 
@@ -149,7 +148,7 @@ function limitText($text, $limit) {
   </span>
 </h3>
 
-<hr class="hrgradient w-4/6 m-auto mb-16 md:w-2/6">
+<hr class="hrgradient w-4/6 m-auto mb-16 mt-6 md:w-2/6">
 </div>
 
 	<a href="index.php?action=actualités" class="w-fit m-auto flex justify-center button-twitch bg-transparent text-color5 font-semibold hover:text-white py-2 px-4 border border-rose hover:border-transparent rounded mt-8 mb-12">
@@ -181,14 +180,14 @@ function limitText($text, $limit) {
 </div>
 
 <div class="ntshow">
-  <hr class="hrgradient w-4/6 m-auto mt-32 md:w-2/6">
+  <hr class="hrgradient w-4/6 m-auto mt-32 mb-6 md:w-2/6">
     <h3 class="text-3xl text-blanc text-center">
       Nos
       <span class="magic">
           <span class="magic-text">commentaires</span>
         </span>
     </h3>
-  <hr class="hrgradient w-4/6 m-auto mb-16 md:w-2/6">
+  <hr class="hrgradient w-4/6 m-auto mb-16 mt-6 md:w-2/6">
 </div>
 
 <div class="max-comment-width grid grid-cols-3 gap-2">
@@ -249,7 +248,7 @@ function limitText($text, $limit) {
 </div> 
 
 <div class="ntshow">
-<hr class="hrgradient w-4/6 m-auto mt-32 md:w-2/6">
+<hr class="hrgradient w-4/6 m-auto mt-32 mb-6 md:w-2/6">
 
 <h3 class="text-3xl text-blanc text-center">
   Notre galerie
@@ -258,7 +257,7 @@ function limitText($text, $limit) {
   </span>
 </h3>
 
-<hr class="hrgradient w-4/6 m-auto mb-16 md:w-2/6">
+<hr class="hrgradient w-4/6 m-auto mb-16 mt-6 md:w-2/6">
 </div>
 
 <a href="index.php?action=galerie" class="w-fit m-auto flex justify-center button-twitch bg-transparent text-color5 font-semibold hover:text-white py-2 px-4 border border-rose hover:border-transparent rounded mb-12">

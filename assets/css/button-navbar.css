@@ -1,6 +1,6 @@
 /* Définir les couleurs du gradient */
 .gradient-button {
-    background-image: linear-gradient(to right,#0f0f0f,#724907, #fca311);
+    background-image: linear-gradient(to right,#c70496, #fca311);
     transition: width 0.3s ease; /* Ajouter une transition pour l'animation en douceur */
     width: 50%;
     color: #e5e5e5;
@@ -25,13 +25,13 @@
       margin: auto;
       height: 2px;
       width: 0px;
-      background: linear-gradient(to right,rgb(90, 17, 47), #fca311); /* Utilisation d'un dégradé linéaire */
+      background: linear-gradient(to right,#c70496, #fca311); /* Utilisation d'un dégradé linéaire */
       transition: width .5s ease, background .5s ease; /* Modification de 'background-color' en 'background' */
   }
   
   .gradient-button-desktop:hover:after {
       width: 100%;
-      background: linear-gradient(to right, rgb(90, 17, 47), #fca311); /* Dégradé linéaire également sur le hover */
+      background: linear-gradient(to right, #c70496, #fca311); /* Dégradé linéaire également sur le hover */
   }
   
   .vertical-hr {

@@ -15,6 +15,7 @@ $offset = ($page - 1) * $limit;
 // Requête pour afficher les éléments sans recherche avec pagination
 $stmt_actualite = $connect->prepare("SELECT id_actualite, image_entete, titre_actualite, description, date_actualite
                                   FROM actualite
+                                  ORDER BY id_actualite DESC
                                   LIMIT :limit OFFSET :offset
                                   ");
 $stmt_actualite->bindValue(':limit', $limit, PDO::PARAM_INT);
@@ -90,7 +91,6 @@ function limitText($text, $limit) {
     }
 }
 
-
 ?>
 
 <!doctype html>
@@ -129,7 +129,7 @@ function limitText($text, $limit) {
 
     <div id="filters">
         <select class="w-fit m-auto flex justify-center bg-transparent text-color5 font-semibold hover:text-white py-2 px-4 border border-color3 focus:border-color5 hover:border-orange-600 transition ease-in-out duration-300 ring-yellow-500 rounded" name="fetchval" id="fetchval">
-            <option value="" selected="">Toutes les catégories</option>
+            <option class="bg-red-500" value="" selected="">Toutes les catégories</option>
             <?php foreach ($all_filter as $filter) : ?>
             <option value="<?php echo htmlspecialchars($filter['id_category'])?>"><?php echo htmlspecialchars($filter['name_category'])?></option>
             <?php endforeach; ?>
@@ -216,7 +216,7 @@ function limitText($text, $limit) {
     <?php endif; ?>
 
 <?php include_once('include/footer.php') ?>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
 <script>
     // Fonction pour enlever le terme "Mercato" du texte des options
     function updateFilterText() {
@@ -232,8 +232,6 @@ function limitText($text, $limit) {
     // Appeler la fonction pour mettre à jour le texte initial
     updateFilterText();
 </script>
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
     $(document).ready(function () {

@@ -35,6 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
         
 
         // Redirection après la mise à jour
+        sleep(2);
         header('Location: index.php?admin=crud');
         exit;
     } catch (PDOException $e) {

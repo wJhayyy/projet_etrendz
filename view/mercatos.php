@@ -15,13 +15,13 @@ $offset = ($page - 1) * $limit;
 // Requête pour afficher les éléments sans recherche avec pagination
 $stmt_mercato = $connect->prepare("SELECT id_mercato, image_entete, titre, description, date_mercato
                                   FROM mercato
+                                  ORDER BY id_mercato DESC
                                   LIMIT :limit OFFSET :offset
                                   ");
 $stmt_mercato->bindValue(':limit', $limit, PDO::PARAM_INT);
 $stmt_mercato->bindValue(':offset', $offset, PDO::PARAM_INT);
 $stmt_mercato->execute();
 $all_mercato = $stmt_mercato->fetchAll(PDO::FETCH_ASSOC);
-
 
 $stmt_count = $connect->prepare("SELECT COUNT(*) FROM mercato");
 $stmt_count->execute();
@@ -33,7 +33,6 @@ if ($page > $total_pages && $total_pages > 0) {
     header("Location: index.php?action=mercatos&page=" . $total_pages);
     exit();
 }
-
 
 // Initialiser la variable $show_error
 $show_error = false;

@@ -64,7 +64,8 @@ if (isset($_POST['submit'])) {
         // Exécutez la requête
         if ($stmt->execute()) {
             // La requête a été exécutée avec succès, vous pouvez afficher un message ou rediriger l'utilisateur vers une autre page si nécessaire.
-            echo "Les données ont été enregistrées avec succès.";
+            sleep(2);
+            header("Location: index.php?admin=ajoutMercato");
         } else {
             // Si la requête échoue, vous pouvez afficher un message d'erreur ou faire un traitement supplémentaire.
             echo "Erreur lors de l'enregistrement des données : " . $stmt->error;
