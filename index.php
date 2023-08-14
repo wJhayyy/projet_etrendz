@@ -54,6 +54,22 @@ if (isset($_GET['action']) && $_GET['action'] !== '') {
             case 'forgottenPassword':
                 forgottenPassword();
                 break;
+            case 'sendEmail':
+                sendEmail();
+                break;
+            case 'resetPassword':
+                resetPassword();
+                break;
+            case 'resetForm':
+                resetForm();
+                break;
+            case 'firstConnexion':
+                firstConnexion();
+                break;
+            case 'firstConnexionForm':
+                firstConnexionForm();
+                 break;
+    
 
 
             case 'deleteActu':

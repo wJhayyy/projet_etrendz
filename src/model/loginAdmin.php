@@ -1,6 +1,5 @@
 <?php
 include_once('connectBdd.php');
-
 $response = array("success" => false, "message" => "");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {

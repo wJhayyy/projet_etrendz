@@ -13,19 +13,16 @@
 
 <div class="min-h-screen flex justify-center items-center">
   <div class="py-12 px-12 bg-color1 rounded-2xl shadow-xl z-20 bg-opacity-30">
-    <form id="loginForm" action="index.php?admin=loginAdmin" method="POST">
+    <form id="resetPasswordForm" action="index.php?admin=sendEmail" method="POST">
       <div>
-        <h1 class="text-3xl font-bold text-center text-color4 mb-4">Connexion</h1>
-        <p class="w-80 text-center mb-8 font-semibold text-color4 tracking-wide">Connexion réservée aux admins du site Gamerush.</p>
+        <h1 class="text-3xl font-bold text-center text-color4 mb-4">Mot de passe oublié ?</h1>
+        <p class="w-80 text-center mb-8 font-semibold text-color4 tracking-wide">Nous allons vous aider à retrouver votre compte.</p>
       </div>
       <div class="space-y-4">
         <input type="text" id="email" name="email" placeholder="Adresse mail" class="block text-sm py-3 px-4 rounded-lg w-full border outline-none" required/>
-        <input type="password" id="password" name="password" placeholder="Mot de passe" class="block text-sm py-3 px-4 rounded-lg w-full border outline-none" required/>
-        
       </div>
       <div class="flex flex-col text-center mt-6">
-        <input type="submit" value="Connexion" class="m-auto py-3 w-64 text-xl text-white bg-color3 transition-colors duration-200 hover:bg-orange-500 hover:cursor-pointer rounded-2xl">
-        <a href="index.php?admin=forgottenPassword" class="w-fit m-auto mt-4 text-color4 hover:underline">Mot de passe oublié ?</a>
+        <input type="submit" value="Envoyer" class="m-auto py-3 w-64 text-xl text-white bg-color3 transition-colors duration-200 hover:bg-orange-500 hover:cursor-pointer rounded-2xl">
       </div>
     </form>
   </div>
@@ -36,20 +33,15 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 $(document).ready(function() {
-    $("#loginForm").submit(function(e) {
-      e.preventDefault();
+    $("#resetPasswordForm").submit(function(e) {
+        e.preventDefault();
 
-      var email = $("#email").val();
-      var password = $("#password").val();
-      var hiddenEmail = email; // Utilisez la valeur de l'e-mail récupérée
+        var email = $("#email").val();
 
-      // Définir la valeur du champ caché
-      $("#hiddenEmail").val(email);
-      console.log(email, password)
         $.ajax({
             type: "POST",
-            url: "index.php?admin=loginAdmin", // Remplacez par le chemin de votre script PHP de traitement
-            data: {email: email, password: password, hiddenEmail: hiddenEmail},
+            url: "index.php?admin=sendEmail", // Remplacez par le chemin de votre script PHP de traitement
+            data: {email: email},
             dataType: "json",
             success: function(response) {
                 if (response.success) {
@@ -60,10 +52,13 @@ $(document).ready(function() {
                         showConfirmButton: true,
                         confirmButtonColor: '#22c55e',
                         color:'#F5F5F5',
-                        background:'#1d1d1f'
+                        background:'#1d1d1f',
+                        allowOutsideClick: false,
+                        allowEscapeKey: false,
+                        allowEnterKey: false,
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            window.location.href = 'index.php'; // Rediriger vers index.php
+                            window.location.href = 'index.php?admin=connexionAdmin'; // Rediriger vers index.php
                         }
                     });
                 } else {
@@ -72,8 +67,7 @@ $(document).ready(function() {
                             icon: 'error',
                             title: 'Compte désactivé',
                             text: response.message,
-                            dataType: "json",
-                            footer: '<form id="sendEmail" action="index.php?admin=firstConnexion" method="POST"><input type="hidden" id="hiddenEmail" name="hiddenEmail" value="' + hiddenEmail + '"><input type="submit"></form>',
+                            footer: '<a href="index.php?admin=#">Cliquez ici pour réactiver votre compte</a>',
                             confirmButtonColor: '#ef4444',
                             color:'#F5F5F5',
                             background:'#1d1d1f'
@@ -83,7 +77,6 @@ $(document).ready(function() {
                             icon: 'error',
                             title: 'Oops...',
                             text: response.message,
-                            footer: '<a href="index.php?admin=forgottenPassword">Mot de passe oublié ?</a>',
                             confirmButtonColor: '#ef4444',
                             color:'#F5F5F5',
                             background:'#1d1d1f'
@@ -95,6 +88,8 @@ $(document).ready(function() {
     });
 });
 </script>
+
+
 
 </body>
 

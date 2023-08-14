@@ -25,6 +25,34 @@ function forgottenPassword()
     require_once('view/admin/forgottenPassword.php');
 }
 
+function sendEmail()
+{
+    require_once('src/model/sendEmail.php');
+}
+
+function resetPassword()
+{
+    require_once('view/admin/resetPassword.php');
+}
+
+function resetForm()
+{
+    require_once('src/model/resetForm.php');
+}
+
+function firstConnexion()
+{
+    require_once('view/admin/firstConnexion.php');
+}
+
+function firstConnexionForm()
+{
+    require_once('src/model/firstConnexionForm.php');
+}
+
+
+
+
 // ----------------------------- //
 
 function deleteActu()
