@@ -20,6 +20,11 @@ function profilAdmin()
     require_once('view/admin/profilAdmin.php');
 }
 
+function deconnexionForm()
+{
+    require_once('src/model/deconnexionForm.php');
+}
+
 function forgottenPassword()
 {
     require_once('view/admin/forgottenPassword.php');

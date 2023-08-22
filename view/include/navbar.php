@@ -10,8 +10,8 @@
 				</svg>
 			</button>
 		</div>
-		<ul class="hidden absolute top-1/2 right-12 transform -translate-y-1/2 -translate-x-1/2 lg:flex lg:mx-auto lg:flex lg:items-center lg:w-auto lg:space-x-6">
-			<li><a class="block text-base font-semibold rounded gradient-button-desktop" href="index.php?action=actualités">Actualité</a></li>
+		<ul class="hidden absolute top-1/2 right-80 transform -translate-y-1/2 translate-x-1/4 lg:flex lg:mx-auto lg:flex lg:items-center lg:w-auto lg:space-x-6">
+			<li><a class="block text-base font-semibold rounded gradient-button-desktop" href="index.php?action=actualites">Actualité</a></li>
 			<hr class="vertical-hr">
 			<li><a class="block text-base font-semibold rounded gradient-button-desktop" href="index.php?action=mercatos">Mercato</a></li>
 			<hr class="vertical-hr">
@@ -24,6 +24,12 @@
 			if (isset($_SESSION['id_role']) && $_SESSION['id_role'] > 1) {
 				echo '<hr class="vertical-hr">';
 				echo '<li><a class="block text-base font-semibold rounded gradient-button-desktop" href="index.php?admin=profilAdmin">Profil</a></li>';
+			}
+			?>
+			<?php
+			if (isset($_SESSION['id_role']) && $_SESSION['id_role'] > 1) {
+				echo '<hr class="vertical-hr">';
+				echo '<li><a class="block text-base font-semibold rounded gradient-button-desktop" href="index.php?admin=crud">Administatration</a></li>';
 			}
 			?>
 		</ul>
@@ -44,7 +50,7 @@
 			<div>
 				<ul>
 					<li class="mb-2">
-						<a class="block p-4 text-base font-semibold rounded gradient-button" href="index.php?action=actualités">Actualités</a>
+						<a class="block p-4 text-base font-semibold rounded gradient-button" href="index.php?action=actualites">Actualités</a>
 					</li>
 					<li class="mb-2">
 						<a class="block p-4 text-base font-semibold rounded gradient-button" href="index.php?action=mercatos">Mercato</a>
@@ -61,6 +67,11 @@
 					<?php
 					if (isset($_SESSION['id_role']) && $_SESSION['id_role'] > 1) {
 						echo '<li class="mb-2"> <a class="block p-4 text-base font-semibold rounded gradient-button" href="index.php?admin=profilAdmin">Profil</a></li>';
+					}
+					?>
+					<?php
+					if (isset($_SESSION['id_role']) && $_SESSION['id_role'] > 1) {
+						echo '<li class="mb-2"> <a class="block p-4 text-base font-semibold rounded gradient-button" href="index.php?admin=crud">Administration</a></li>';
 					}
 					?>
 				</ul>

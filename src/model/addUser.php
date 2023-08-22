@@ -24,9 +24,18 @@ $allowedDomains = array("gmail.com", "laposte.com", "example.com"); // Ajoutez d
 
 if (isset($_POST['submit'])) {
     // Vérifier si un fichier a été téléchargé
+
     if (isset($_FILES['img_profil']) && $_FILES['img_profil']['error'] === UPLOAD_ERR_OK) {
+        $allowedExtensions = array("jpg", "jpeg", "png", "gif"); // Liste des extensions autorisées
+    
         $img_profil = $_FILES['img_profil']['name'];
         $tmp_img_profil = $_FILES['img_profil']['tmp_name'];
+        $fileExtension = strtolower(pathinfo($img_profil, PATHINFO_EXTENSION));
+    
+        if (!in_array($fileExtension, $allowedExtensions)) {
+            echo "Type de fichier non autorisé. Seules les images JPG, JPEG, PNG et GIF sont autorisées.";
+            exit;
+        }
 
         // Générer un nom de fichier aléatoire
         function generateRandomFileName($originalName) {

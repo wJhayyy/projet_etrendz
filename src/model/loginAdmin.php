@@ -18,6 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $response["success"] = true;
             $response["message"] = "Connexion réussie pour l'utilisateur : " . $user['email'];
             $_SESSION['id_role'] = $user['id_role'];
+            $_SESSION['email'] = $user['email'];
         } else {
             $response["message"] = "Votre compte est désactivé.";
             // Vous pouvez ajouter ici le code pour la redirection vers une page de compte désactivé.

@@ -17,7 +17,6 @@ if (isset($_GET['id_mercato']) && !empty($_GET['id_mercato'])) {
     $stmt_postmercato->bindParam(':id', $id_mercato, PDO::PARAM_INT);
     $stmt_postmercato->execute();
     $mercato = $stmt_postmercato->fetch(PDO::FETCH_ASSOC);
-  
 
     if (isset($mercato) && empty($mercato)) {
         header('Location: index.php?action=mercatos');
@@ -25,42 +24,13 @@ if (isset($_GET['id_mercato']) && !empty($_GET['id_mercato'])) {
     }    
 }
 
-// Requête pour afficher les éléments sans recherche avec pagination
-// Sélectionner le nombre total d'enregistrements dans la table "mercato"
-$stmt_count = $connect->prepare("SELECT COUNT(*) FROM mercato");
-$stmt_count->execute();
-$total_rows = $stmt_count->fetchColumn();
-
-// Vérifier si nous avons au moins 4 enregistrements dans la table
-if ($total_rows >= 4) {
-    // Tant que nous n'avons pas 4 enregistrements uniques, on continue de générer une nouvelle requête
-    do {
-        // Générer trois IDs aléatoires
-        $random_ids = array_rand(range(1, $total_rows), 4);
-
-        // Convertir les IDs en une chaîne pour la clause IN de la requête
-        $random_ids_str = implode(',', $random_ids);
-
-        // Sélectionner les enregistrements avec les IDs aléatoires, en limitant à 4 résultats
-        $stmt_mercato = $connect->prepare("SELECT id_mercato, image_entete, titre, description, date_mercato
-                                          FROM mercato
-                                          WHERE id_mercato IN ($random_ids_str)
-                                          LIMIT 4");
-        $stmt_mercato->execute();
-        $all_mercato = $stmt_mercato->fetchAll(PDO::FETCH_ASSOC);
-        
-        // Répéter la boucle si on n'obtient pas trois enregistrements uniques
-    } while (count(array_unique(array_column($all_mercato, 'id_mercato'))) < 4);
-} else {
-    // Traiter le cas où il y a moins de 4 enregistrements dans la table "mercato"
-    // Vous pouvez ajuster cette partie selon vos besoins
-    $stmt_mercato = $connect->prepare("SELECT id_mercato, image_entete, titre, description, date_mercato
-                                      FROM mercato
-                                      LIMIT 4");
-    $stmt_mercato->execute();
-    $all_mercato = $stmt_mercato->fetchAll(PDO::FETCH_ASSOC);
-}
-
+// Requête pour sélectionner les 4 derniers éléments de la table "mercato"
+$stmt_mercato = $connect->prepare("SELECT id_mercato, image_entete, titre, description, date_mercato
+                                FROM mercato
+                                ORDER BY id_mercato DESC
+                                LIMIT 4");
+$stmt_mercato->execute();
+$all_mercato = $stmt_mercato->fetchAll(PDO::FETCH_ASSOC);
 
 function limitText($text, $limit) {
     if (mb_strlen($text) <= $limit) {

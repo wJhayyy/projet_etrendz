@@ -56,7 +56,7 @@ function limitText($text, $limit) {
   <?php include_once('include/link.php')?>
 </head>
 
-<body class="bg-gradient-to-b from-color1 to-black overflow-x-hidden">
+<body class="bg-gradient-to-t from-color1 to-black overflow-x-hidden">
 
 <?php include_once('include/navbar.php')?>
 
@@ -80,8 +80,8 @@ function limitText($text, $limit) {
                     <h3 class="mt-8 font-semibold">Des streams quotidiens sur tous les événements e-sport du moment</h3>
                 </div>
                 <div class="mt-8 lg:mt-0">
-                    <i class="fa-solid fa-calendar-days text-5xl" style="color: #fca311;"></i>
-                    <h3 class="mt-8 font-semibold">Le calendrier des compétitions</h3>
+                    <i class="fa-solid fa-image text-5xl" style="color: #fca311;"></i>
+                    <h3 class="mt-8 font-semibold">Une galerie complète sur les événements e-sport</h3>
                 </div>
                 <div class="mt-8 lg:mt-0">
                     <i class="fa-solid fa-fire text-5xl" style="color: #fca311;"></i>
@@ -151,7 +151,7 @@ function limitText($text, $limit) {
 <hr class="hrgradient w-4/6 m-auto mb-16 mt-6 md:w-2/6">
 </div>
 
-	<a href="index.php?action=actualités" class="w-fit m-auto flex justify-center button-twitch bg-transparent text-color5 font-semibold hover:text-white py-2 px-4 border border-rose hover:border-transparent rounded mt-8 mb-12">
+	<a href="index.php?action=actualites" class="w-fit m-auto flex justify-center button-twitch bg-transparent text-color5 font-semibold hover:text-white py-2 px-4 border border-rose hover:border-transparent rounded mt-8 mb-12">
 		<p class="z-10">En savoir plus</p>
 	</a>
 
@@ -160,12 +160,12 @@ function limitText($text, $limit) {
 	<div class="card ntshow">
 	<div class="card-content">
           <div class="card-image" title="<?php echo htmlspecialchars($actualite['titre_actualite']); ?>">
-				    <a href="<?php echo htmlspecialchars('index.php?action=actualité&id_actualite=' . $actualite['id_actualite'])?>">
+				    <a href="<?php echo htmlspecialchars('index.php?action=actualite&id_actualite=' . $actualite['id_actualite'])?>">
 				    <img src="assets/upload/<?php echo $actualite['image_entete']; ?>">
 				  </div>
 				  </a>
 				<div class="card-info-wrapper">
-        <a href="<?php echo htmlspecialchars('index.php?action=actualité&id_actualite=' . $actualite['id_actualite'])?>">
+        <a href="<?php echo htmlspecialchars('index.php?action=actualite&id_actualite=' . $actualite['id_actualite'])?>">
           <div class="card-info">
             <div class="card-info-title">
               <h3><?php echo limitText(htmlspecialchars($actualite['titre_actualite']),60); ?></h3>  
@@ -307,27 +307,6 @@ const observer = new IntersectionObserver((entries) => {
 
 const hiddenElements = document.querySelectorAll('.ntshow');
 hiddenElements.forEach((el) => observer.observe(el));
-
-
-  document.addEventListener('DOMContentLoaded', function () {
-    const swiper = new Swiper('.swiper-container', {
-      loop: true,
-      slidesPerView: 1,
-      spaceBetween: 32,
-      centeredSlides: true,
-      autoplay: {
-        delay: 8000,
-      },
-      breakpoints: {
-        640: {
-          slidesPerView: 1.5,
-        },
-        1024: {
-          slidesPerView: 3,
-        },
-      },
-    })
-  })
 
 </script>
 

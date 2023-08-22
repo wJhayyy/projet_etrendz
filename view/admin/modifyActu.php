@@ -157,7 +157,7 @@ if (!empty($dateFromDB)) {
                   <div class="flex text-sm text-gray-600">
                     <label for="image2" class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
                       <span class="">Télécharger un fichier</span>
-                      <input id="image2" name="image2" type="file" class="sr-only" onchange="updateBackgroundImage('image_2_div', event)"value="<?php echo $all_actualite[0]['image2']; ?>">
+                      <input id="image2" name="image2" type="file" class="sr-only" onchange="updateBackgroundImage('image_2_div', event)" value="<?php echo $all_actualite[0]['image2']; ?>">
                     </label>
                   </div>
                   <p class="text-xs text-white">
@@ -227,46 +227,6 @@ if (!empty($dateFromDB)) {
 </section>
 
 <?php include_once('view/include/footer.php');?>
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    document.querySelector("form").addEventListener("submit", function(event) {
-        var isFormValid = true; // Variable pour vérifier si le formulaire est valide
-
-        // Vérifier chaque champ du formulaire
-        var formFields = document.querySelectorAll("input, textarea, select");
-        for (var i = 0; i < formFields.length; i++) {
-            if (formFields[i].value.trim() === "") {
-                isFormValid = false;
-                console.log("Champs trouvé : ",formFields[i]);
-                break; // Sortir de la boucle dès qu'un champ vide est trouvé
-            }
-        }
-
-        if (!isFormValid) {
-            event.preventDefault(); // Empêcher l'envoi du formulaire
-            Swal.fire({
-                title: 'Erreur',
-                text: 'Tous les champs doivent être remplis.',
-                icon: 'error',
-                confirmButtonText: 'Fermer',
-                confirmButtonColor: '#ef4444',
-                color:'#F5F5F5',
-                background:'#1d1d1f',
-            });
-        } else {
-            Swal.fire({
-                title: 'Succès',
-                text: 'Le formulaire a été soumis avec succès !',
-                icon: 'success',
-                color:'#F5F5F5',
-                background:'#1d1d1f',
-            });
-        }
-    });
-});
-</script>
 
 <script>
   function updateBackgroundImage(divId, event) {

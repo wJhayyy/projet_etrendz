@@ -20,11 +20,11 @@ if (isset($_GET['action']) && $_GET['action'] !== '') {
         case 'mercato':
             vueMercato();
             break;
-        case 'actualité':
-            vueActualité();
+        case 'actualite':
+            vueActualite();
             break; 
-        case 'actualités':
-            vueActualités();
+        case 'actualites':
+            vueActualites();
             break; 
         case 'accueil':
             homepage();
@@ -50,6 +50,9 @@ if (isset($_GET['action']) && $_GET['action'] !== '') {
                 break;
             case 'profilAdmin':
                 profilAdmin();
+                break;
+            case 'deconnexionForm':
+                deconnexionForm();
                 break;
             case 'forgottenPassword':
                 forgottenPassword();

@@ -73,7 +73,7 @@ $(document).ready(function() {
                             title: 'Compte désactivé',
                             text: response.message,
                             dataType: "json",
-                            footer: '<form id="sendEmail" action="index.php?admin=firstConnexion" method="POST"><input type="hidden" id="hiddenEmail" name="hiddenEmail" value="' + hiddenEmail + '"><input type="submit"></form>',
+                            footer: '<form id="sendEmail" action="index.php?admin=firstConnexion" method="POST"><input type="hidden" id="hiddenEmail" name="hiddenEmail" value="' + hiddenEmail + '"><input type="submit" value="Activer votre compte"></form>',
                             confirmButtonColor: '#ef4444',
                             color:'#F5F5F5',
                             background:'#1d1d1f'

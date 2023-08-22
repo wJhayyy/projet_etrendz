@@ -7,7 +7,7 @@ if (isset($_GET['id_actualite']) && !empty($_GET['id_actualite'])) {
     // Récupérer l'id_mercato depuis les paramètres GET
     $id_actualite = $_GET['id_actualite'];
 
-    // Requête SQL avec une jointure entre les tables "mercato" et "category"
+    // Requête SQL avec une jointure entre les tables "actualite" et "category"
     $sql = 'SELECT a.*, c.name_category 
             FROM actualite AS a
             INNER JOIN category AS c ON a.id_category = c.id_category
@@ -17,50 +17,20 @@ if (isset($_GET['id_actualite']) && !empty($_GET['id_actualite'])) {
     $stmt_actualite->bindParam(':id', $id_actualite, PDO::PARAM_INT);
     $stmt_actualite->execute();
     $actualite = $stmt_actualite->fetch(PDO::FETCH_ASSOC);
-  
 
     if (isset($actualite) && empty($actualite)) {
-        header('Location: index.php?action=actualités');
+        header('Location: index.php?action=actualites');
         exit;
     }    
 }
 
-// Requête pour afficher les éléments sans recherche avec pagination
-// Sélectionner le nombre total d'enregistrements dans la table "mercato"
-$stmt_count = $connect->prepare("SELECT COUNT(*) FROM actualite");
-$stmt_count->execute();
-$total_rows = $stmt_count->fetchColumn();
-
-// Vérifier si nous avons au moins 4 enregistrements dans la table
-if ($total_rows >= 4) {
-    // Tant que nous n'avons pas 4 enregistrements uniques, on continue de générer une nouvelle requête
-    do {
-        // Générer trois IDs aléatoires
-        $random_ids = array_rand(range(1, $total_rows), 4);
-
-        // Convertir les IDs en une chaîne pour la clause IN de la requête
-        $random_ids_str = implode(',', $random_ids);
-
-        // Sélectionner les enregistrements avec les IDs aléatoires, en limitant à 4 résultats
-        $stmt_actu = $connect->prepare("SELECT id_actualite, image_entete, titre_actualite, description, date_actualite
-                                          FROM actualite
-                                          WHERE id_actualite IN ($random_ids_str)
-                                          LIMIT 4");
-        $stmt_actu->execute();
-        $all_actualite = $stmt_actu->fetchAll(PDO::FETCH_ASSOC);
-        
-        // Répéter la boucle si on n'obtient pas trois enregistrements uniques
-    } while (count(array_unique(array_column($all_actualite, 'id_actualite'))) < 4);
-} else {
-    // Traiter le cas où il y a moins de 4 enregistrements dans la table "mercato"
-    // Vous pouvez ajuster cette partie selon vos besoins
-    $stmt_act = $connect->prepare("SELECT id_actualite, image_entete, titre_actualite, description, date_actualite
-                                      FROM actualite
-                                      LIMIT 4");
-    $stmt_act->execute();
-    $all_actualite = $stmt_act->fetchAll(PDO::FETCH_ASSOC);
-}
-
+// Requête pour sélectionner les 4 dernières actualités
+$stmt_actu = $connect->prepare("SELECT id_actualite, image_entete, titre_actualite, description, date_actualite
+                                FROM actualite
+                                ORDER BY id_actualite DESC
+                                LIMIT 4");
+$stmt_actu->execute();
+$all_actualite = $stmt_actu->fetchAll(PDO::FETCH_ASSOC);
 
 function limitText($text, $limit) {
     if (mb_strlen($text) <= $limit) {

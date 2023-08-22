@@ -13,7 +13,7 @@
 
 <?php include_once('view/include/navbar.php');?>
 <div class="h-4/6">
-    <section class="max-w-4xl p-6 mx-auto bg-color2 rounded-md shadow-md dark:bg-gray-800 mt-24">
+    <section class="max-w-4xl p-6 mx-auto bg-gradient-to-t from-color2 via-colorcrud to-color2 rounded-md shadow-md dark:bg-gray-800 mt-24">
         <h2 class="text-xl font-bold text-white capitalize dark:text-white">Ajout d'une catégorie</h2>
         <form method="POST" action="index.php?admin=addCategory" enctype="multipart/form-data">
             <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">

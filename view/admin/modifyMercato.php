@@ -69,7 +69,7 @@ if (!empty($dateFromDB)) {
 
 <?php include_once('view/include/navbar.php');?>
 
-<section class="max-w-4xl p-6 mx-auto bg-color2 rounded-md shadow-md dark:bg-gray-800 mt-24">
+<section class="max-w-4xl p-6 mx-auto bg-gradient-to-t from-color2 via-colorcrud to-color2 rounded-md shadow-md dark:bg-gray-800 mt-24">
     <h2 class="text-xl font-bold text-white capitalize dark:text-white">Modification d'un Mercato</h2>
     <form method="POST" action="index.php?admin=editMercato" enctype="multipart/form-data">
         <input type="hidden" name="id_mercato" value="<?= $id_mercato; ?>">

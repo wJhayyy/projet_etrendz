@@ -66,10 +66,10 @@ function vueMercato(){
     require_once('view/mercato.php');
 }
 
-function vueActualité(){
+function vueActualite(){
     require_once('view/actualite.php');
 }
 
-function vueActualités(){
+function vueActualites(){
     require_once('view/actualites.php');
 }

@@ -29,6 +29,11 @@ $stmt_user = $connect->prepare('SELECT users.*, roles.role
 $stmt_user->execute();
 $all_user = $stmt_user->fetchAll(PDO::FETCH_ASSOC);
 
+if ('id_role' <= 1) {
+    // Rediriger vers la page d'accueil si pas de rôle supérieur à 1
+    header("Location: index.php");
+    exit();
+}
 
 ?>
 
@@ -57,17 +62,36 @@ $all_user = $stmt_user->fetchAll(PDO::FETCH_ASSOC);
 <br class="mt-28">
 
 <div class="w-full lg:w-1/2 m-auto flex justify-center">
+
+<?php
+if ($_SESSION['id_role'] === 3 || $_SESSION['id_role'] === 4 || $_SESSION['id_role'] === 6) {
+?>
     <button onclick="openTab(event, 'tab1')" class="w-fit button-twitch bg-transparent text-color5 font-semibold hover:text-white py-2 px-4 border border-rose hover:border-transparent rounded mt-8 mr-4 focus:outline-none">
         <p class="z-10 relative">Gestion Actualité</p>
     </button>
     <button onclick="openTab(event, 'tab2')" class="w-fit button-twitch bg-transparent text-color5 font-semibold hover:text-white py-2 px-4 border border-rose hover:border-transparent rounded mt-8 mr-4 focus:outline-none">
         <p class="z-10 relative">Gestion Mercato</p>
     </button>
+    <?php
+}
+?>
+
+<?php
+if ($_SESSION['id_role'] === 3 || $_SESSION['id_role'] === 5) {
+?>
+
     <button onclick="openTab(event, 'tab3')" class="w-fit button-twitch bg-transparent text-color5 font-semibold hover:text-white py-2 px-4 border border-rose hover:border-transparent rounded mt-8 focus:outline-none">
         <p class="z-10 relative">Gestion Galerie</p>
     </button>
+    <?php
+}
+?>
+
 </div>
 
+<?php
+if ($_SESSION['id_role'] === 3) {
+?>
 <div class="w-full lg:w-1/2 m-auto flex justify-center mb-12">
     <button onclick="openTab(event, 'tab4')" class="w-fit button-twitch bg-transparent text-color5 font-semibold hover:text-white py-2 px-4 border border-rose hover:border-transparent rounded mt-8 mr-4 focus:outline-none">
         <p class="z-10 relative">Gestion Catégorie</p>
@@ -75,10 +99,13 @@ $all_user = $stmt_user->fetchAll(PDO::FETCH_ASSOC);
     <button onclick="openTab(event, 'tab5')" class="w-fit button-twitch bg-transparent text-color5 font-semibold hover:text-white py-2 px-4 border border-rose hover:border-transparent rounded mt-8 mr-4 focus:outline-none">
         <p class="z-10 relative">Gestion Users</p>
     </button>
-    <button onclick="openTab(event, 'tab6')" class="w-fit button-twitch bg-transparent text-color5 font-semibold hover:text-white py-2 px-4 border border-rose hover:border-transparent rounded mt-8 focus:outline-none">
+    <!-- <button onclick="openTab(event, 'tab6')" class="w-fit button-twitch bg-transparent text-color5 font-semibold hover:text-white py-2 px-4 border border-rose hover:border-transparent rounded mt-8 focus:outline-none">
         <p class="z-10 relative">Gestion Boutique</p>
-    </button>
+    </button> -->
 </div>
+<?php
+}
+?>
 
 <div id="tab1" class="bg-colorcrud tab-content text-color5 p-4">
     <div class="flex justify-end mb-2">
@@ -299,7 +326,7 @@ $all_user = $stmt_user->fetchAll(PDO::FETCH_ASSOC);
   </table>
 </div>
 
-<div id="tab6" class="bg-colorcrud tab-content hidden text-color5 p-4">
+<!-- <div id="tab6" class="bg-colorcrud tab-content hidden text-color5 p-4">
     <div class="flex justify-end mb-2">
         <button class="relative inline-flex items-center justify-center p-0.5 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white focus:ring-4 focus:outline-none focus:ring-green-200">
             <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
@@ -334,7 +361,7 @@ $all_user = $stmt_user->fetchAll(PDO::FETCH_ASSOC);
           <?php endforeach;?>
     </tbody>
   </table>
-</div>
+</div> -->
 
 <?php include_once('view/include/footer.php');?>
 

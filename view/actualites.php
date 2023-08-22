@@ -5,7 +5,7 @@ include_once('src/model/connectBdd.php');
 // Pagination
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 if ($page < 1) {
-    header("Location: index.php?action=actualités");
+    header("Location: index.php?action=actualites");
     exit();
 }
 
@@ -30,7 +30,7 @@ $total_pages = ceil($total_rows / $limit);
 
 // Ensure page number is not greater than the total number of pages
 if ($page > $total_pages && $total_pages > 0) {
-    header("Location: index.php?action=actualités&page=" . $total_pages);
+    header("Location: index.php?action=actualites&page=" . $total_pages);
     exit();
 }
 
@@ -155,7 +155,7 @@ function limitText($text, $limit) {
         <div class="w-11/12 lg:w-5/6 lg:flex">
                     <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover lg:rounded-tl lg:rounded-l text-center overflow-hidden" style="background-image: url('assets/upload/<?php echo htmlspecialchars($result['image_entete']); ?>')" title="<?php echo htmlspecialchars($result['titre_actualite']);?>">
                     </div>
-                    <a href="<?php echo htmlspecialchars('index.php?action=actualité&id_actualite=' . $result['id_actualite']); ?>">
+                    <a href="<?php echo htmlspecialchars('index.php?action=actualite&id_actualite=' . $result['id_actualite']); ?>">
                     <div class="max-w-full w-full border-r border-b border-l border-grey-light lg:border-l-0 lg:border-t lg:border-grey-light bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
                         <div class="mb-8">
                         <div class="text-black font-bold text-xl mb-2"><?php echo limitText(htmlspecialchars($result['titre_actualite']),60); ?></div>
@@ -181,7 +181,7 @@ function limitText($text, $limit) {
                 <div class="w-11/12 lg:w-5/6 lg:flex">
                     <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover lg:rounded-tl lg:rounded-l text-center overflow-hidden" style="background-image: url('assets/upload/<?php echo htmlspecialchars($actualite['image_entete']); ?>')" title="<?php echo htmlspecialchars($actualite['titre_actualite']); ?>">
                     </div>
-                    <a href="<?php echo htmlspecialchars('index.php?action=actualité&id_actualite=' . $actualite['id_actualite']); ?>">
+                    <a href="<?php echo htmlspecialchars('index.php?action=actualite&id_actualite=' . $actualite['id_actualite']); ?>">
                     <div class="max-w-full w-full border-r border-b border-l border-grey-light lg:border-l-0 lg:border-t lg:border-grey-light bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
                         <div class="mb-8">
                         <div class="text-black font-medium lg:font-bold text-lg lg:text-xl mb-2"><?php echo limitText(htmlspecialchars($actualite['titre_actualite']),60); ?></div>
@@ -209,7 +209,7 @@ function limitText($text, $limit) {
             // Afficher les boutons de pagination
             for ($i = 1; $i <= $total_pages; $i++) {
                 $active_class = ($i === $page) ? "" : "";
-                echo '<a href="index.php?action=actualités&page=' . $i . '" class="w-fit flex justify-center button-twitch bg-transparent text-color5 font-semibold hover:text-color4 mx-4 py-2 px-4 border border-rose hover:border-transparent rounded mt-8 mb-12 ' . $active_class . '">' . '<p class="z-10">' .$i .'</p>'.'</a>';
+                echo '<a href="index.php?action=actualites&page=' . $i . '" class="w-fit flex justify-center button-twitch bg-transparent text-color5 font-semibold hover:text-color4 mx-4 py-2 px-4 border border-rose hover:border-transparent rounded mt-8 mb-12 ' . $active_class . '">' . '<p class="z-10">' .$i .'</p>'.'</a>';
             }
             ?>
         </div>
@@ -241,7 +241,7 @@ function limitText($text, $limit) {
 
             // Si l'option par défaut est sélectionnée, effectuer la redirection vers actualités.php
             if (value === "") {
-                window.location.href = "index.php?action=actualités";
+                window.location.href = "index.php?action=actualites";
             } else {
                 // Sinon, faire la requête AJAX pour rafraîchir la liste des résultats en fonction de la catégorie sélectionnée
                 $.ajax({
@@ -282,7 +282,7 @@ function limitText($text, $limit) {
             $("#fetchval").val("");
 
             // Rediriger l'utilisateur vers la page mercato.php
-            window.location.href = "index.php?action=actualités";
+            window.location.href = "index.php?action=actualites";
         });
     });
 </script>

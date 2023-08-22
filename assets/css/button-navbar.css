@@ -4,7 +4,7 @@
     transition: width 0.3s ease; /* Ajouter une transition pour l'animation en douceur */
     width: 50%;
     color: #e5e5e5;
-    font-size: 40px
+    font-size: 18px
   }
   
   /* Lorsque la souris survole le bouton */

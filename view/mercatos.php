@@ -131,7 +131,7 @@ function limitText($text, $limit) {
         <select class="w-fit m-auto flex justify-center bg-transparent text-color5 font-semibold hover:text-white py-2 px-4 border border-color3 focus:border-color5 hover:border-orange-600 transition ease-in-out duration-300 ring-yellow-500 rounded" name="fetchval" id="fetchval" placeholder="Selectionner un filtre">
             <option value="" selected="">Toutes les catégories</option>
             <?php foreach ($all_filter as $filter) : ?>
-            <option value="<?php echo htmlspecialchars($filter['id_category'])?>"><?php echo htmlspecialchars($filter['name_category'])?></option>
+            <option class="bg-transparent" value="<?php echo htmlspecialchars($filter['id_category'])?>"><?php echo htmlspecialchars($filter['name_category'])?></option>
             <?php endforeach ?>
         </select>
     </div>

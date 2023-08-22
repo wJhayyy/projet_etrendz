@@ -1,5 +1,3 @@
-<?php var_dump($_POST);die; ?>
-
 <!doctype html>
 
 <html lang="fr">
@@ -35,9 +33,102 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
+  $(document).ready(function() {
+    $("#resetPassword").submit(function(event) {
+      event.preventDefault();
 
-console.log()
+      // Récupérer les valeurs des champs
+      var email = $("#hiddenEmail").val();
+      var password = $("#password").val();
+      var confirmPassword = $("#confirm_password").val();
+      console.log(email);
 
+      // Vérifier si les mots de passe correspondent
+      if (password !== confirmPassword) {
+        // Afficher une erreur
+        Swal.fire({
+          icon: 'error',
+          text: 'Les mots de passe ne correspondent pas.',
+          color:'#F5F5F5',
+          background:'#1d1d1f',
+        });
+        return;
+      }
+
+      // Créer un FormData pour envoyer les données POST
+      var formData = new FormData(this);
+      formData.append("hiddenEmail", email);
+
+      // Soumettre le formulaire avec les données FormData
+      $.ajax({
+        url: "index.php?admin=firstConnexionForm",
+        type: "POST",
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function(response) {
+          // Gérer la réponse du serveur (afficher succès ou erreur)
+          switch (response) {
+            case "success":
+            Swal.fire({
+              icon: 'success',
+              text: 'Le mot de passe a été mis à jour avec succès.',
+              showConfirmButton: true,
+              color: '#F5F5F5',
+              background: '#1d1d1f',
+              confirmButtonText: 'Ok',
+            }).then((result) => {
+              // Si l'utilisateur clique sur "Ok", effectuer la redirection
+              if (result.isConfirmed) {
+                window.location.href = "index.php?admin=connexionAdmin";
+              }
+            });
+            break;
+            case "password_invalid":
+              Swal.fire({
+                icon: 'error',
+                text: 'Le mot de passe ne respecte pas les règles de validation. Il faut 1 majuscule, 1 chiffre et 10 lettres au minimum.',
+                color:'#F5F5F5',
+                background:'#1d1d1f',
+              });
+              break;
+            case "password_mismatch":
+              Swal.fire({
+                icon: 'error',
+                text: 'Les mots de passe ne correspondent pas.',
+                color:'#F5F5F5',
+                background:'#1d1d1f',
+              });
+              break;
+            case "update_error":
+              Swal.fire({
+                icon: 'error',
+                text: 'Erreur lors de la mise à jour du mot de passe.',
+                color:'#F5F5F5',
+                background:'#1d1d1f',
+              });
+              break;
+            case "email_missing":
+              Swal.fire({
+                icon: 'error',
+                text: "L'adresse e-mail n'a pas été transmise.",
+                color:'#F5F5F5',
+                background:'#1d1d1f',
+              });
+              break;
+            default:
+              Swal.fire({
+                icon: 'error',
+                text: "Une erreur s'est produite lors de la soumission du formulaire.",
+                color:'#F5F5F5',
+                background:'#1d1d1f',
+              });
+              break;
+          }
+        }
+      });
+    });
+  });
 </script>
 
 </body>

@@ -34,7 +34,7 @@ function limitText($text, $limit) {
             </div>
             <div class="max-w-full w-96 border-r border-b border-l border-grey-light lg:border-l-0 lg:border-t lg:border-grey-light bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
                 <div class="mb-8">
-                    <div class="text-black font-bold text-xl mb-2"><a href="<?php echo htmlspecialchars('index.php?action=actualité?id_actualite=' . $filter['id_actualite']); ?>"><?php echo limitText(htmlspecialchars($filter['titre_actualite']),60); ?></a></div>
+                    <div class="text-black font-bold text-xl mb-2"><a href="<?php echo htmlspecialchars('index.php?action=actualite?id_actualite=' . $filter['id_actualite']); ?>"><?php echo limitText(htmlspecialchars($filter['titre_actualite']),60); ?></a></div>
                     <p class="text-grey-darker text-base"><?php echo limitText(htmlspecialchars($filter['description']),80); ?></p>
                 </div>
                 <div class="text-sm">
