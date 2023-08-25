@@ -29,8 +29,16 @@ $stmt_user = $connect->prepare('SELECT users.*, roles.role
 $stmt_user->execute();
 $all_user = $stmt_user->fetchAll(PDO::FETCH_ASSOC);
 
-if ('id_role' <= 1) {
-    // Rediriger vers la page d'accueil si pas de rôle supérieur à 1
+if (!isset($_SESSION['id_role'])) {
+    // Rediriger vers la page de connexion si l'id_role n'est pas défini dans la session
+    header("Location: index.php"); // Remplacez "login.php" par le chemin de votre page de connexion
+    exit();
+}
+
+$id_role = $_SESSION['id_role']; // Récupérez l'id_role depuis la session
+
+if ($id_role <= 1) {
+    // Rediriger vers la page d'accueil si le rôle n'est pas supérieur à 1
     header("Location: index.php");
     exit();
 }
